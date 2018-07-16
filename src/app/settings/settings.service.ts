@@ -11,7 +11,7 @@ export class SettingsService {
 
     constructor(private apiService: ApiService) {}
 
-    public getSettings() : Observable<Settings> {
+    public getSettings(): Observable<Settings> {
         const obs = this.apiService.getSettings();
         obs.subscribe((settings: Settings) => {
 

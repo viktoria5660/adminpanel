@@ -9,15 +9,16 @@ import { Users } from './users.model';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users: Users
-  error: string
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'group'];
+  dataSource;
+  error: string;
   constructor(private usersService: UsersService) {
   }
 
   public ngOnInit(): void {
     this.usersService.getUsers().subscribe((users: Users) => {
-      this.users = users;
-      this.error = '';
+      this.dataSource = users;
+          this.error = '';
     }, (error) => this.error = error.message);
   }
 

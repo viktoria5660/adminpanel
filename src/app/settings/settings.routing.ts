@@ -1,27 +1,12 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { SettingsComponent } from './settings.component';
-import { FormValidationComponent } from './settings.component';
+import {SettingsComponent} from './settings.component';
 
 
 export const SettingsRoutes: Routes = [{
-  path: '',
-  component: SettingsComponent
-},
-{
-  path: '',
-  component: FormValidationComponent
-},
+    path: '',
+    component: SettingsComponent
+}
 ];
 
-export const FormRoutes: Routes = [
-  {
-    path: '',
-    children: [{
-      path: 'validation',
-      component: FormValidationComponent
-    }
-  ]
-  }
-];
 

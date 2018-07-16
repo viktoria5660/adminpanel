@@ -1,5 +1,5 @@
 export interface Settings {
-    companyName : string;
+    companyName: string;
     defaultCoins: number;
     defaultCorrectFB: string;
     defaultInCorrectFB: string;
@@ -9,5 +9,4 @@ export interface Settings {
     timetToSendToLogin: number;
     EnableGame: boolean;
     minBet: number;
-
 }

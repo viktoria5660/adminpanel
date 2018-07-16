@@ -1,45 +1,45 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgressBarModule, MatMenuModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {
+    MatButtonModule,
+    MatCardModule, MatFormFieldModule,
+    MatIconModule, MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule
+} from '@angular/material';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { SettingsComponent } from './settings.component';
-import { SettingsRoutes } from './settings.routing';
-import { SettingsService } from './settings.service';
-////////////////////////////////
-import { FormValidationComponent } from './settings.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormRoutes } from './settings.routing';
-///////////////////////
+import {ChartsModule} from 'ng2-charts/ng2-charts';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {SettingsComponent} from './settings.component';
+import {SettingsRoutes} from './settings.routing';
+import {SettingsService} from './settings.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(SettingsRoutes),
-    RouterModule.forChild(FormRoutes),
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatMenuModule,
-    ChartsModule,
-    ReactiveFormsModule,
-    // // FormBuilder,
-    // FormGroup,
-    // FormArray,
-    // FormControl,
-    FormsModule,
-    // NgForm,
-    NgxDatatableModule,
-    FlexLayoutModule
-  ],
-  declarations: [ SettingsComponent, FormValidationComponent ],
-  providers: [SettingsService]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(SettingsRoutes),
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatListModule,
+        MatProgressBarModule,
+        MatMenuModule,
+        ChartsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        NgxDatatableModule,
+        FlexLayoutModule
+    ],
+    declarations: [SettingsComponent],
+    providers: [SettingsService]
 })
 
-export class SettingsModule {}
+export class SettingsModule {
+}

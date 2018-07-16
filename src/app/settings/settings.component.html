@@ -1,21 +1,26 @@
-<p>settings works!</p>
-
-<p *ngIf="settings">{{ settings | json}}</p>
-<p>{{error}}</p>
-
 <mat-card>
-  <mat-card-title>Form validation</mat-card-title>
-  <mat-card-subtitle>Angular2 custom validation</mat-card-subtitle>
-  <form [formGroup]="form">
+  <mat-card-title>Settings Form</mat-card-title>
+  <mat-card-subtitle>Change some settings if you know what you are doing</mat-card-subtitle>
+
+  <!--<p *ngIf="settings">{{ settings | json}}</p>-->
+  <p>{{error}}</p>
+
+  <form [formGroup]="form" *ngIf="form">
     <mat-card-content>
       <div fxLayout="row wrap">
         <div class="mb-1">
-          <mat-form-field style="width: 100%">
-            <input matInput placeholder="First name" [formControl]="form.controls['fname']">
+          <mat-form-field>
+            <input matInput placeholder="Company Name" formControlName="companyName">
+            <mat-hint *ngIf="form.controls['companyName'].hasError('required') && form.controls['companyName'].touched" class="mat-text-warn">You must include a company name.</mat-hint>
           </mat-form-field>
-          <small *ngIf="form.controls['fname'].hasError('required') && form.controls['fname'].touched" class="mat-text-warn">You must include a first name.</small>
-          <small *ngIf="form.controls['fname'].hasError('minlength') && form.controls['fname'].touched" class="mat-text-warn">Your first name must be at least 5 characters long.</small>
-          <small *ngIf="form.controls['fname'].hasError('maxlength') && form.controls['fname'].touched" class="mat-text-warn">Your first name cannot exceed 10 characters.</small>
+        </div>
+
+        <div class="mb-1 ml-2">
+          <mat-form-field>
+            <input matInput placeholder="Default Coins" formControlName="defaultCoins">
+            <mat-hint *ngIf="form.controls['defaultCoins'].hasError('required') && form.controls['defaultCoins'].touched" class="mat-text-warn">You must include default coins.</mat-hint>
+          </mat-form-field>
+
         </div>
       </div>
       
