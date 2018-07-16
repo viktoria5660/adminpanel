@@ -37,7 +37,7 @@ router.put('/', (req, res) => {
 // });
 
 router.post('/getSttingsByCompany',function(req,res,next){
-    console.log("getSttingsByCompany")
+    // console.log("getSttingsByCompany")
     var companyName = req.body.companyName
     SettingsModel.find({companyName : companyName }, function(err,info){
         if(err) {

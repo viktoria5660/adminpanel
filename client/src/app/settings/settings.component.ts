@@ -3,7 +3,6 @@ import {SettingsService} from './settings.service';
 import {Settings} from './settings.model';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from 'ng2-validation';
 
 
 @Component({
