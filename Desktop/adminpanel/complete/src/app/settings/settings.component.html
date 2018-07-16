@@ -1,0 +1,28 @@
+<p>settings works!</p>
+
+<p *ngIf="settings">{{ settings | json}}</p>
+<p>{{error}}</p>
+
+<mat-card>
+  <mat-card-title>Form validation</mat-card-title>
+  <mat-card-subtitle>Angular2 custom validation</mat-card-subtitle>
+  <form [formGroup]="form">
+    <mat-card-content>
+      <div fxLayout="row wrap">
+        <div class="mb-1">
+          <mat-form-field style="width: 100%">
+            <input matInput placeholder="First name" [formControl]="form.controls['fname']">
+          </mat-form-field>
+          <small *ngIf="form.controls['fname'].hasError('required') && form.controls['fname'].touched" class="mat-text-warn">You must include a first name.</small>
+          <small *ngIf="form.controls['fname'].hasError('minlength') && form.controls['fname'].touched" class="mat-text-warn">Your first name must be at least 5 characters long.</small>
+          <small *ngIf="form.controls['fname'].hasError('maxlength') && form.controls['fname'].touched" class="mat-text-warn">Your first name cannot exceed 10 characters.</small>
+        </div>
+      </div>
+      
+    </mat-card-content>
+    <hr>
+    <mat-card-actions class="px-1">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

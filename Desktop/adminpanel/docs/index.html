@@ -1,0 +1,380 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="assets/material.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+          <h5>Documentation</h5>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+          <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
+          <a href="#cli" class="mdl-layout__tab">Getting started</a>
+          <a href="#helpers" class="mdl-layout__tab">CSS Helpers</a>
+          <a href="#td" class="mdl-layout__tab">3rd Party</a>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="column bl">
+              <h4>
+               Overview
+              </h4>
+              <p>
+                This documentation is to help you understand the template's structure. Please go through the documentation carefully to understand how this template is made and how to edit this properly. Basic HTML, CSS and JS knowledge is required to customize this template.
+              </p>
+              <p>
+                If you have any questions that are beyond the scope of this help file, please feel free to get in touch.
+              </p>
+              <div class="alert alert-info">
+                Support requests can go through the form
+                <a href="http://themeforest.net/user/iamnyasha/?ref=iamnyasha" target="_blank">
+                  on my ThemeForest profile page
+                </a>
+                or via email.
+              </div>
+              <p>
+                Support for my items includes:
+              </p>
+              <ul class="toc">
+                <a>
+                  Responding to questions or problems regarding the item and its features
+                </a>
+                <a>
+                  Fixing bugs and reported issues
+                </a>
+                <a>
+                  Providing updates to ensure compatibility with new software versions
+                </a>
+              </ul>
+              <p>
+                Item support does not include:
+              </p>
+              <ul class="toc">
+                <a>
+                  Customization and installation services
+                </a>
+                <a>
+                  Support for third party software and plug-ins
+                </a>
+              </ul>
+              <p>
+                Before seeking support please:
+              </p>
+              <ul class="toc">
+                <a>
+                  Make sure your question is a valid item Issue and not a customization request.
+                </a>
+                <a>
+                  Make sure you have read through the documentation and any related video guides before asking support on how to accomplish a task.
+                </a>
+                <a>
+                  Make sure to double check the item FAQs.
+                </a>
+                <a>
+                  If you have customized your item and now have an issue, back-track to make sure you didn't make a mistake. If you have made changes and can't find the issue, please provide us with your changelog.
+                </a>
+                <a>
+                  Most of the time we find that the solution to people's issues can be solved with a simple "Google Search". You might want to try that before seeking support. You might be able to fix the issue yourself much quicker than we can respond to your request.
+                </a>
+                <a>
+                  Make sure to state the name of the item you are having issues with when requesting support via ThemeForest.
+                </a>
+              </ul>
+              <h5 class="mt25">
+                What is it?
+              </h5>
+              <p>
+                Primer is a creative material design admin template built for Angular 2+ and Angular 4. It comes out of the box with AoT and lazy loading support, Language translation , RTL support and light and dark colour schemes. With this, you get all you need to start working on your SAAS, CRM, CMS or dashboard based project.
+              </p>
+              <p>
+                Once you've purchased Primer please consider giving a 5 star rating, it helps in pushing out more updates and adding a lot more features.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="cli">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Getting started</h4>
+
+              <p>This template is built with angular-cli and requires Node and NPM to be installed.</p>
+
+              <h6>Installing the prerequisites</h6>
+              <p><strong>Node.js and NPM:</strong> You can download Node.js from <a href="https://nodejs.org">https://nodejs.org</a>. NPM comes bundled with Node.js</p>
+
+              <p><strong>angular-cli:</strong> You can install angular-cli by executing from your terminal <b>npm install -g @angular/cli</b>. More details can be found here <a href="https://github.com/angular/angular-cli">https://github.com/angular/angular-cli</a> </p>
+
+              <h6>Installing the npm packages</h6>
+              <p>Before proceding you'll need to install npm packages. You can do this by running <strong>npm install</strong> from the root of your project to install all the necessary dependencies.</p>
+
+              <h5>Using CLI</h5>
+              <h6>Development server</h6>
+              <p>Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.</p>
+
+              <h6>Code scaffolding</h6>
+              <p>Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.</p>
+
+              <h6>Building</h6>
+              <p>Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build. Use `--aot` flag for a AoT build</p>
+
+              <h6>Further help</h6>
+              <p>To get more help on the `angular-cli` use `ng --help` or go check out <a href="https://github.com/angular/angular-cli">https://github.com/angular/angular-cli</a>.</p>
+
+              <h5>Layout Engine</h5>
+              <p>For the layout, the template uses @angular/flex-layout angular 2+ component layout engine which uses flexbox css. For detailed usage information you can read the docs over at <a href="https://github.com/angular/flex-layout">https://github.com/angular/flex-layout</a> </p>
+
+              <h5>Theming and RTL</h5>
+              <p><b>Dark theme:</b> To activate the dark theme simply add the class app-dark to the div.app in layout-dashboard.component.html</p>
+              <p><b>Custom theming:</b> For detailed custom theming guide you can read the offical material 2 docs at <a href="https://github.com/angular/material2/blob/master/docs/theming.md">https://github.com/angular/material2/blob/master/docs/theming.md</a></p>
+              <p><b>RTL:</b> For direction use the [dir] directive with either ltr or rtl.</p>
+
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="helpers">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="column bl">
+                <h3 class="page-title">
+                  Helper classes
+                </h3>
+                <p>
+                  These are all the available helper classes used in the template
+                </p>
+                <h5 class="mt25">
+                  General
+                </h5>
+                <ul class="">
+                  <a>
+                    <code>.radius-none</code> (no round corners)
+                  </a>
+                  <a>
+                    <code>.radius-round</code> (border corners based on $border-radius-base)
+                  </a>
+                  <a>
+                    <code>.radius-circle</code> (circle radius corners)
+                  </a>
+                  <a>
+                    <code>.overflow-visible</code>
+                  </a>
+                  <a>
+                    <code>.overflow-hidden</code>
+                  </a>
+                  <a>
+                    <code>.overflow-auto</code>
+                  </a>
+                  <a>
+                    <code>.block</code> (display block)
+                  </a>
+                  <a>
+                    <code>.button-block</code>
+                  </a>
+                  <a>
+                    <code>.inline-block</code>
+                  </a>
+                  <a>
+                    <code>.center-block</code>
+                  </a>
+                  <a>
+                    <code>.relative</code> (position relative)
+                  </a>
+                  <a>
+                    <code>.fixed</code>
+                  </a>
+                  <a>
+                    <code>.absolute</code>
+                  </a>
+                  <a>
+                    <code>.shadow-none</code>
+                  </a>
+                  <a>
+                    <code>.border-none</code>
+                  </a>
+                  <a>
+                    <code>.background-none</code>
+                  </a>
+                </ul>
+                <h5>Background colors (Based on material palette)</h5>
+                <p>Background colors are named using the format: mat-{color}-{shade}</p>
+                <p><b>Where color is one of:</b> red, pink , purple, deep-purple, indigo, blue, light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, deep-orage, brown, grey, blue-grey</p>
+                <p><b>Where shade is one of:</b> 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A700</p>
+                <p>e.g mat-red-500</p>
+
+                <h5 class="mt25">
+                  Spacing
+                </h5>
+                <p>Spacing classes are named using the format: {property}{sides}-{size}</p>
+                <p><b>Where property is one of:</b></p>
+                <ul class="">
+                  <a>m - for classes that set margin</a>
+                  <a>p - for classes that set padding</a>
+                </ul>
+                <p><b>Where sides is one of:</b></p>
+                <ul class="">
+                  <a><code>t</code> - for classes that set <code>margin-top</code> or <code>padding-top</code></a>
+                  <a><code>b</code> - for classes that set <code>margin-bottom</code> or <code>padding-bottom</code></a>
+                  <a><code>l</code> - for classes that set <code>margin-left</code> or <code>padding-left</code></a>
+                  <a><code>r</code> - for classes that set <code>margin-right</code> or <code>padding-right</code></a>
+                  <a><code>x</code> - for classes that set both <code>*-left</code> and <code>*-right</code></a>
+                  <a><code>y</code> - for classes that set both <code>*-top</code> and <code>*-bottom</code></a>
+                  <a><code>a</code> - for classes that set a <code>margin</code> or <code>padding</code> on all 4 sides of the element</a>
+                </ul>
+                <p><b>Where size is one of:</b></p>
+                <ul class="">
+                  <a><code>0</code> - for classes that eliminate the <code>margin</code> or <code>padding</code> by setting it to <code>0</code></a>
+                  <a><code>1</code> - (by default) for classes that set the <code>margin</code> or <code>padding</code> to <code>$spacer-x</code> or <code>$spacer-y</code></a>
+                  <a><code>2</code> - (by default) for classes that set the <code>margin</code> or <code>padding</code> to <code>$spacer-x * 1.5</code> or <code>$spacer-y * 1.5</code></a>
+                  <a><code>3</code> - (by default) for classes that set the <code>margin</code> or <code>padding</code> to <code>$spacer-x * 3</code> or <code>$spacer-y * 3</code></a>
+                </ul>
+                <h5 class="mt25">
+                  Text
+                </h5>
+                <ul class="">
+                  <a>
+                    <code>.text-justify</code>
+                  </a>
+                  <a>
+                    <code>.text-nowrap</code>
+                  </a>
+                  <a>
+                    <code>.text-truncate</code>
+                  </a>
+                  <a>
+                    <code>.text-{xs, sm, md, lg}-{left, center, right}</code>
+                  </a>
+
+                  <a>
+                    <code>.text-lowercase</code>
+                  </a>
+                  <a>
+                    <code>.text-uppercase</code>
+                  </a>
+                  <a>
+                    <code>.text-capitalize</code>
+                  </a>
+                  <a>
+                    <code>.text-xs</code>
+                  </a>
+                  <a>
+                    <code>.text-sm</code>
+                  </a>
+                  <a>
+                    <code>.text-md</code>
+                  </a>
+                  <a>
+                    <code>.text-lg</code>
+                  </a>
+                  <a>
+                    <code>.text-xl</code>
+                  </a>
+                  <a>
+                    <code>.text-xxl</code>
+                  </a>
+                  <a>
+                    <code>.text-weight-normal</code>
+                  </a>
+                  <a>
+                    <code>.text-weight-bold</code>
+                  </a>
+                  <a>
+                    <code>.text-italic</code>
+                  </a>
+                  <a>
+                    <code>.text-hide</code>
+                  </a>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="td">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>3rd party components</h4>
+              <ul>
+                <a href="https://github.com/angular/flex-layout">Angular component Layout engine; using flexbox-2016 css</a>
+                <a href="https://github.com/angular/material2">Material Design components for Angular</a>
+                <a href="https://github.com/mattlewis92/angular-calendar">Angular calendar - A flexible calendar component for angular 2.0+ that can display events on a month, week or day view.</a>
+                <a href="https://github.com/swimlane/angular2-data-table">A feature-rich yet lightweight data-table crafted for Angular2</a>
+                <a href="https://github.com/SebastianM/angular2-google-maps">Angular components for Google Maps</a>
+                <a href="https://github.com/500tech/angular2-tree-component">A simple yet powerful tree component for Angular2</a>
+                <a href="https://github.com/valor-software/ng2-dragula">Simple drag and drop with dragula</a>
+                <a href="http://leafletjs.com/">An open-source JavaScript library for mobile-friendly interactive maps</a>
+                <a href="https://github.com/valor-software/ng2-charts">Beautiful charts for Angular2 based on Chart.js</a>
+                <a href="https://github.com/valor-software/ng2-file-upload">Easy to use Angular2 components for files upload</a>
+                <a href="https://github.com/ocombe/ng2-translate">An implementation of angular translate for Angular</a>
+                <a href="https://github.com/yuyang041060120/ng2-validation">angular2 validation</a>
+                <a href="http://quilljs.com/">Your powerful, rich text editor</a>
+                <a href="https://github.com/sindresorhus/screenfull.js/">Simple wrapper for cross-browser usage of the JavaScript Fullscreen API</a>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="assets/material.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+@import "../../../assets/styles/scss/components/editor";
+:host ::ng-deep {
+  quill-editor {
+    display: block;
+    border: 0;
+  }
+  .ng-invalid {
+    border: 1px dashed red;
+  }
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow {
+    border: 0;
+  }
+}
