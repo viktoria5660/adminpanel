@@ -23,8 +23,7 @@ export class ApiService {
     }
 
     public updateSettings(settings: Settings): Observable<any> {
-        // todo: put real api
-        return this.http.post<Settings>(API_URL + '/settings/updateSettingsByCompany', settings)
+        return this.http.put<Settings>(API_URL + '/settings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 

@@ -9,4 +9,5 @@ export interface Settings {
     timetToSendToLogin: number;
     EnableGame: boolean;
     minBet: number;
+    gameOp : string;
 }

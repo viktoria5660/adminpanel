@@ -26,18 +26,8 @@ router.put('/', (req, res) => {
 
 })
 
-// router.get('/getSettings',function(req,res,next){
-//     SettingsModel.find({_id: '5b3f9398a2a83633c4f97bc5'}, function(err,settings){
-//         if(err) {
-//           res.status(500).send({message:"Error!"});
-//         } else {
-//           res.send(settings);
-//         }
-//     });
-// });
-
-router.post('/getSttingsByCompany',function(req,res,next){
-    // console.log("getSttingsByCompany")
+router.post('/getSttingsByCompany',function(req,res){
+    console.log("getSttingsByCompany")
     var companyName = req.body.companyName
     SettingsModel.find({companyName : companyName }, function(err,info){
         if(err) {
@@ -48,45 +38,41 @@ router.post('/getSttingsByCompany',function(req,res,next){
     });
 });
 
-router.post('/createNewSettings',function(req,res,next){
-    console.log("creating")
-    var  companyName = req.body.companyName
-        var  gameOp = req.body.gameOp
-        //   defaultCoins,
-        //   minBet,
-        //   defaultCorrectFB,
-        //   defaultInCorrectFB,
-        //   timeLimitForQ,
-        //   lowToMed,
-        //   medToHigh,
-        //   timetToSendToLogin,
-        //   EnableGame
-        // }
-        
-        let  settings = new SettingsModel 
-        ({ companyName ,
-            gameOp
-            // defaultCoins = defaultCoins,
-            // minBet = minBet,
-            // defaultCorrectFB = defaultCorrectFB,
-            // defaultInCorrectFB = defaultInCorrectFB,
-            // timeLimitForQ = timeLimitForQ,
-            // lowToMed = lowToMed,
-            // medToHigh = medToHigh,
-            // timetToSendToLogin = timetToSendToLogin,
-            // EnableGame = EnableGame
-          })
-  
-          try {
-            console.log("aaaaaaaaaaaa:",companyName)
-             settings.save()
-        } catch (err) {
+//create new settings
+router.post('/createNewSettings',function(req,res){
+console.log("INSIDE CREATING SETTINGS")
 
-            console.log(err)
-            return err
+let settings = new SettingsModel({
+            companyName : req.body.companyName,
+            gameOp : req.body.gameOp,
+            defaultCoins : req.body.defaultCoins,
+            minBet : req.body.minBet,
+            defaultCorrectFB : req.body.defaultCorrectFB,
+            defaultInCorrectFB : req.body.defaultInCorrectFB,
+            timeLimitForQ : req.body.timeLimitForQ,
+            lowToMed : req.body.lowToMed,
+            medToHigh : req.body.medToHigh,
+            timetToSendToLogin : req.body.timetToSendToLogin,
+            EnableGame : req.body.EnableGame
+})
+
+settings.save()
+    .then(doc => {
+        console.log(doc)
+        res.status(200).json({ message: 'Settings created'})
+    })
+});
+//delete by company
+router.post('/deleteSettings',function(req,res){
+    console.log("deleteSttings")
+    var companyName = req.body.companyName
+    SettingsModel.findOneAndRemove({companyName: companyName }, function(err,info){
+        if(err) {
+          res.status(500).send({message:"Error!"});
+        } else {
+            res.status(200).send({message:"Deleted"});
         }
-
-        return settings
+    });
 });
 
 
