@@ -31,7 +31,9 @@ export class UsersComponent implements OnInit {
     }
 
     public addUser(): void {
-        const dialogRef: MatDialogRef<AddEditUserDialogComponent> = this.dialog.open(AddEditUserDialogComponent);
+        const dialogRef: MatDialogRef<AddEditUserDialogComponent> = this.dialog.open(AddEditUserDialogComponent, {
+            width: '450px'
+        });
         dialogRef.afterClosed().subscribe((newUser: User) => {
             console.log(newUser);
             if (newUser) {
@@ -42,6 +44,7 @@ export class UsersComponent implements OnInit {
 
     public editUser(user: User): void {
         const dialogRef: MatDialogRef<AddEditUserDialogComponent> = this.dialog.open(AddEditUserDialogComponent, {
+            width: '450px',
             data: {user: user}
         });
         dialogRef.afterClosed().subscribe((editUser: User) => {

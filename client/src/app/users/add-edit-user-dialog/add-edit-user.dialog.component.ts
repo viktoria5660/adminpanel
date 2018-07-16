@@ -12,7 +12,6 @@ export class AddEditUserDialogComponent implements OnInit {
     form: FormGroup;
     user: User;
     editMode: boolean;
-
     constructor(private dialogRef: MatDialogRef<AddEditUserDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {

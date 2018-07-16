@@ -7,25 +7,44 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-
                 <!--First Name-->
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <mat-form-field>
                         <input matInput formControlName="name" placeholder="First Name">
                     </mat-form-field>
                 </div>
+            </div>
 
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Last Name-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="lastName" placeholder="Last Name">
+                    </mat-form-field>
+                </div>
+            </div>
 
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--Email-->
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <mat-form-field>
                         <input type="email" matInput formControlName="email" placeholder="Email">
                     </mat-form-field>
                 </div>
+            </div>
 
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Group-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="group" placeholder="Group">
+                    </mat-form-field>
+                </div>
+            </div>
 
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--Difficulty-->
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <mat-form-field class="mr-2">
                         <mat-select placeholder="Difficulty" formControlName="difficulty">
                             <mat-option [value]="1">Low</mat-option>
@@ -34,33 +53,17 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-
-
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-
-                <!--Last Name-->
-                <div class="form-group mb-0">
-                    <mat-form-field>
-                        <input matInput formControlName="lastName" placeholder="Last Name">
-                    </mat-form-field>
-                </div>
-
-                <!--Group-->
-                <div class="form-group mb-0">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="group" placeholder="Group">
-                    </mat-form-field>
-                </div>
-
                 <!--Coins-->
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <mat-form-field>
                         <input matInput type="number" formControlName="coins" placeholder="Coins">
                     </mat-form-field>
                 </div>
-
             </div>
+
         </div>
 
         <div class="divider divider-md"></div>
