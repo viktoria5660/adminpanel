@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     name: string;
     lastName: string;
     email: string;
@@ -8,4 +8,5 @@ export interface User {
     coins: number;
     created_at: string;
     updatedAt: string;
+    constructor() {}
 }

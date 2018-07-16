@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsersService} from './users.service';
 import {User} from './users.model';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
+import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
 
 
 @Component({
@@ -10,13 +11,14 @@ import {MatSort, MatTableDataSource} from '@angular/material';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'lastName', 'email', 'group'];
+    displayedColumns: string[] = ['name', 'lastName', 'email', 'group', 'actions'];
     dataSource;
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
-    constructor(private usersService: UsersService) {
+    constructor(private usersService: UsersService,
+                private dialog: MatDialog) {
     }
 
     public ngOnInit(): void {
@@ -26,6 +28,32 @@ export class UsersComponent implements OnInit {
             this.dataSource.sort = this.sort;
             this.error = '';
         }, (error) => this.error = error.message);
+    }
+
+    public addUser(): void {
+        const dialogRef: MatDialogRef<AddEditUserDialogComponent> = this.dialog.open(AddEditUserDialogComponent);
+        dialogRef.afterClosed().subscribe((newUser: User) => {
+            console.log(newUser);
+            if (newUser) {
+                // todo: add user
+            }
+        });
+    }
+
+    public editUser(user: User): void {
+        const dialogRef: MatDialogRef<AddEditUserDialogComponent> = this.dialog.open(AddEditUserDialogComponent, {
+            data: {user: user}
+        });
+        dialogRef.afterClosed().subscribe((editUser: User) => {
+            console.log(editUser);
+            if (editUser) {
+                // todo: edit user
+            }
+        });
+    }
+
+    public deleteUser(user: User): void {
+        // todo: delete user
     }
 
 }
