@@ -4,10 +4,10 @@ import { environment } from "../../environments/environment";
 import { Observable, throwError } from "rxjs";
 import { Settings } from "../settings/settings.model";
 import { publishLast, refCount, catchError } from "rxjs/operators";
-import { Users } from "../users/users.model";
+import { User } from "../users/users.model";
 
 const API_URL: string = environment.apiUrl
-var company = "HP"
+const company = 'HP'
 @Injectable()
 export class ApiService {
     constructor(private http: HttpClient) {
@@ -18,15 +18,18 @@ export class ApiService {
     }
 
     public getSettings(): Observable<Settings> {
-        return this.http.post<Settings>(API_URL + '/settings/getSttingsByCompany', {"companyName": company})
+        return this.http.post<Settings>(API_URL + '/settings/getSttingsByCompany', {'companyName': company})
         .pipe(publishLast(), refCount(), catchError(this.handleError))
     }
-    // public getSettings(): Observable<Settings> {
-    //     return this.http.get<Settings>(API_URL + '/settings/getSettings')
-    //     .pipe(publishLast(), refCount(), catchError(this.handleError))
-    // }
-    public getUsers(): Observable<Users> {
-        return this.http.get<Users>(API_URL + '/users')
+
+    public updateSettings(settings: Settings): Observable<any> {
+        // todo: put real api
+        return this.http.post<Settings>(API_URL + '/settings/updateSettingsByCompany', settings)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+
+    public getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(API_URL + '/users')
         .pipe(publishLast(), refCount(), catchError(this.handleError))
     }
 }

@@ -13,7 +13,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class SettingsComponent implements OnInit {
     error: string;
     public form: FormGroup;
-    constructor(private settingsService: SettingsService, private fb: FormBuilder) {
+    constructor(private settingsService: SettingsService,
+                private fb: FormBuilder) {
     }
 
     public ngOnInit(): void {
@@ -27,6 +28,14 @@ export class SettingsComponent implements OnInit {
         this.form = this.fb.group({
             companyName: [settings.companyName, Validators.required],
             defaultCoins: [settings.defaultCoins, Validators.required],
+        });
+    }
+
+    public onSubmit(): void {
+        this.settingsService.updateSettings(this.form.value).subscribe((response) => {
+
+        }, (error) => {
+
         });
     }
 

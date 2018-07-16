@@ -29,7 +29,7 @@ const MENUITEMS = [
   },
   {
     state: 'users',
-    name: 'Users',
+    name: 'User',
     type: 'link',
     icon: 'face'
   },

@@ -3,8 +3,9 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgressBarModule, MatMenuModule,
-  MatTableModule
+  MatTableModule, MatSortModule
 } from '@angular/material';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';

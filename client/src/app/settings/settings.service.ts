@@ -20,4 +20,9 @@ export class SettingsService {
         return obs;
     }
 
+    public updateSettings(newSettings: Settings): Observable<any> {
+        console.log(newSettings);
+        return this.apiService.updateSettings(newSettings);
+    }
+
 }

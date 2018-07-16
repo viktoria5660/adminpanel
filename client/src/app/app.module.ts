@@ -29,7 +29,8 @@ import {
   MatListModule,
   MatSlideToggleModule,
   MatSelectModule,
-  MatProgressBarModule } from '@angular/material';
+  MatProgressBarModule, MatSortModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {BidiModule} from '@angular/cdk/bidi';
 
@@ -73,7 +74,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    
   ],
   imports: [
     BrowserModule,
