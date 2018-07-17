@@ -12,7 +12,7 @@ import {Company} from '../company/company.model';
     styleUrls: ['./questions.component.scss']
 })
 export class QuestionsComponent implements OnInit {
-    displayedColumns: string[] = ['picture', 'company', 'category', 'coins', 'content', 'answers', 'actions'];
+    displayedColumns: string[] = ['picture', 'difficulty', 'category', 'coins', 'content', 'answers', 'actions'];
     dataSource;
 
     @ViewChild(MatSort) sort: MatSort;
@@ -30,6 +30,10 @@ export class QuestionsComponent implements OnInit {
     public ngOnInit(): void {
         this.selectedCompany = this.companies[0];
         this.dataSource = new MatTableDataSource([]);
+        this.getQuestions();
+    }
+
+    public getQuestions(): void {
         this.questionsService.getQuestionsByCompany(this.selectedCompany.name).subscribe((questions: Question[]) => {
             this.dataSource.data = questions;
             this.dataSource.sort = this.sort;
@@ -64,6 +68,17 @@ export class QuestionsComponent implements OnInit {
 
     public deleteQuestion(question: Question): void {
         // todo: delete question
+    }
+
+    public getDifficultyString(difficulty: number): string {
+        let res: string;
+        switch (difficulty) {
+            case 1: res = 'Easy'; break;
+            case 2: res = 'Medium'; break;
+            case 3: res = 'Hard'; break;
+        }
+
+        return res;
     }
 
 }
