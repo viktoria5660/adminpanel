@@ -24,23 +24,12 @@ import {QuestionsRoutes} from './questions.routing';
 import {QuestionsService} from './questions.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     imports: [
-        ReactiveFormsModule,
-        CommonModule,
+        SharedModule,
         RouterModule.forChild(QuestionsRoutes),
-        MatIconModule,
-        MatCardModule,
-        MatButtonModule,
-        MatListModule,
-        MatTableModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatProgressBarModule,
-        MatMenuModule,
         ChartsModule,
         NgxDatatableModule,
         FlexLayoutModule

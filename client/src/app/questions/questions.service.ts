@@ -8,8 +8,8 @@ export class QuestionsService {
 
     constructor(private apiService: ApiService) {}
 
-    public getQuestions(): Observable<Question[]> {
-        const obs = this.apiService.getQuestions();
+    public getQuestionsByCompany(companyName: string): Observable<Question[]> {
+        const obs = this.apiService.getQuestionsByCompany(companyName);
         obs.subscribe((questions: Question[]) => {
 
         }, (error) => console.log('Questions Service error: ' + error.message));

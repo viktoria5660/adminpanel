@@ -3,6 +3,7 @@ import {QuestionsService} from './questions.service';
 import {Question} from './questions.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
+import {Company} from '../company/company.model';
 
 
 @Component({
@@ -17,13 +18,19 @@ export class QuestionsComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
+    companies = [
+        {id: 1, name: 'HP'},
+        {id: 2, name: 'DELL'}
+    ]; // todo: get from api
+    selectedCompany: Company;
     constructor(private questionsService: QuestionsService,
                 private dialog: MatDialog) {
     }
 
     public ngOnInit(): void {
+        this.selectedCompany = this.companies[0];
         this.dataSource = new MatTableDataSource([]);
-        this.questionsService.getQuestions().subscribe((questions: Question[]) => {
+        this.questionsService.getQuestionsByCompany(this.selectedCompany.name).subscribe((questions: Question[]) => {
             this.dataSource.data = questions;
             this.dataSource.sort = this.sort;
             this.error = '';
