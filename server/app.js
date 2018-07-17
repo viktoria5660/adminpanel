@@ -47,6 +47,8 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json())
 app.use(controllers)
 app.get('/', (req, res) => {
-    res.send('hello')
+    res.send('hello');
 })
-app.listen(3000)
+
+console.log('server listening on port 3000');
+app.listen(3000);

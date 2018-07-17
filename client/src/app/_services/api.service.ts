@@ -5,6 +5,7 @@ import { Observable, throwError } from "rxjs";
 import { Settings } from "../settings/settings.model";
 import { publishLast, refCount, catchError } from "rxjs/operators";
 import { User } from "../users/users.model";
+import {Question} from '../questions/questions.model';
 
 const API_URL: string = environment.apiUrl
 const company = 'HP'
@@ -29,6 +30,11 @@ export class ApiService {
 
     public getUsers(): Observable<User[]> {
         return this.http.get<User[]>(API_URL + '/users')
-        .pipe(publishLast(), refCount(), catchError(this.handleError))
+        .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+
+    public getQuestions(): Observable<Question[]> {
+        return this.http.get<Question[]>(API_URL + '/questions')
+        .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 }

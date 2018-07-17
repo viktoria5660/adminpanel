@@ -1,0 +1,78 @@
+<h3 matDialogTitle>
+    <ng-container *ngIf="editMode" i18n>Edit Question</ng-container>
+    <ng-container *ngIf="!editMode" i18n>Add Question</ng-container>
+</h3>
+
+<div mat-dialog-content style="padding-bottom: 20px;">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <div fxLayout="row wrap">
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--First Name-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="name" placeholder="First Name">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Last Name-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="lastName" placeholder="Last Name">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Email-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input type="email" matInput formControlName="email" placeholder="Email">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Group-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="group" placeholder="Group">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Difficulty-->
+                <div class="form-group">
+                    <mat-form-field class="mr-2">
+                        <mat-select placeholder="Difficulty" formControlName="difficulty">
+                            <mat-option [value]="1">Low</mat-option>
+                            <mat-option [value]="2">Medium</mat-option>
+                            <mat-option [value]="3">High</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Coins-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="coins" placeholder="Coins">
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="divider divider-md"></div>
+
+        <div class="form-actions">
+            <button mat-raised-button type="submit" class="btn-w-md" color="primary"
+                    [disabled]="form.invalid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

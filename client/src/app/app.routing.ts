@@ -20,6 +20,10 @@ export const AppRoutes: Routes = [
                 loadChildren: './users/users.module#UsersModule'
             },
             {
+                path: 'questions',
+                loadChildren: './questions/questions.module#QuestionsModule'
+            },
+            {
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
             }
