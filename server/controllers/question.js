@@ -114,9 +114,11 @@ router.post('/enterQ', (req, res) => {
 
 })
 
-router.get('/allQ/Q',function(req,res){
-    console.log("INSIDE ALLQ")
-    QuestionModel.find({}, function(err,questions){
+router.get('/getQuestionsByCompany/:conpamyName',function(req,res){
+    // console.log("INSIDE ALLQ")
+     var conpamyName = req.params.conpamyName
+
+    QuestionModel.find({company :conpamyName }, function(err,questions){
         if(err) {
           res.status(500).send({message:"Error!"});
         } else {
@@ -124,8 +126,6 @@ router.get('/allQ/Q',function(req,res){
         }
     });
 });
-
-
 
 var handleError = (err) => {
    return ({message:'Error while trying to execute query!' + ' ' + err});
