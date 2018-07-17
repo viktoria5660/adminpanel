@@ -3,6 +3,7 @@ import {SettingsService} from './settings.service';
 import {Settings} from './settings.model';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Company} from '../company/company.model';
 
 @Component({
     selector: 'app-settings',
@@ -17,7 +18,7 @@ export class SettingsComponent implements OnInit {
         {id: 1, name: 'HP'},
         {id: 2, name: 'DELL'}
         ]; // todo: get from api
-    selectedCompany: {id: number, name: string};
+    selectedCompany: Company;
     constructor(private settingsService: SettingsService,
                 private fb: FormBuilder) {
     }

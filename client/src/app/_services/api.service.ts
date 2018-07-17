@@ -33,8 +33,8 @@ export class ApiService {
         .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 
-    public getQuestions(): Observable<Question[]> {
-        return this.http.get<Question[]>(API_URL + '/questions')
+    public getQuestionsByCompany(companyName: string): Observable<Question[]> {
+        return this.http.get<Question[]>(API_URL + '/question/getQuestionsByCompany/' + companyName)
         .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 }

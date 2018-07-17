@@ -8,4 +8,8 @@
 @import "scss/core";
 @import "scss/material";
 @import "scss/utilities/utilities";
+@import "scss/colors";
 
+.material-icons {
+  vertical-align: middle;
+}

@@ -1,8 +1,14 @@
 <div class="container">
-<h1>Questions</h1>
+    <h1>Questions</h1>
     <div class="row">
         <div class="col-12 pb-2">
-
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedCompany" (ngModelChange)="getQuestions()" placeholder="Select company">
+                    <mat-option *ngFor="let company of companies" [value]="company">
+                        {{company.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <p>{{error}}</p>
             <button mat-raised-button color="accent" (click)="addQuestion()">Add Question</button>
         </div>
@@ -14,19 +20,26 @@
         <!-- picture Column -->
         <ng-container matColumnDef="picture">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Picture</th>
-            <td mat-cell *matCellDef="let question"> {{question.picture}}</td>
-        </ng-container>
-
-        <!-- company Column -->
-        <ng-container matColumnDef="company">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Company</th>
-            <td mat-cell *matCellDef="let question"> {{question.company}}</td>
+            <td mat-cell *matCellDef="let question"><img [src]="question.picture" class="thumbnail"></td>
         </ng-container>
 
         <!-- category Column -->
         <ng-container matColumnDef="category" mat-sort-header>
             <th mat-header-cell *matHeaderCellDef> Category</th>
             <td mat-cell *matCellDef="let question"> {{question.category}}</td>
+        </ng-container>
+
+        <!-- difficulty Column -->
+        <ng-container matColumnDef="difficulty">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty</th>
+            <td mat-cell *matCellDef="let question">
+                <span class="badge badge-default"
+                   [ngClass]="{'text-red': question.difficulty === 3,
+                               'text-orange': question.difficulty === 2,
+                               'text-green': question.difficulty === 1}">
+                             {{getDifficultyString(question.difficulty)}}
+                     </span>
+            </td>
         </ng-container>
 
         <!-- coins Column -->
@@ -37,7 +50,7 @@
 
         <!-- content Column -->
         <ng-container matColumnDef="content" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef> Content</th>
+            <th mat-header-cell *matHeaderCellDef> Question</th>
             <td mat-cell *matCellDef="let question"> {{question.content}}</td>
         </ng-container>
 
@@ -47,7 +60,8 @@
             <td mat-cell *matCellDef="let question">
                 <ul>
                     <li *ngFor="let answer of question.answers">
-                        <i *ngIf="answer.iscorrect" class="material-icons">check_circle_outline</i>
+                        <i *ngIf="answer.iscorrect" class="material-icons text-green">thumb_up</i>
+                        <i *ngIf="!answer.iscorrect" class="material-icons text-red">thumb_down</i>
                         {{answer.content}}
                         <small>{{answer.feedback}}</small>
                     </li>
