@@ -7,7 +7,7 @@ import {
     MatIconModule, MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatProgressBarModule
+    MatProgressBarModule, MatSelectModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -32,6 +32,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         ChartsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
+        MatSelectModule,
         MatInputModule,
         FormsModule,
         NgxDatatableModule,
