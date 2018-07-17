@@ -114,6 +114,17 @@ router.post('/enterQ', (req, res) => {
 
 })
 
+router.get('/allQ/Q',function(req,res){
+    console.log("INSIDE ALLQ")
+    QuestionModel.find({}, function(err,questions){
+        if(err) {
+          res.status(500).send({message:"Error!"});
+        } else {
+          res.send(questions);
+        }
+    });
+});
+
 
 
 var handleError = (err) => {
