@@ -1,96 +1,142 @@
-<mat-card>
-  <mat-card-title>Settings Form</mat-card-title>
-  <mat-card-subtitle>Change some settings if you know what you are doing</mat-card-subtitle>
+<div class="container">
+    <h1>Settings</h1>
+    <mat-form-field>
+        <mat-select [(ngModel)]="selectedCompany" (ngModelChange)="changeCompany()" placeholder="Select company">
+            <mat-option *ngFor="let company of companies" [value]="company">
+                {{company.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-card class="m-0">
+        <mat-card-title> {{selectedCompany.name}} Settings</mat-card-title>
+        <mat-card-subtitle>Change some settings if you know what you are doing</mat-card-subtitle>
 
-  <!--<p *ngIf="settings">{{ settings | json}}</p>-->
-  <p>{{error}}</p>
+        <!--<p *ngIf="settings">{{ settings | json}}</p>-->
+        <p>{{error}}</p>
 
-  <form [formGroup]="form" *ngIf="form">
-    <mat-card-content>
-      <div fxLayout="row wrap">
-        <div class="mb-1">
-          <mat-form-field>
-            <input matInput placeholder="Company Name" formControlName="companyName">
-            <mat-hint *ngIf="form.controls['companyName'].hasError('required') && form.controls['companyName'].touched" class="mat-text-warn">You must include a company name.</mat-hint>
-          </mat-form-field>
-        </div>
+        <form [formGroup]="form" *ngIf="form">
+            <mat-card-content>
+                <div fxLayout="row wrap">
+                    <div class="mb-1">
+                        <mat-form-field>
+                            <input matInput placeholder="Company Name" formControlName="companyName">
+                            <mat-hint
+                                    *ngIf="form.controls['companyName'].hasError('required') && form.controls['companyName'].touched"
+                                    class="mat-text-warn">You must include a company name.
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
 
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default Coins" formControlName="defaultCoins">
-            <mat-hint *ngIf="form.controls['defaultCoins'].hasError('required') && form.controls['defaultCoins'].touched" class="mat-text-warn">You must include default coins.</mat-hint>
-          </mat-form-field>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default Coins" formControlName="defaultCoins">
+                            <mat-hint
+                                    *ngIf="form.controls['defaultCoins'].hasError('required') && form.controls['defaultCoins'].touched"
+                                    class="mat-text-warn">You must include default coins.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default CorrectFB" formControlName="defaultCorrectFB">
-            <mat-hint *ngIf="form.controls['defaultCorrectFB'].hasError('required') && form.controls['defaultCorrectFB'].touched" class="mat-text-warn">You must include default CorrectFB.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default CorrectFB" formControlName="defaultCorrectFB">
+                            <mat-hint
+                                    *ngIf="form.controls['defaultCorrectFB'].hasError('required') && form.controls['defaultCorrectFB'].touched"
+                                    class="mat-text-warn">You must include default CorrectFB.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1">
-          <mat-form-field>
-            <input matInput placeholder="Default InCorrectFB" formControlName="defaultInCorrectFB">
-            <mat-hint *ngIf="form.controls['defaultInCorrectFB'].hasError('required') && form.controls['defaultInCorrectFB'].touched" class="mat-text-warn">You must include default InCorrectFB.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <mat-form-field>
+                            <input matInput placeholder="Default InCorrectFB" formControlName="defaultInCorrectFB">
+                            <mat-hint
+                                    *ngIf="form.controls['defaultInCorrectFB'].hasError('required') && form.controls['defaultInCorrectFB'].touched"
+                                    class="mat-text-warn">You must include default InCorrectFB.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default timeLimitForQ" formControlName="timeLimitForQ">
-            <mat-hint *ngIf="form.controls['timeLimitForQ'].hasError('required') && form.controls['timeLimitForQ'].touched" class="mat-text-warn">You must include default timeLimitForQ.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default timeLimitForQ" formControlName="timeLimitForQ">
+                            <mat-hint
+                                    *ngIf="form.controls['timeLimitForQ'].hasError('required') && form.controls['timeLimitForQ'].touched"
+                                    class="mat-text-warn">You must include default timeLimitForQ.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default lowToMed" formControlName="lowToMed">
-            <mat-hint *ngIf="form.controls['lowToMed'].hasError('required') && form.controls['lowToMed'].touched" class="mat-text-warn">You must include default lowToMed.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default lowToMed" formControlName="lowToMed">
+                            <mat-hint
+                                    *ngIf="form.controls['lowToMed'].hasError('required') && form.controls['lowToMed'].touched"
+                                    class="mat-text-warn">You must include default lowToMed.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1">
-          <mat-form-field>
-            <input matInput placeholder="Default medToHigh" formControlName="medToHigh">
-            <mat-hint *ngIf="form.controls['medToHigh'].hasError('required') && form.controls['medToHigh'].touched" class="mat-text-warn">You must include default medToHigh.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <mat-form-field>
+                            <input matInput placeholder="Default medToHigh" formControlName="medToHigh">
+                            <mat-hint
+                                    *ngIf="form.controls['medToHigh'].hasError('required') && form.controls['medToHigh'].touched"
+                                    class="mat-text-warn">You must include default medToHigh.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default timetToSendToLogin" formControlName="timetToSendToLogin">
-            <mat-hint *ngIf="form.controls['timetToSendToLogin'].hasError('required') && form.controls['timetToSendToLogin'].touched" class="mat-text-warn">You must include default timetToSendToLogin.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default timetToSendToLogin"
+                                   formControlName="timetToSendToLogin">
+                            <mat-hint
+                                    *ngIf="form.controls['timetToSendToLogin'].hasError('required') && form.controls['timetToSendToLogin'].touched"
+                                    class="mat-text-warn">You must include default timetToSendToLogin.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default EnableGame" formControlName="EnableGame">
-            <mat-hint *ngIf="form.controls['EnableGame'].hasError('required') && form.controls['EnableGame'].touched" class="mat-text-warn">You must include default EnableGame.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default EnableGame" formControlName="EnableGame">
+                            <mat-hint
+                                    *ngIf="form.controls['EnableGame'].hasError('required') && form.controls['EnableGame'].touched"
+                                    class="mat-text-warn">You must include default EnableGame.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1">
-          <mat-form-field>
-            <input matInput placeholder="Default minBet" formControlName="minBet">
-            <mat-hint *ngIf="form.controls['minBet'].hasError('required') && form.controls['minBet'].touched" class="mat-text-warn">You must include default minBet.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <mat-form-field>
+                            <input matInput placeholder="Default minBet" formControlName="minBet">
+                            <mat-hint
+                                    *ngIf="form.controls['minBet'].hasError('required') && form.controls['minBet'].touched"
+                                    class="mat-text-warn">You must include default minBet.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-        <div class="mb-1 ml-2">
-          <mat-form-field>
-            <input matInput placeholder="Default gameOp" formControlName="gameOp">
-            <mat-hint *ngIf="form.controls['gameOp'].hasError('required') && form.controls['gameOp'].touched" class="mat-text-warn">You must include default gameOp.</mat-hint>
-          </mat-form-field>
+                    </div>
+                    <div class="mb-1 ml-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Default gameOp" formControlName="gameOp">
+                            <mat-hint
+                                    *ngIf="form.controls['gameOp'].hasError('required') && form.controls['gameOp'].touched"
+                                    class="mat-text-warn">You must include default gameOp.
+                            </mat-hint>
+                        </mat-form-field>
 
-        </div>
-      </div>
-      
-    </mat-card-content>
-    <hr>
-    <mat-card-actions class="px-1">
-      <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">Submit</button>
-    </mat-card-actions>
-  </form>
-</mat-card>
+                    </div>
+                </div>
+
+            </mat-card-content>
+            <hr>
+            <mat-card-actions class="px-1">
+                <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">
+                    Submit
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

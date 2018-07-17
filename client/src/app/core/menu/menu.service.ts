@@ -34,6 +34,12 @@ const MENUITEMS = [
     icon: 'face'
   },
   {
+    state: 'questions',
+    name: 'Questions',
+    type: 'link',
+    icon: 'question_answer'
+  },
+  {
     state: 'settings',
     name: 'Settings',
     type: 'link',
