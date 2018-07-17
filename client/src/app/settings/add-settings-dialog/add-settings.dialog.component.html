@@ -1,25 +1,33 @@
 <h3 matDialogTitle>
-    <ng-container *ngIf="editMode" i18n>Edit User</ng-container>
-    <ng-container *ngIf="!editMode" i18n>Add User</ng-container>
+     <ng-container i18n>Add User</ng-container>
 </h3>
 
 <div mat-dialog-content style="padding-bottom: 20px;">
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--First Name-->
+            
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput formControlName="name" placeholder="First Name">
+                        <input matInput formControlName="companyName" placeholder="companyName">
                     </mat-form-field>
                 </div>
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Last Name-->
+               
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput formControlName="lastName" placeholder="Last Name">
+                        <input matInput formControlName="defaultCoins" placeholder="defaultCoins">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+           
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="defaultCorrectFB" placeholder="defaultCorrectFB">
                     </mat-form-field>
                 </div>
             </div>
@@ -28,16 +36,7 @@
                 <!--Email-->
                 <div class="form-group">
                     <mat-form-field>
-                        <input type="email" matInput formControlName="email" placeholder="Email">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Email-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input type="password" matInput formControlName="password" placeholder="Password">
+                        <input matInput formControlName="defaultInCorrectFB" placeholder="defaultInCorrectFB">
                     </mat-form-field>
                 </div>
             </div>
@@ -46,28 +45,42 @@
                 <!--Group-->
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput type="text" formControlName="group" placeholder="Group">
+                        <input matInput type="number" formControlName="timeLimitForQ" placeholder="timeLimitForQ">
                     </mat-form-field>
                 </div>
             </div>
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Group-->
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput type="text" formControlName="company" placeholder="Company">
+                        <input matInput type="number" formControlName="lowToMed" placeholder="lowToMed">
                     </mat-form-field>
                 </div>
             </div>
-
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Difficulty-->
                 <div class="form-group">
-                    <mat-form-field class="mr-2">
-                        <mat-select placeholder="Difficulty" formControlName="difficulty">
-                            <mat-option [value]="1">Low</mat-option>
-                            <mat-option [value]="2">Medium</mat-option>
-                            <mat-option [value]="3">High</mat-option>
-                        </mat-select>
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="medToHigh" placeholder="medToHigh">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="timetToSendToLogin" placeholder="timetToSendToLogin">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input formControlName="EnableGame" placeholder="EnableGame">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="minBet" placeholder="minBet">
                     </mat-form-field>
                 </div>
             </div>
@@ -76,7 +89,7 @@
                 <!--Coins-->
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput type="number" formControlName="coins" placeholder="Coins">
+                        <input matInput type="text" formControlName="gameOp" placeholder="gameOp">
                     </mat-form-field>
                 </div>
             </div>

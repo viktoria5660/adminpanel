@@ -12,7 +12,7 @@ import {Company} from '../company/company.model';
     styleUrls: ['./questions.component.scss']
 })
 export class QuestionsComponent implements OnInit {
-    displayedColumns: string[] = ['picture', 'difficulty', 'category', 'coins', 'content', 'answers', 'actions'];
+    displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
 
     @ViewChild(MatSort) sort: MatSort;
@@ -68,6 +68,10 @@ export class QuestionsComponent implements OnInit {
 
     public deleteQuestion(question: Question): void {
         // todo: delete question
+        this.questionsService.deleteQuestion(question).subscribe((response) => {
+            // this.message = response.message;
+            console.log("INSIDE delet Q")
+        },  (error) => console.log(error));
     }
 
     public getDifficultyString(difficulty: number): string {

@@ -102,6 +102,63 @@ const router = require('express').Router(),
         });
     });
     
+    router.post('/createNewUser',function(req,res){
+        // console.log("INSIDE CREATING USER", req)
+        
+        let user = new UserModel({
+            coins : req.body.coins,
+            difficulty : req.body.difficulty,
+            email : req.body.email,
+            group : req.body.group,
+            company : req.body.company,
+            lastName : req.body.lastName,
+            name : req.body.name,
+            password : req.body.password
+        })
+        
+        user.save()
+            .then(doc => {
+                console.log(doc)
+                res.status(200).json({ message: 'User created'})
+            })
+        });
+
+
+        router.put('/updateuserfromadmin', (req, res) => {
+            let { coins , company, difficulty,group, lastName, name, email } = req.body
+            // UserModel.update({_id:}, {$set: {name:newname}}, options, function(err,doc){res.status(200)});
+            // console.log("MINBET",minBet)
+            UserModel.findOneAndUpdate({email : email}, 
+            {$set: {coins : coins , company : company, difficulty : difficulty ,group : group, lastName : lastName, name : name }}
+            ,function(err,doc){res.status(200)})
+                    .then(doc => {
+                        if (doc) {
+                            // console.log("SETTING DOC", doc)
+                            res.status(200).json({ message: 'user were updated successfully' })
+                        } else {
+                            res.status(500).json({ message: 'Bad Request'})
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({ message: 'Bad Request'})
+                    })
+            
+        
+        })
+
+        router.post('/deleteUser',function(req,res){
+            console.log("deleteUser")
+            var email = req.body.email
+            UserModel.findOneAndRemove({email: email }, function(err,info){
+                if(err) {
+                  res.status(500).send({message:"Error!"});
+                } else {
+                    res.status(200).send({message:"Deleted"});
+                }
+            });
+        });
+
 
   
     module.exports = router

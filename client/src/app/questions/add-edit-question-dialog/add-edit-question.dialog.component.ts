@@ -34,19 +34,20 @@ export class AddEditQuestionDialogComponent implements OnInit {
 
     public buildForm(): void {
         const answers = [];
-        this.question.answers.forEach((answer: Answer) => {
-            answers.push({
-                content: [answer.content, Validators.required],
-                feedback: [answer.feedback, Validators.required],
-                iscorrect: [answer.iscorrect, Validators.required],
-            });
-        })
+        // this.question.answers.forEach((answer: Answer) => {
+        //     answers.push({
+        //         content: [answer.content, Validators.required],
+        //         feedback: [answer.feedback, Validators.required],
+        //         iscorrect: [answer.iscorrect, Validators.required],
+        //     });
+        // })
         this.form = this.formBuilder.group({
             picture: [this.question.picture, Validators.required],
             company: [this.question.company, Validators.required],
-            category: [this.question.category, Validators.required],
-            coins: [this.question.coins, Validators.required],
+            groups: [this.question.groups, Validators.required],
             content: [this.question.content, Validators.required],
+            template: [this.question.template, Validators.required ],
+            difficulty: [this.question.difficulty,Validators.required ],
             answers: this.formBuilder.array(answers)
         });
     }

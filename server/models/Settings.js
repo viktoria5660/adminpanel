@@ -12,7 +12,6 @@ const schema = new mongoose.Schema(
     medToHigh : Number,
     timetToSendToLogin : Number,
     EnableGame : Boolean
-  
 }
 )
 

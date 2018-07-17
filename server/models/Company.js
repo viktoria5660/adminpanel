@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const schema = new mongoose.Schema(
 {
-    companyid : Number,
+    settings:{type:mongoose.Schema.Types.ObjectId, ref:'settings'},
     companyName: String,
-    gruops:[{
+    groups:[{
         name  : String
     }]
 }

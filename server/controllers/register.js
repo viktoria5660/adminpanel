@@ -1,17 +1,6 @@
 const router = require('express').Router(),
       userHelper = require('../helpers/user')
-    //   SettingsModel = require('../models/Settings')
-
-    //   var defaultCoins
-    //   SettingsModel.findOne({_id:'5b3f9398a2a83633c4f97bc5'},function(err,settings){
-    //       if(err) res.status(500).send(handleError(err));
-    //       else {
-    //         //   res.send(question);
-    //         // console.log("COINS",settings)
-    //         defaultCoins = settings.defaultCoins
-    //       }
-    //   }); 
-// console.log("defaultCOINS:",defaultCoins )
+      
 router.post('/', (req, res) => {
     let correctAns =[] ,
         countOfcorrectAns = 0,

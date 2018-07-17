@@ -35,9 +35,14 @@ export class UsersComponent implements OnInit {
             width: '450px'
         });
         dialogRef.afterClosed().subscribe((newUser: User) => {
-            console.log(newUser);
+            // this.message = '';
+            // console.log(newUser);
             if (newUser) {
                 // todo: add user
+                this.usersService.setUser(newUser).subscribe((response) => {
+                    // this.message = response.message;
+                    // console.log("INSIDE SET USER COMPO")
+                },  (error) => console.log(error));
             }
         });
     }
@@ -51,12 +56,20 @@ export class UsersComponent implements OnInit {
             console.log(editUser);
             if (editUser) {
                 // todo: edit user
+                this.usersService.updateUser(editUser).subscribe((response) => {
+                    // this.message = response.message;
+                    console.log("INSIDE SET UPDATE USER COMPO")
+                },  (error) => console.log(error));
             }
         });
     }
 
     public deleteUser(user: User): void {
         // todo: delete user
+        this.usersService.deleteUser(user).subscribe((response) => {
+            // this.message = response.message;
+            console.log("INSIDE SET UPDATE USER COMPO")
+        },  (error) => console.log(error));
     }
 
 }
