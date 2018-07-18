@@ -3,6 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../questions.model';
 import {Answer} from '../_models/answer.model';
+import {Observable} from 'rxjs/Observable';
+import {Company} from '../../company/company.model';
+import {CompanyService} from '../../company/company.service';
 
 @Component({
     selector: 'app-add-edit-question',
@@ -13,13 +16,16 @@ export class AddEditQuestionDialogComponent implements OnInit {
     form: FormGroup;
     question: Question;
     editMode: boolean;
-
-    constructor(private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
+    companies$: Observable<Company[]>;
+    constructor(private companyService: CompanyService,
+                private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
+        this.companies$ = this.companyService.companies$;
+
         if (this.data && this.data.question) {
             this.editMode = true;
             this.question = this.data.question;
@@ -34,13 +40,16 @@ export class AddEditQuestionDialogComponent implements OnInit {
 
     public buildForm(): void {
         const answers = [];
-        this.question.answers.forEach((answer: Answer) => {
-            answers.push({
-                content: [answer.content, Validators.required],
-                feedback: [answer.feedback, Validators.required],
-                iscorrect: [answer.iscorrect, Validators.required],
+        if (this.question.answers) {
+            this.question.answers.forEach((answer: Answer) => {
+                answers.push(this.createAnswer(answer));
             });
-        })
+        } else {
+            for (let i = 0; i < 4; i++) {
+                answers.push(this.createAnswer());
+            }
+        }
+
         this.form = this.formBuilder.group({
             picture: [this.question.picture, Validators.required],
             company: [this.question.company, Validators.required],
@@ -48,6 +57,14 @@ export class AddEditQuestionDialogComponent implements OnInit {
             coins: [this.question.coins, Validators.required],
             content: [this.question.content, Validators.required],
             answers: this.formBuilder.array(answers)
+        });
+    }
+
+    createAnswer(answer?: Answer): FormGroup {
+        return this.formBuilder.group({
+            content: [answer ? answer.content : '', Validators.required],
+            feedback: [answer ? answer.feedback : '', Validators.required],
+            iscorrect: [answer ? answer.iscorrect : '', Validators.required],
         });
     }
 

@@ -50,6 +50,7 @@ import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 import { ApiService } from './_services/api.service';
 import {SharedModule} from './shared/shared.module';
+import {CompanyModule} from './company/company.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,6 +79,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   imports: [
     SharedModule,
+    CompanyModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),

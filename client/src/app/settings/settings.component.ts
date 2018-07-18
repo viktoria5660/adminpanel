@@ -61,7 +61,6 @@ export class SettingsComponent implements OnInit {
         this.settingsService.updateSettings(this.form.value).subscribe((response) => {
             this.message = response.message;
         },  (error) => this.message = error.message);
-    
     }
 
 }

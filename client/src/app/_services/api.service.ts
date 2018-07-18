@@ -6,6 +6,7 @@ import { Settings } from "../settings/settings.model";
 import { publishLast, refCount, catchError } from "rxjs/operators";
 import { User } from "../users/users.model";
 import {Question} from '../questions/questions.model';
+import {Company} from '../company/company.model';
 
 const API_URL: string = environment.apiUrl
 const company = 'HP'
@@ -25,6 +26,12 @@ export class ApiService {
 
     public updateSettings(settings: Settings): Observable<any> {
         return this.http.put<Settings>(API_URL + '/settings', settings)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+
+    // todo: add this api to server
+    public getCompanies(): Observable<Company[]> {
+        return this.http.get<Company[]>(API_URL + '/companies')
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 

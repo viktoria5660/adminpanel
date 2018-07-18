@@ -7,56 +7,36 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--First Name-->
+                <!--picture-->
                 <div class="form-group">
-                    <mat-form-field>
-                        <input matInput formControlName="name" placeholder="First Name">
-                    </mat-form-field>
+                    <img [src]="question.picture" class="thumbnail">
                 </div>
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Last Name-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input matInput formControlName="lastName" placeholder="Last Name">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Email-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input type="email" matInput formControlName="email" placeholder="Email">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Group-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="group" placeholder="Group">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Difficulty-->
+                <!--company-->
                 <div class="form-group">
                     <mat-form-field class="mr-2">
-                        <mat-select placeholder="Difficulty" formControlName="difficulty">
-                            <mat-option [value]="1">Low</mat-option>
-                            <mat-option [value]="2">Medium</mat-option>
-                            <mat-option [value]="3">High</mat-option>
+                        <mat-select formControlName="company" placeholder="Company">
+                            <mat-option *ngFor="let company of companies$ | async" [value]="company.name">
+                                {{company.name}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Coins-->
+                <!--category-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="category" placeholder="Category">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--coins-->
                 <div class="form-group">
                     <mat-form-field>
                         <input matInput type="number" formControlName="coins" placeholder="Coins">
@@ -64,11 +44,38 @@
                 </div>
             </div>
 
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <!--content-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="content" placeholder="Question">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--answers-->
+            <div formArrayName="answers"
+                 *ngFor="let answer of form.get('answers').controls; let i = index;"
+                 fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50">
+                <div [formGroupName]="i" class="border p-2">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput formControlName="content" placeholder="Answer">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput formControlName="feedback" placeholder="Feedback">
+                        </mat-form-field>
+                        <mat-checkbox formControlName="iscorrect">Correct answer</mat-checkbox>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <div class="divider divider-md"></div>
 
-        <div class="form-actions">
+        <div class="form-actions mt-2">
             <button mat-raised-button type="submit" class="btn-w-md" color="primary"
                     [disabled]="form.invalid">
                 Submit

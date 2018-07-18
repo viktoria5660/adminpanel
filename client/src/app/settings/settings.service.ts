@@ -1,10 +1,7 @@
-import { Injectable } from "@angular/core";
-import { ApiService } from "../_services/api.service";
-import { Observable } from "rxjs";
-import { Settings } from "./settings.model";
-
-
-
+import { Injectable } from '@angular/core';
+import { ApiService } from '../_services/api.service';
+import { Observable } from 'rxjs';
+import { Settings } from './settings.model';
 
 @Injectable()
 export class SettingsService {

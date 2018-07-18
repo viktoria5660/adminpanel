@@ -43,7 +43,7 @@ export class QuestionsComponent implements OnInit {
 
     public addQuestion(): void {
         const dialogRef: MatDialogRef<AddEditQuestionDialogComponent> = this.dialog.open(AddEditQuestionDialogComponent, {
-            width: '450px'
+            maxWidth: '700px'
         });
         dialogRef.afterClosed().subscribe((newQuestion: Question) => {
             console.log(newQuestion);
@@ -55,7 +55,7 @@ export class QuestionsComponent implements OnInit {
 
     public editQuestion(question: Question): void {
         const dialogRef: MatDialogRef<AddEditQuestionDialogComponent> = this.dialog.open(AddEditQuestionDialogComponent, {
-            width: '450px',
+            maxWidth: '700px',
             data: {question: question}
         });
         dialogRef.afterClosed().subscribe((editQuestion: Question) => {
