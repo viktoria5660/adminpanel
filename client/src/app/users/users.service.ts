@@ -20,4 +20,20 @@ export class UsersService {
         return obs;
     }
 
+    public setUser(newUser: User): Observable<any> {
+        // console.log(newUser);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.setUser(newUser);
+    }
+    public updateUser(newUser: User): Observable<any> {
+        console.log(newUser);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.updateUser(newUser);
+    }
+    public deleteUser(newUser: User): Observable<any> {
+        console.log(newUser);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.deleteUser(newUser);
+    }
+
 }

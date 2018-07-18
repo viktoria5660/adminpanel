@@ -35,7 +35,9 @@ export class AddEditUserDialogComponent implements OnInit {
             name: [this.user.name, Validators.required],
             lastName: [this.user.lastName, Validators.required],
             email: [this.user.email, Validators.required],
+            password : [this.user.password,Validators.required],
             group: [this.user.group, Validators.required],
+            company : [this.user.company ,Validators.required ],
             difficulty: [this.user.difficulty, Validators.required],
             coins: [this.user.coins, Validators.required],
         });

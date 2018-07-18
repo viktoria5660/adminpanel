@@ -127,6 +127,52 @@ router.get('/getQuestionsByCompany/:conpamyName',function(req,res){
     });
 });
 
+router.post('/deleteQ', (req, res) => {
+   let Qid = req.body._id
+
+        QuestionModel.findByIdAndRemove({_id : Qid})
+            .then(doc => {
+                if (doc) {
+                   return res.status(200).json({message: 'question deleted'})
+                } else {
+                    return res.status(500).json({ message: 'Bad Request'})
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                return res.status(500).json({ message: 'Bad Request'})
+            })
+  
+
+})
+
+router.put('/updateQ', (req, res) => {
+    // console.log("INSIDE UPDATEQ")
+    let id = req.body._id
+    let {content , template, picture, difficulty , company, groups} = req.body
+    let answers = req.body.answers
+
+    QuestionModel.findOneAndUpdate({_id: id}, 
+    {$set: { content : content , template : template , picture : picture, difficulty : difficulty,
+        company : company, groups: groups, answers : answers }}
+    ,function(err,doc){res.status(200)})
+            .then(doc => {
+                if (doc) {
+                    // console.log("SETTING DOC", doc)
+                    res.status(200).json({ message: 'Question was updated successfully' })
+                } else {
+                    res.status(500).json({ message: 'Question did not updated'})
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json({ message: 'Bad Request'})
+            })
+    
+
+})
+
+
 var handleError = (err) => {
    return ({message:'Error while trying to execute query!' + ' ' + err});
 }

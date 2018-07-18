@@ -6,8 +6,6 @@ export class Question {
     difficulty: number;
     company: string;
     groups:  string;
-    category: string;
-    coins: number;
     answers: Answer[];
     constructor() {}
 }

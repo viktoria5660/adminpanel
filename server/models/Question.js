@@ -9,7 +9,6 @@ const schema = new mongoose.Schema(
     company : String,
     groups:  String,
     category : String,
-    coins: Number,
     answers:[{
         content  : String,
         feedback  : String,

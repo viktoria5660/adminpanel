@@ -16,5 +16,10 @@ export class QuestionsService {
 
         return obs;
     }
+    public deleteQuestion(newQuestion: Question): Observable<any> {
+        console.log(newQuestion);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.deleteQuestion(newQuestion);
+    }
 
 }
