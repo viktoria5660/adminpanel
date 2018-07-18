@@ -26,7 +26,7 @@ export class ApiService {
     // }
     public getCompanies(): Observable<FullCompany[]> {
         return this.http.get<FullCompany[]>(API_URL + '/company')
-            .pipe(publishLast(), refCount(), catchError(this.handleError))
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 
     public updateSettings(settings: Settings): Observable<any> {
@@ -36,13 +36,6 @@ export class ApiService {
 
     public addSettings(settings: Settings): Observable<any> {
         return this.http.post<Settings>(API_URL + '/settings/createNewSettings', settings)
-            .pipe(publishLast(), refCount(), catchError(this.handleError));
-    }
-
-
-    // todo: add this api to server
-    public getCompanies(): Observable<Company[]> {
-        return this.http.get<Company[]>(API_URL + '/companies')
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 

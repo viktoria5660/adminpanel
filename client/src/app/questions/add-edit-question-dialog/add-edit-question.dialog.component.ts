@@ -4,8 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../questions.model';
 import {Answer} from '../_models/answer.model';
 import {Observable} from 'rxjs/Observable';
-import {Company} from '../../company/company.model';
 import {CompanyService} from '../../company/company.service';
+import {FullCompany} from '../../company/full.company.model';
 
 @Component({
     selector: 'app-add-edit-question',
@@ -16,7 +16,8 @@ export class AddEditQuestionDialogComponent implements OnInit {
     form: FormGroup;
     question: Question;
     editMode: boolean;
-    companies$: Observable<Company[]>;
+    companies$: Observable<FullCompany[]>;
+
     constructor(private companyService: CompanyService,
                 private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,8 +54,7 @@ export class AddEditQuestionDialogComponent implements OnInit {
         this.form = this.formBuilder.group({
             picture: [this.question.picture, Validators.required],
             company: [this.question.company, Validators.required],
-            category: [this.question.category, Validators.required],
-            coins: [this.question.coins, Validators.required],
+            groups: [this.question.groups, Validators.required],
             content: [this.question.content, Validators.required],
             answers: this.formBuilder.array(answers)
         });

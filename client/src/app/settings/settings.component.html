@@ -4,19 +4,22 @@
     <div class="row">
         <div class="col-12 pb-4">
             <p>{{error}}</p>
-            <button mat-raised-button color="accent" (click)="addSettings()">Add settings</button>
+
+            <mat-form-field class="mr-2">
+                <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
+                    <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                        {{company.companyName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" (click)="addSettings()">Add Company</button>
         </div>
+
+
     </div>
 
-    <mat-form-field>
-        <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
-            <mat-option *ngFor="let company of companies" [value]="company">
-                {{company.companyName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-card class="m-0" *ngIf="selectedCompany">
+    <mat-card style="margin: 0" *ngIf="selectedCompany">
         <mat-card-title> {{selectedCompany.companyName}} Settings</mat-card-title>
         <mat-card-subtitle>Change some settings if you know what you are doing</mat-card-subtitle>
 
@@ -26,7 +29,7 @@
         <form [formGroup]="form" *ngIf="form">
             <mat-card-content>
                 <div fxLayout="row wrap">
-                    <div class="mb-1">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Company Name" formControlName="companyName">
                             <mat-hint
@@ -56,7 +59,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default InCorrectFB" formControlName="defaultInCorrectFB">
                             <mat-hint
@@ -66,7 +69,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1 ml-2">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default timeLimitForQ" formControlName="timeLimitForQ">
                             <mat-hint
@@ -76,7 +79,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1 ml-2">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default lowToMed" formControlName="lowToMed">
                             <mat-hint
@@ -86,7 +89,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default medToHigh" formControlName="medToHigh">
                             <mat-hint
@@ -96,7 +99,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1 ml-2">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default timetToSendToLogin"
                                    formControlName="timetToSendToLogin">
@@ -107,7 +110,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1 ml-2">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default EnableGame" formControlName="EnableGame">
                             <mat-hint
@@ -117,7 +120,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default minBet" formControlName="minBet">
                             <mat-hint
@@ -127,7 +130,7 @@
                         </mat-form-field>
 
                     </div>
-                    <div class="mb-1 ml-2">
+                    <div class="mr-1 mb-1">
                         <mat-form-field>
                             <input matInput placeholder="Default gameOp" formControlName="gameOp">
                             <mat-hint
