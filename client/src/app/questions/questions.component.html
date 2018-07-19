@@ -2,15 +2,8 @@
     <h1>Questions</h1>
     <div class="row">
         <div class="col-12 pb-2">
-            <!-- <mat-form-field>
-                <mat-select [(ngModel)]="selectedCompany" (ngModelChange)="getQuestions()" placeholder="Select company">
-                    <mat-option *ngFor="let company of companies" [value]="company">
-                        {{company.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
             <mat-form-field class="mr-2">
-                    <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
+                    <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="getQuestions()">
                         <mat-option *ngFor="let company of companies$ | async" [value]="company">
                             {{company.companyName}}
                         </mat-option>

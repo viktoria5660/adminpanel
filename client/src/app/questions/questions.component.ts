@@ -5,7 +5,7 @@ import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/mat
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
 import {FullCompany} from '../company/full.company.model';
 import {CompanyService} from '../company/company.service';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -21,27 +21,19 @@ export class QuestionsComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
-    
-    // companies = [
-    //     {id: 1, name: 'HP'},
-    //     {id: 2, name: 'DELL'}
-    // ]; // todo: get from api
-    // selectedCompany: Company;
+
     constructor(private questionsService: QuestionsService,
-               private companyService: CompanyService,
+                private companyService: CompanyService,
                 private dialog: MatDialog) {
     }
-    
+
     public ngOnInit(): void {
+        this.dataSource = new MatTableDataSource([]);
         this.companies$ = this.companyService.companies$;
         this.companyService.companies$.subscribe((companies) => {
-        this.selectedCompany = companies[0];
-        
-            
+            this.selectedCompany = companies[0];
+            this.getQuestions();
         });
-        
-        this.dataSource = new MatTableDataSource([]);
-        this.getQuestions();
     }
 
     public getQuestions(): void {
@@ -49,7 +41,7 @@ export class QuestionsComponent implements OnInit {
             this.dataSource.data = questions;
             this.dataSource.sort = this.sort;
             this.error = '';
-            
+
         }, (error) => this.error = error.message);
     }
 
@@ -58,21 +50,20 @@ export class QuestionsComponent implements OnInit {
             maxWidth: '700px'
         });
         dialogRef.afterClosed().subscribe((newQuestion: Question) => {
-            console.log("INSIDE DIALOG COMPONENT",newQuestion);
+            console.log('dialog component closed', newQuestion);
             if (newQuestion) {
-                
                 // todo: add question
 
                 this.questionsService.addQuestion(newQuestion).subscribe((response) => {
                     // this.message = response.message;
-                    // console.log("INSIDE SET USER COMPO")
-                },  (error) => console.log(error));
+                    // console.log('INSIDE SET USER COMPO')
+                }, (error) => console.log(error));
             }
         });
     }
-    
+
     public editQuestion(question: Question): void {
-        console.log("INSIDE COMPO editQuestion ")
+        console.log('open editQuestion dialog');
         const dialogRef: MatDialogRef<AddEditQuestionDialogComponent> = this.dialog.open(AddEditQuestionDialogComponent, {
             maxWidth: '700px',
             data: {question: question}
@@ -83,9 +74,9 @@ export class QuestionsComponent implements OnInit {
                 // todo: edit question
                 this.questionsService.editQuestion(editQuestion).subscribe((response) => {
                     // this.message = response.message;
-                    console.log("INSIDE edit Q",editQuestion )
-                },  (error) => console.log(error));
-                
+                    console.log('INSIDE edit Q', editQuestion);
+                }, (error) => console.log(error));
+
             }
         });
     }
@@ -94,16 +85,22 @@ export class QuestionsComponent implements OnInit {
         // todo: delete question
         this.questionsService.deleteQuestion(question).subscribe((response) => {
             // this.message = response.message;
-            console.log("INSIDE delet Q")
-        },  (error) => console.log(error));
+            console.log('INSIDE delet Q');
+        }, (error) => console.log(error));
     }
 
     public getDifficultyString(difficulty: number): string {
         let res: string;
         switch (difficulty) {
-            case 1: res = 'Easy'; break;
-            case 2: res = 'Medium'; break;
-            case 3: res = 'Hard'; break;
+            case 1:
+                res = 'Easy';
+                break;
+            case 2:
+                res = 'Medium';
+                break;
+            case 3:
+                res = 'Hard';
+                break;
         }
 
         return res;
