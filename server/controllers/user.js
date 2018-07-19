@@ -7,7 +7,7 @@ const router = require('express').Router(),
             bet = req.body.bet,
             isCorrect = req.body.isCorrect,
             qid = req.body.qid
-                console.log("INSIDE UPDATE", req)
+                console.log("INSIDE UPDATE", req.body)
               UserModel.findOne(  
               // query
               {email:email},
@@ -17,7 +17,7 @@ const router = require('express').Router(),
                 user.incorrectAns.forEach(el => el.numberOfTurns++);
                 if (isCorrect)
                 {
-                //   console.log("Updaing user..");
+                  console.log("Updaing user..");
                   user.correctAns.push (qid); //is it correct?
                   user.coins = user.coins + (2 * bet);
                   user.countOfcorrectAns ++;
@@ -37,13 +37,15 @@ const router = require('express').Router(),
                 }
                 if (user.countOfcorrectAns > 8)
                 {
-                    // console.log("COUNT", user.countOfcorrectAns)
+                    console.log("COUNT8", user.countOfcorrectAns)
                        user.difficulty =  2;
                 }
-                else (user.countOfcorrectAns > 16)
+                else 
+                {if(user.countOfcorrectAns > 16)
                 {   
+                    console.log("COUNT16", user.countOfcorrectAns)
                     user.difficulty =  3; 
-                }
+                }}
                 UserModel.findOneAndUpdate({email:email}, 
                 {$set: {coins:user.coins,correctAns : user.correctAns,countOfcorrectAns : user.countOfcorrectAns, incorrectAns : user.incorrectAns, difficulty: user.difficulty  }}
                 ,function(err,doc){res.status(200)})

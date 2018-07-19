@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../_services/api.service';
 import { Observable } from 'rxjs';
 import { Settings } from './settings.model';
+import { FullCompany } from '../company/full.company.model';
 
 @Injectable()
 export class SettingsService {
@@ -18,13 +19,15 @@ export class SettingsService {
     // }
 
     public updateSettings(newSettings: Settings): Observable<any> {
-        console.log(newSettings);
+
         return this.apiService.updateSettings(newSettings);
     }
     public addSettings(newSettings: Settings): Observable<any> {
-        // console.log(newUser);
-        // console.log("INSIDE SET USER SERViCE");
+    
         return this.apiService.addSettings(newSettings);
+    }
+    public addGroups(newGroups: FullCompany): Observable<any> {
+        return this.apiService.addGroups(newGroups);
     }
 
 }

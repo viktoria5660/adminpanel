@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FullCompany} from '../company/full.company.model';
 import {CompanyService} from '../company/company.service';
 import {Observable} from 'rxjs/Observable';
+import { AddGroupsDialogComponent } from './add-groups-dialog/add-groups.dialog.component';
 
 @Component({
     selector: 'app-settings',
@@ -19,6 +20,7 @@ export class SettingsComponent implements OnInit {
     form: FormGroup;
     companies$: Observable<FullCompany[]>;
     selectedCompany: FullCompany;
+    newSettings: any;
 
     constructor(private settingsService: SettingsService,
                 private companyService: CompanyService,
@@ -41,8 +43,32 @@ export class SettingsComponent implements OnInit {
             // this.message = '';
             // console.log(newUser);
             if (newSettings) {
+              
                 // todo: add user
                 this.settingsService.addSettings(newSettings).subscribe((response) => {
+                    // this.message = response.message;
+                    this.newSettings = response;
+                   
+                }, (error) => console.log(error));
+            }
+        });
+    }
+
+    public addGroups(): void {
+        const dialogRef: MatDialogRef<AddGroupsDialogComponent> = this.dialog.open(AddGroupsDialogComponent, {
+            width: '450px'
+        });
+        dialogRef.afterClosed().subscribe((newGroups) => {
+            // this.message = '';
+            // console.log(newUser);
+            if (newGroups ) {
+               
+                newGroups.groups= newGroups.groups.split(',').map(el => new Object({name:el}));
+               
+                newGroups.settings = this.newSettings.id;
+                // todo: add user
+                console.log(newGroups);
+                this.settingsService.addGroups(newGroups).subscribe((response) => {
                     // this.message = response.message;
                     // console.log("INSIDE SET USER COMPO")
                 }, (error) => console.log(error));

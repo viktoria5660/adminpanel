@@ -21,5 +21,15 @@ export class QuestionsService {
         // console.log("INSIDE SET USER SERViCE");
         return this.apiService.deleteQuestion(newQuestion);
     }
+    public addQuestion(newQuestion: Question): Observable<any> {
+        console.log("INSIDE Q SERVICE ADD Q",newQuestion);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.addQuestion(newQuestion);
+    }
+    public editQuestion(newQuestion: Question): Observable<any> {
+        console.log("INSIDE Q SERVICE edit Q",newQuestion);
+        // console.log("INSIDE SET USER SERViCE");
+        return this.apiService.editQuestion(newQuestion);
+    }
 
 }

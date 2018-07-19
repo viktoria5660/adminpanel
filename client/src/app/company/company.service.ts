@@ -12,7 +12,7 @@ export class CompanyService {
     private companiesSubject: ReplaySubject<FullCompany[]> = new ReplaySubject<FullCompany[]>(1);
     companies$: Observable<FullCompany[]> = this.companiesSubject.asObservable();
     constructor(private apiService: ApiService) {
-        // call api once to load all companies. every place that needs companies, should subscribe to companies$ instead of making api call.
+        // from api once to load all companies. 
         this.loadCompanies();
     }
 

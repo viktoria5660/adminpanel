@@ -42,12 +42,11 @@ router.get('/:id', (req, res) => {
 
             }); 
         }
+    }else {
+        console.log("NOTHING IN INCORRECT ANSWER")
+        res.status(404).send(incorrectAnsArr)
+        return;
     }
-    // else {
-    //     console.log("NOTHING IN INCORRECT ANSWER")
-    //     res.status(404).send(incorrectAnsArr)
-    //     return;
-    // }
     
     if(!found){
         console.log("RANDOM ELSE");
@@ -68,25 +67,23 @@ router.get('/:id', (req, res) => {
                     res.status(401).json({
                         message: err
                       });
-                       console.log("ERR",err);
+                    //   console.log(err);
                 }else{
-                    console.log("OBJ",obj)
+                    // console.log(obj)
                     // return  res.send(obj);
                     if (!obj.length){
-                        console.log("INSIDE !OBJ")
-                        res.send({message:"NO QUESTIONS"})
-                        // QuestionModel.findOne({_id:new ObjectID(incorrectAnsArr[.find(el => true)].questionId)},function(err,question){
-                        //     if(err) {
-                        //         return  res.status(500).send(handleError(err));
-                        //     }
-                        //     else {
-                        //         console.log("INSIDE FOUND :", question)
-                        //         //  res.send(question);
-                        //         return;
-                        //     }
+                        QuestionModel.findOne({_id:new ObjectID(incorrectAnsArr.find(el => true).questionId)},function(err,question){
+                            if(err) {
+                                return  res.status(500).send(handleError(err));
+                            }
+                            else {
+                                console.log("INSIDE FOUND :", question)
+                                //  res.send(question);
+                                return;
+                            }
             
-                        // });
-                        // console.log("OBJ")
+                        });
+                        console.log("OBJ")
                     } else{
                         return  res.send(obj);
                     }

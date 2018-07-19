@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import { FileSelectDirective } from 'ng2-file-upload';
 import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
@@ -34,7 +35,7 @@ import {SharedModule} from '../shared/shared.module';
         NgxDatatableModule,
         FlexLayoutModule
     ],
-    declarations: [QuestionsComponent, AddEditQuestionDialogComponent],
+    declarations: [QuestionsComponent, AddEditQuestionDialogComponent, FileSelectDirective],
     providers: [QuestionsService],
     entryComponents: [AddEditQuestionDialogComponent]
 })

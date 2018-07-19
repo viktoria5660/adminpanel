@@ -7,6 +7,7 @@ import {
     MatTableModule, MatSortModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule
   } from '@angular/material';
 import { AddSettingsDialogComponent } from './add-settings-dialog/add-settings.dialog.component';
+import { AddGroupsDialogComponent } from './add-groups-dialog/add-groups.dialog.component';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SettingsComponent} from './settings.component';
@@ -25,9 +26,9 @@ import {SharedModule} from '../shared/shared.module';
         NgxDatatableModule,
         FlexLayoutModule
     ],
-    declarations: [SettingsComponent, AddSettingsDialogComponent],
+    declarations: [SettingsComponent, AddSettingsDialogComponent, AddGroupsDialogComponent],
     providers: [SettingsService],
-    entryComponents: [AddSettingsDialogComponent]
+    entryComponents: [AddSettingsDialogComponent,AddGroupsDialogComponent]
 
 })
 

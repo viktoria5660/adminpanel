@@ -6,15 +6,64 @@
 <div mat-dialog-content style="padding-bottom: 20px;">
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--picture-->
+
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                        <!--Group-->
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input matInput type="text" formControlName="groups" placeholder="Group">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                        <!--Group-->
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input matInput type="text" formControlName="company" placeholder="Company">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                            <!--Group-->
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput type="number" formControlName="template" placeholder="template">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                                <!--Group-->
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="difficulty" placeholder="difficulty">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                            <!--Group-->
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput type="text" formControlName="picture" placeholder="picture">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+
+                            <button type="button" class="btn-w-md" color="primary" 
+                            (click)="uploader.uploadAll()" 
+                            [disabled]="!uploader.getNotUploadedItems().length" >
+                            Upload an Image
+                            </button>
+            <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                
                 <div class="form-group">
                     <img [src]="question.picture" class="thumbnail">
                 </div>
-            </div>
+            </div> -->
 
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--company-->
+            <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+               
                 <div class="form-group">
                     <mat-form-field class="mr-2">
                         <mat-select formControlName="company" placeholder="Company">
@@ -24,25 +73,8 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-            </div>
+            </div> -->
 
-            <!--<div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">-->
-                <!--&lt;!&ndash;category&ndash;&gt;-->
-                <!--<div class="form-group">-->
-                    <!--<mat-form-field>-->
-                        <!--<input matInput formControlName="category" placeholder="Category">-->
-                    <!--</mat-form-field>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">-->
-                <!--&lt;!&ndash;coins&ndash;&gt;-->
-                <!--<div class="form-group">-->
-                    <!--<mat-form-field>-->
-                        <!--<input matInput type="number" formControlName="coins" placeholder="Coins">-->
-                    <!--</mat-form-field>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                 <!--content-->
@@ -76,10 +108,11 @@
         <div class="divider divider-md"></div>
 
         <div class="form-actions mt-2">
-            <button mat-raised-button type="submit" class="btn-w-md" color="primary"
-                    [disabled]="form.invalid">
+            <button mat-raised-button type="submit" class="btn-w-md" color="primary">
+                    
                 Submit
             </button>
+            <!-- [disabled]="form.invalid"> -->
         </div>
     </form>
 </div>

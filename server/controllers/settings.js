@@ -59,7 +59,7 @@ let settings = new SettingsModel({
 settings.save()
     .then(doc => {
         console.log(doc)
-        res.status(200).json({ message: 'Settings created'})
+        res.status(200).json({ message: 'Settings created',id:doc.id});
     })
 });
 //delete by company
@@ -71,6 +71,25 @@ router.post('/deleteSettings',function(req,res){
           res.status(500).send({message:"Error!"});
         } else {
             res.status(200).send({message:"Deleted"});
+        }
+    });
+});
+router.get('/getAllCompanys',function(req,res){
+    console.log("getAllCompanys")
+    SettingsModel.find({}, function(err,info){
+        if(err) {
+          res.status(500).send({message:"Error!"});
+        } else {
+            var companies =[];
+            info.forEach(el =>{
+                var js={
+                    "companyName": el.companyName
+                }
+                companies.push(js)
+            })
+            res.status(200).send(companies);
+        //   console.log(newA)  
+           
         }
     });
 });

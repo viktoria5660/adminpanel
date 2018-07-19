@@ -2,31 +2,11 @@ const router = require('express').Router(),
 companyHelper = require('../helpers/company'),
 companyModel = require("../models/Company")
 
-
-// router.get('/', (req, res) => {
-//     companyHelper.getgroups()
-//         .then(groups => {
-//             res.json(groups)
-//         })
-// })
-// router.post('/', (req, res) => {
-//     let company = req.body.companyid
-
-//     if ( company) {
-//             console.log("company number:", company)
-//         companyHelper.getgroups(company)
-//              .then(groups => {
-//                  res.json({ groups })
-//              })
-//          } else {
-//              res.status(500).json({ message: 'no matching company' })
-//          }
-// })
-
 router.post('/create',(req,res) => {
     var newCompany = new companyModel({settings:req.body.settings,groups:req.body.groups,companyName:req.body.companyName});
     newCompany.save(function(err){
         if(err){
+            console.log(err);
             return res.status(500).send({error:"Error"});
         } else {
             return res.send({message:"Company Added"});

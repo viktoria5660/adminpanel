@@ -1,0 +1,40 @@
+<h3 matDialogTitle>
+     <ng-container i18n>Add Groups</ng-container>
+</h3>
+
+<div mat-dialog-content style="padding-bottom: 20px;">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <div fxLayout="row wrap">
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="companyName" placeholder="Company Name">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+               
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+           
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="groups" placeholder="groups">
+                    </mat-form-field>
+                </div>
+            </div>       
+        </div>
+
+        <div class="divider divider-md"></div>
+
+        <div class="form-actions">
+            <button mat-raised-button type="submit" class="btn-w-md" color="primary"
+                    [disabled]="form.invalid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

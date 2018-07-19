@@ -3,7 +3,9 @@ import {QuestionsService} from './questions.service';
 import {Question} from './questions.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
-import {Company} from '../company/company.model';
+import {FullCompany} from '../company/full.company.model';
+import {CompanyService} from '../company/company.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -14,30 +16,40 @@ import {Company} from '../company/company.model';
 export class QuestionsComponent implements OnInit {
     displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
+    companies$: Observable<FullCompany[]>;
+    selectedCompany: FullCompany;
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
-
-    companies = [
-        {id: 1, name: 'HP'},
-        {id: 2, name: 'DELL'}
-    ]; // todo: get from api
-    selectedCompany: Company;
+    
+    // companies = [
+    //     {id: 1, name: 'HP'},
+    //     {id: 2, name: 'DELL'}
+    // ]; // todo: get from api
+    // selectedCompany: Company;
     constructor(private questionsService: QuestionsService,
+               private companyService: CompanyService,
                 private dialog: MatDialog) {
     }
-
+    
     public ngOnInit(): void {
-        this.selectedCompany = this.companies[0];
+        this.companies$ = this.companyService.companies$;
+        this.companyService.companies$.subscribe((companies) => {
+        this.selectedCompany = companies[0];
+        
+            
+        });
+        
         this.dataSource = new MatTableDataSource([]);
         this.getQuestions();
     }
 
     public getQuestions(): void {
-        this.questionsService.getQuestionsByCompany(this.selectedCompany.name).subscribe((questions: Question[]) => {
+        this.questionsService.getQuestionsByCompany(this.selectedCompany.companyName).subscribe((questions: Question[]) => {
             this.dataSource.data = questions;
             this.dataSource.sort = this.sort;
             this.error = '';
+            
         }, (error) => this.error = error.message);
     }
 
@@ -46,14 +58,21 @@ export class QuestionsComponent implements OnInit {
             maxWidth: '700px'
         });
         dialogRef.afterClosed().subscribe((newQuestion: Question) => {
-            console.log(newQuestion);
+            console.log("INSIDE DIALOG COMPONENT",newQuestion);
             if (newQuestion) {
+                
                 // todo: add question
+
+                this.questionsService.addQuestion(newQuestion).subscribe((response) => {
+                    // this.message = response.message;
+                    // console.log("INSIDE SET USER COMPO")
+                },  (error) => console.log(error));
             }
         });
     }
-
+    
     public editQuestion(question: Question): void {
+        console.log("INSIDE COMPO editQuestion ")
         const dialogRef: MatDialogRef<AddEditQuestionDialogComponent> = this.dialog.open(AddEditQuestionDialogComponent, {
             maxWidth: '700px',
             data: {question: question}
@@ -62,6 +81,11 @@ export class QuestionsComponent implements OnInit {
             console.log(editQuestion);
             if (editQuestion) {
                 // todo: edit question
+                this.questionsService.editQuestion(editQuestion).subscribe((response) => {
+                    // this.message = response.message;
+                    console.log("INSIDE edit Q",editQuestion )
+                },  (error) => console.log(error));
+                
             }
         });
     }

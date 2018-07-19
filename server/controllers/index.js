@@ -5,7 +5,8 @@ const router    = require('express').Router()
       company   = require ('./company'),
       settings  = require ('./settings'),
       user      = require ('./user'),
-      login     = require('./login')
+      login     = require('./login'),
+      // upload    = require('./upload'),
       //real path
 
 router.use('/question', question)
@@ -15,6 +16,7 @@ router.use('/login', login)
 router.use('/company', company)
 router.use('/settings', settings)
 router.use ('/users', user)
+// router.use ('/upload', upload)
 //real route
 
 

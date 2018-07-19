@@ -2,13 +2,20 @@
     <h1>Questions</h1>
     <div class="row">
         <div class="col-12 pb-2">
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-select [(ngModel)]="selectedCompany" (ngModelChange)="getQuestions()" placeholder="Select company">
                     <mat-option *ngFor="let company of companies" [value]="company">
                         {{company.name}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
+            <mat-form-field class="mr-2">
+                    <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
+                        <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                            {{company.companyName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             <p>{{error}}</p>
             <button mat-raised-button color="accent" (click)="addQuestion()">Add Question</button>
         </div>
@@ -23,12 +30,6 @@
             <td mat-cell *matCellDef="let question"><img [src]="question.picture" class="thumbnail"></td>
         </ng-container>
 
-        <!-- category Column -->
-        <ng-container matColumnDef="category" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef> Category</th>
-            <td mat-cell *matCellDef="let question"> {{question.category}}</td>
-        </ng-container>
-
         <!-- difficulty Column -->
         <ng-container matColumnDef="difficulty">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty</th>
@@ -40,12 +41,6 @@
                              {{getDifficultyString(question.difficulty)}}
                      </span>
             </td>
-        </ng-container>
-
-        <!-- coins Column -->
-        <ng-container matColumnDef="coins" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef> Coins</th>
-            <td mat-cell *matCellDef="let question"> {{question.coins}}</td>
         </ng-container>
 
         <!-- content Column -->

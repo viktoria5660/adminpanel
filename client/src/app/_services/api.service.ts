@@ -38,6 +38,10 @@ export class ApiService {
         return this.http.post<Settings>(API_URL + '/settings/createNewSettings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
+    public addGroups(newGroups: FullCompany): Observable<any> {
+        return this.http.post<FullCompany>(API_URL + '/company/create', newGroups)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
 
     public getUsers(): Observable<User[]> {
         return this.http.get<User[]>(API_URL + '/users')
@@ -69,7 +73,19 @@ export class ApiService {
 
     public deleteQuestion(question: Question): Observable<any> {
         console.log('INSIDE THE deleteQuestion')
-        return this.http.post<User>(API_URL + '/question/deleteQ', question)
+        return this.http.post<Question>(API_URL + '/question/deleteQ', question)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+    public addQuestion(question: Question): Observable<any> {
+        console.log('INSIDE THE addQuestion',question)
+        return this.http.post<Question>(API_URL + '/question/enterQ', question)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+
+    }
+    public editQuestion(question: Question): Observable<any> {
+        console.log('INSIDE THE addQuestion',question)
+        return this.http.put<Question>(API_URL + '/question/updateQ', question)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+
     }
 }
