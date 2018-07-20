@@ -38,6 +38,11 @@ export class ApiService {
         return this.http.post<Settings>(API_URL + '/settings/createNewSettings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
+    public deleteSettings(settings: Settings): Observable<any> {
+        console.log('INSIDE THE deleteSettings');
+        return this.http.post<User>(API_URL + '/settings/deleteSettings', settings)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
     public addGroups(newGroups: FullCompany): Observable<any> {
         return this.http.post<FullCompany>(API_URL + '/company/create', newGroups)
             .pipe(publishLast(), refCount(), catchError(this.handleError));

@@ -5,10 +5,8 @@ import { User } from "./users.model";
 
 
 
-
 @Injectable()
 export class UsersService {
-
     constructor(private apiService: ApiService) {}
 
     public getUsers(): Observable<User[]> {

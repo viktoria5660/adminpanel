@@ -3,6 +3,9 @@ import {UsersService} from './users.service';
 import {User} from './users.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
+import { FullCompany } from '../company/full.company.model';
+import { Observable } from 'rxjs/Observable';
+import { CompanyService } from '../company/company.service';
 
 
 @Component({
@@ -11,14 +14,17 @@ import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.d
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'lastName', 'email', 'group', 'actions'];
+    displayedColumns: string[] = ['name', 'lastName', 'email', 'company' , 'group','coins','created_at','updatedAt','isAdmin', 'actions'];
     dataSource;
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
+    companies$: Observable<FullCompany[]>;
+    selectedCompany: FullCompany;
+
     constructor(private usersService: UsersService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,  private companyService: CompanyService) {
     }
 
     public ngOnInit(): void {
@@ -28,6 +34,10 @@ export class UsersComponent implements OnInit {
             this.dataSource.sort = this.sort;
             this.error = '';
         }, (error) => this.error = error.message);
+        this.companies$ = this.companyService.companies$;
+        this.companyService.companies$.subscribe((companies) => {
+            this.selectedCompany = companies[0];
+            });
     }
 
     public addUser(): void {

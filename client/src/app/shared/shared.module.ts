@@ -3,7 +3,7 @@ import {
     MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule,
     MatInputModule, MatListModule,
     MatMenuModule, MatOptionModule,
-    MatProgressBarModule, MatSelectModule,
+    MatProgressBarModule, MatSelectModule,MatSortModule,
     MatSidenavModule, MatSlideToggleModule, MatTableModule, MatTabsModule, MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,6 +13,7 @@ import {CommonModule} from '@angular/common';
         FormsModule,
         CommonModule,
         ReactiveFormsModule,
+        MatSortModule,
         // material
         MatSidenavModule,
         MatCardModule,

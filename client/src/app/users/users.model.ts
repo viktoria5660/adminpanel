@@ -8,6 +8,7 @@ export class User {
     countOfcorrectAns: number;
     difficulty: number;
     coins: number;
+    isAdmin : boolean;
     created_at: string;
     updatedAt: string;
     constructor() {}

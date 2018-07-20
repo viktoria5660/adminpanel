@@ -152,13 +152,16 @@
 
                     </div>
                 </div>
-
+           
             </mat-card-content>
             <hr>
             <mat-card-actions class="px-1">
                 <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">
                     Submit
                 </button>
+                <button (click)="deleteSettings(companyName)" mat-icon-button class="ml-xs overflow-visible">
+                        <mat-icon>delete</mat-icon>
+                    </button>
             </mat-card-actions>
             
         </form>

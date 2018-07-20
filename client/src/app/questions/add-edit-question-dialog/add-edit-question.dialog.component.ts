@@ -8,7 +8,7 @@ import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upl
 import {CompanyService} from '../../company/company.service';
 import {FullCompany} from '../../company/full.company.model';
 
-const URL = 'http://localhost:3000/upload/api/upload';
+const URL = 'http://localhost:3000/upload/testupload';
 
 @Component({
     selector: 'app-add-edit-question',
@@ -20,6 +20,7 @@ export class AddEditQuestionDialogComponent implements OnInit {
     question: Question;
     editMode: boolean;
     companies$: Observable<FullCompany[]>;
+    selectedCompany: FullCompany;
 
     constructor(private companyService: CompanyService,
                 private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
@@ -34,7 +35,11 @@ export class AddEditQuestionDialogComponent implements OnInit {
              alert('File uploaded successfully');
          };
 
-        this.companies$ = this.companyService.companies$;
+        // this.companies$ = this.companyService.companies$;
+         this.companies$ = this.companyService.companies$;
+        this.companyService.companies$.subscribe((companies) => {
+            this.selectedCompany = companies[0];
+        });
 
         if (this.data && this.data.question) {
             this.editMode = true;

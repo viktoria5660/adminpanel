@@ -100,5 +100,13 @@ export class SettingsComponent implements OnInit {
         }, (error) => this.message = error.message);
     }
 
+    public deleteSettings(settings: Settings): void {
+        // todo: delete user
+        this.settingsService.deleteSettings(settings).subscribe((response) => {
+            // this.message = response.message;
+            console.log("INSIDE deleteSettings")
+        },  (error) => console.log(error));
+    }
+
 }
 

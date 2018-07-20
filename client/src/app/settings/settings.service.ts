@@ -29,5 +29,8 @@ export class SettingsService {
     public addGroups(newGroups: FullCompany): Observable<any> {
         return this.apiService.addGroups(newGroups);
     }
+    public deleteSettings(newSettings: Settings): Observable<any> {
+        return this.apiService.deleteSettings(newSettings);
+    }
 
 }

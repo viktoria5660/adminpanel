@@ -6,6 +6,16 @@
 <div mat-dialog-content style="padding-bottom: 20px;">
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
+
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                            <!--Is Admin-->
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput formControlName="isAdmin" placeholder="isAdmin ? true/false">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--First Name-->
                 <div class="form-group">
@@ -34,7 +44,7 @@
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Email-->
+                <!--Password-->
                 <div class="form-group">
                     <mat-form-field>
                         <input type="password" matInput formControlName="password" placeholder="Password">
@@ -50,14 +60,18 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Group-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="company" placeholder="Company">
-                    </mat-form-field>
-                </div>
+            <div class="form-group">
+            <mat-form-field class="mr-2">
+                    <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
+                        <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                            {{company.companyName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
+        </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--Difficulty-->

@@ -95,6 +95,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoadingBarRouterModule,
     FlexLayoutModule,
     BidiModule,
+    MatSortModule,
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'}),
     PerfectScrollbarModule
   ],

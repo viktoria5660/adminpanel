@@ -19,7 +19,12 @@
                         <!--Group-->
                         <div class="form-group">
                             <mat-form-field>
-                                <input matInput type="text" formControlName="company" placeholder="Company">
+                                <!-- <input matInput type="text" formControlName="company" placeholder="Company"> -->
+                                <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                                            {{company.companyName}}
+                                        </mat-option>
+                                    </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -35,7 +40,12 @@
                                 <!--Group-->
                                 <div class="form-group">
                                     <mat-form-field>
-                                        <input matInput type="number" formControlName="difficulty" placeholder="difficulty">
+                                        <!-- <input matInput type="number" formControlName="difficulty" placeholder="difficulty"> -->
+                                        <mat-select placeholder="Difficulty" formControlName="difficulty">
+                                                <mat-option [value]="1">Low</mat-option>
+                                                <mat-option [value]="2">Medium</mat-option>
+                                                <mat-option [value]="3">High</mat-option>
+                                            </mat-select>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -48,12 +58,16 @@
                             </div>
                         </div>
 
-                        <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+                        <!-- <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
 
                             <button type="button" class="btn-w-md" color="primary" 
                             (click)="uploader.uploadAll()" 
                             [disabled]="!uploader.getNotUploadedItems().length" >
                             Upload an Image
+                            </button> -->
+                            <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+                            <button type="button" class="btn-w-md" color="primary" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            Upload to server
                             </button>
             <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 
@@ -61,20 +75,6 @@
                     <img [src]="question.picture" class="thumbnail">
                 </div>
             </div> -->
-
-            <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-               
-                <div class="form-group">
-                    <mat-form-field class="mr-2">
-                        <mat-select formControlName="company" placeholder="Company">
-                            <mat-option *ngFor="let company of companies$ | async" [value]="company.name">
-                                {{company.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div> -->
-
 
             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                 <!--content-->

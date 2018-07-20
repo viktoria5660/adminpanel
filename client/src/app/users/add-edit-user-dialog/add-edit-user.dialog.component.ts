@@ -2,6 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../users.model';
+import { Observable } from 'rxjs/Observable';
+import { FullCompany } from '../../company/full.company.model';
+import { CompanyService } from '../../company/company.service';
 
 @Component({
     selector: 'app-add-edit-user',
@@ -12,8 +15,10 @@ export class AddEditUserDialogComponent implements OnInit {
     form: FormGroup;
     user: User;
     editMode: boolean;
+    companies$: Observable<FullCompany[]>;
+    selectedCompany: FullCompany;
     constructor(private dialogRef: MatDialogRef<AddEditUserDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: any,
+                @Inject(MAT_DIALOG_DATA) public data: any, private companyService: CompanyService,
                 private formBuilder: FormBuilder) {
     }
 
@@ -26,8 +31,12 @@ export class AddEditUserDialogComponent implements OnInit {
             this.editMode = false;
             this.user = new User();
         }
-
+        this.companies$ = this.companyService.companies$;
+        this.companyService.companies$.subscribe((companies) => {
+            this.selectedCompany = companies[0];
+        });
         this.buildForm();
+        
     }
 
     public buildForm(): void {
@@ -40,6 +49,7 @@ export class AddEditUserDialogComponent implements OnInit {
             company : [this.user.company ,Validators.required ],
             difficulty: [this.user.difficulty, Validators.required],
             coins: [this.user.coins, Validators.required],
+            isAdmin : [this.user.isAdmin , Validators.required ],
         });
     }
 
