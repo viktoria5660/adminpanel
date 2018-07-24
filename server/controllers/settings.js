@@ -171,7 +171,7 @@ router.put('/updateFullSettings', (req, res) => {
     
 
 })
-router.get('/getAllFullCompanys',function(req,res){
+router.get('/getAllCompanies',function(req,res){
     console.log("getAllFullCompanys")
     FullSettingsModel.find({}, function(err,info){
         if(err) {
