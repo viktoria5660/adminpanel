@@ -17,6 +17,10 @@ export class ApiService {
         return throwError(error);
     }
 
+    // public getAllCompanies(): Observable<Company[]> {
+    //     return this.http.get<Company[]>(API_URL + '/settings/getAllCompanies')
+    //         .pipe(publishLast(), refCount(), catchError(this.handleError));
+    // }
     public getAllCompanies(): Observable<Company[]> {
         return this.http.get<Company[]>(API_URL + '/settings/getAllCompanies')
             .pipe(publishLast(), refCount(), catchError(this.handleError));
@@ -72,6 +76,7 @@ export class ApiService {
 
     }
     public editQuestion(question: Question): Observable<any> {
+        console.log("INSIDEAPI QUESTION UPDATE")
         return this.http.put<Question>(API_URL + '/question/updateQ', question)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
 
