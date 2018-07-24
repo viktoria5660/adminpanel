@@ -31,7 +31,6 @@ export class AddCompanyDialogComponent implements OnInit {
             timetToSendToLogin: [, Validators.required],
             EnableGame: [, Validators.required],
             minBet: [, Validators.required],
-            
             groups: [, Validators.required]
 
         });

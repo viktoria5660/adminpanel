@@ -20,6 +20,11 @@ html, body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
 }
+
+.text-center {
+  text-align: center;
+}
+
 .mdl-demo .mdl-layout__header-row {
   padding-left: 40px;
 }

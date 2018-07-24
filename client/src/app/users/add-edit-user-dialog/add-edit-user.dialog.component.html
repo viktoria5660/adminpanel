@@ -7,18 +7,18 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
 
-                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                            <!--Is Admin-->
-                            <div class="form-group">
-                                <mat-form-field>
-                                    <!-- <input matInput formControlName="isAdmin" placeholder="isAdmin ? true/false"> -->
-                                    <mat-select placeholder="isAdmin?" formControlName="isAdmin">
-                                        <mat-option [value]="false">False</mat-option>
-                                        <mat-option [value]="true">True</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </div>
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Is Admin-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <!-- <input matInput formControlName="isAdmin" placeholder="isAdmin ? true/false"> -->
+                        <mat-select placeholder="isAdmin?" formControlName="isAdmin">
+                            <mat-option [value]="false">False</mat-option>
+                            <mat-option [value]="true">True</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--First Name-->
@@ -57,28 +57,6 @@
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Group-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="group" placeholder="Group">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-            <div class="form-group">
-            <mat-form-field class="mr-2">
-                    <input matInput type="text" formControlName="company" placeholder="Company">
-                    <!-- <mat-select placeholder="Select company">
-                        <mat-option *ngFor="let company of companies$ | async" [value]="company"  formControlName="company">
-                            {{company.companyName}}
-                        </mat-option>
-                    </mat-select> -->
-                </mat-form-field>
-            </div>
-        </div>
-
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <!--Difficulty-->
                 <div class="form-group">
                     <mat-form-field class="mr-2">
@@ -86,6 +64,36 @@
                             <mat-option [value]="1">Low</mat-option>
                             <mat-option [value]="2">Medium</mat-option>
                             <mat-option [value]="3">High</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <div class="form-group">
+                    <mat-form-field class="mr-2">
+                        <mat-select #selectedCompany placeholder="Company">
+                            <mat-option *ngFor="let company of companies$ | async" [value]="company"
+                                        formControlName="company">
+                                {{company.companyName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <!--Group-->
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-select placeholder="Group">
+                            <mat-option>No company selected</mat-option>
+                            <ng-container *ngIf="selectedCompany.value">
+                                <mat-option *ngFor="let group of selectedCompany.value.group" [value]="group"
+                                            formControlName="groups">
+                                    {{company.companyName}}
+                                </mat-option>
+                            </ng-container>
                         </mat-select>
                     </mat-form-field>
                 </div>

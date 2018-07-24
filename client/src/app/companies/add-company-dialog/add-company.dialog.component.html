@@ -1,30 +1,43 @@
-<h3 matDialogTitle>
+<h3 matDialogTitle class="text-center">
      <ng-container i18n>Add Company</ng-container>
 </h3>
 
 <div mat-dialog-content style="padding-bottom: 20px;">
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
+
+            <!--NAME-->
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-            
                 <div class="form-group">
                     <mat-form-field>
                         <input matInput formControlName="companyName" placeholder="Company Name">
                     </mat-form-field>
                 </div>
             </div>
+
+            <!--GROUPS-->
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-           
                 <div class="form-group">
                     <mat-form-field>
                         <input matInput formControlName="groups" placeholder="groups separated by comma">
                     </mat-form-field>
                 </div>
-            </div>    
-          
+            </div>
+
+            <!--GAME OPTION-->
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-select placeholder="Game Option" formControlName="gameOp">
+                            <mat-option [value]="'slot'">Slot</mat-option>
+                            <mat-option [value]="'wheel'">Wheel</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-               
                 <div class="form-group">
                     <mat-form-field>
                         <input matInput formControlName="defaultCoins" placeholder="Default Coins">
@@ -33,7 +46,6 @@
             </div>
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-           
                 <div class="form-group">
                     <mat-form-field>
                         <input matInput formControlName="defaultCorrectFB" placeholder="Default Correct Feedback">
@@ -56,6 +68,7 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
@@ -63,6 +76,7 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
@@ -70,6 +84,7 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
@@ -77,16 +92,15 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
-                    <mat-form-field>
-                        <mat-select placeholder="EnableGame" formControlName="EnableGame">
-                            <mat-option [value]="true">True</mat-option>
-                            <mat-option [value]="false">False</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <mat-slide-toggle formControlName="EnableGame">
+                        Enable Game
+                    </mat-slide-toggle>
                 </div>
             </div>
+
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
@@ -100,7 +114,7 @@
 
         <div class="divider divider-md"></div>
 
-        <div class="form-actions">
+        <div class="form-actions text-center">
             <button mat-raised-button type="submit" class="btn-w-md" color="primary"
                     [disabled]="form.invalid">
                 Submit

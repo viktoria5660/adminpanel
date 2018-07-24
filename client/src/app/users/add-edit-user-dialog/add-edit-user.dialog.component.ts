@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../users.model';
 import { Observable } from 'rxjs/Observable';
 import {Company } from '../../companies/company.model';
+import {CompaniesService} from '../../companies/companies.service';
 // import {settingsService} from '../../settings/settings.service';
 
 @Component({
@@ -15,15 +16,16 @@ export class AddEditUserDialogComponent implements OnInit {
     form: FormGroup;
     user: User;
     editMode: boolean;
-    // companies$: Observable<Company[]>;
-    // selectedCompany: Company;
-    settings : Company
+    companies$: Observable<Company[]>;
+    selectedCompany: Company;
     constructor(private dialogRef: MatDialogRef<AddEditUserDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
+                private companiesService: CompaniesService,
                 private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
+        this.companies$ = this.companiesService.companies$;
         if (this.data && this.data.user) {
             this.editMode = true;
             this.user = this.data.user;
@@ -37,7 +39,6 @@ export class AddEditUserDialogComponent implements OnInit {
         //     this.selectedCompany = companies[0];
         // });
         this.buildForm();
-        
     }
 
     public buildForm(): void {

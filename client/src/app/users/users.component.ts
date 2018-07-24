@@ -3,9 +3,10 @@ import {UsersService} from './users.service';
 import {User} from './users.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs';
-
+import {Subject} from 'rxjs';
+import {CompaniesService} from '../companies/companies.service';
+import {Observable} from 'rxjs/Rx';
+import {Company} from '../companies/company.model';
 
 
 @Component({
@@ -14,15 +15,15 @@ import { Subject } from 'rxjs';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'lastName', 'email', 'company' , 'group','coins','created_at','updatedAt','isAdmin', 'actions'];
+    displayedColumns: string[] = ['name', 'lastName', 'email', 'company', 'group', 'coins',
+        'created_at', 'updatedAt', 'isAdmin', 'actions'];
     dataSource;
-    dataSourceSubject : Subject<any>
+    dataSourceSubject: Subject<any>;
     @ViewChild(MatSort) sort: MatSort;
     error: string;
-
     constructor(private usersService: UsersService,
                 private dialog: MatDialog) {
-                    this.dataSourceSubject = new Subject<any>();
+        this.dataSourceSubject = new Subject<any>();
     }
 
     public ngOnInit(): void {
@@ -48,9 +49,9 @@ export class UsersComponent implements OnInit {
                 this.usersService.setUser(newUser).subscribe((response) => {
                     // this.message = response.message;
                     // console.log("INSIDE SET USER COMPO")
-                },  (error) => console.log(error));
+                }, (error) => console.log(error));
             }
-            
+
         });
     }
 
@@ -66,7 +67,7 @@ export class UsersComponent implements OnInit {
                 this.usersService.updateUser(editUser).subscribe((response) => {
                     // this.message = response.message;
                     console.log("INSIDE SET UPDATE USER COMPO")
-                },  (error) => console.log(error));
+                }, (error) => console.log(error));
             }
         });
     }
@@ -76,7 +77,7 @@ export class UsersComponent implements OnInit {
         this.usersService.deleteUser(user).subscribe((response) => {
             // this.message = response.message;
             console.log("INSIDE SET UPDATE USER COMPO", user)
-        },  (error) => console.log(error));
+        }, (error) => console.log(error));
     }
 
 }
