@@ -71,7 +71,7 @@ export class CompaniesService {
         return this.apiService.deleteCompany(companyName);
     }
 
-    public getAllCompanies(): Observable<Company[]> {
+    private getAllCompanies(): Observable<Company[]> {
         return this.apiService.getAllCompanies();
     }
 

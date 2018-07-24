@@ -12,8 +12,8 @@ export const AppRoutes: Routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
             {
-                path: 'settings',
-                loadChildren: './settings/settings.module#SettingsModule'
+                path: 'companies',
+                loadChildren: './companies/companies.module#CompaniesModule'
             },
             {
                 path: 'users',

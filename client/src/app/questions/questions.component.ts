@@ -19,29 +19,24 @@ export class QuestionsComponent implements OnInit {
     dataSource;
     companies$: Observable<Company[]>;
     selectedCompany: Company;
-    fullSettingsArr: Company[];
-    fullSettingsArrSubject: Subject<Company[]>;
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
     constructor(private questionsService: QuestionsService,
-                private settingsService: CompaniesService,
+                private companiesService: CompaniesService,
                 private dialog: MatDialog) {
-                    this.selectedCompany = {} as Company;
-                    this.fullSettingsArrSubject = new Subject<Company[]>();
     }
 
     public ngOnInit(): void {
         this.dataSource = new MatTableDataSource([]);
-        this.companies$ = this.settingsService.companies$;
-        this.settingsService.companies$.subscribe((companies) => {
-            console.log(companies)
-            this.selectedCompany = companies[0];
-            this.getQuestions();
+        this.companies$ = this.companiesService.companies$;
+        this.companiesService.companies$.subscribe((companies) => {
+            if (companies.length > 0) {
+                this.selectedCompany = companies[0];
+                this.getQuestions();
+            }
         });
-        // this.getQuestions();
-    
     }
 
     public getQuestions(): void {

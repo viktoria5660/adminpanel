@@ -40,10 +40,10 @@ const MENUITEMS = [
     icon: 'question_answer'
   },
   {
-    state: 'settings',
-    name: 'Company',
+    state: 'companies',
+    name: 'Companies',
     type: 'link',
-    icon: 'settings'
+    icon: 'location_city'
   },
   {
     state: 'http://primer.nyasha.me/docs',

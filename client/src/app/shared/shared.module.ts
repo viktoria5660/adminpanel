@@ -3,8 +3,8 @@ import {
     MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule,
     MatInputModule, MatListModule,
     MatMenuModule, MatOptionModule,
-    MatProgressBarModule, MatSelectModule,MatSortModule,
-    MatSidenavModule, MatSlideToggleModule, MatTableModule, MatTabsModule, MatToolbarModule
+    MatProgressBarModule, MatSelectModule, MatSortModule,
+    MatSidenavModule, MatSlideToggleModule, MatTableModule, MatTabsModule, MatToolbarModule, MatProgressSpinnerModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
@@ -31,6 +31,7 @@ import {CommonModule} from '@angular/common';
         MatProgressBarModule,
         MatFormFieldModule,
         MatInputModule,
+        MatProgressSpinnerModule,
         MatDialogModule,
     ],
     declarations: [],
@@ -52,6 +53,7 @@ import {CommonModule} from '@angular/common';
         MatSelectModule,
         MatOptionModule,
         MatProgressBarModule,
+        MatProgressSpinnerModule,
         MatFormFieldModule,
         MatInputModule,
         MatDialogModule,

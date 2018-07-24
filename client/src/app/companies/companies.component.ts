@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CompaniesService} from './companies.service';
 import {AddCompanyDialogComponent} from './add-company-dialog/add-company.dialog.component';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Company} from './company.model';
 import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/internal/operators';
 
 
 @Component({
@@ -12,29 +13,27 @@ import {Subject} from 'rxjs';
     templateUrl: './companies.component.html',
     styleUrls: ['./companies.component.scss']
 })
-export class CompaniesComponent implements OnInit {
+export class CompaniesComponent implements OnInit, OnDestroy {
     error: string;
     message: string;
     form: FormGroup;
-    company: any;
-    fullSettingsArr: Company[];
-    selectedCompany: Company;
-    fullSettingsArrSubject: Subject<Company[]>
 
+    companies: Company[];
+    selectedCompany: Company;
+
+    private destroyed$ = new Subject<void>();
     constructor(private companiesService: CompaniesService,
                 private fb: FormBuilder, private dialog: MatDialog) {
-        this.selectedCompany = {} as Company;
-        this.fullSettingsArrSubject = new Subject<Company[]>();
-
     }
 
 
     public ngOnInit(): void {
-        this.companiesService.getAllCompanies().subscribe(fullSettingsArr => {
-            this.fullSettingsArr = fullSettingsArr;
-            this.fullSettingsArrSubject.next(this.fullSettingsArr);
-            this.selectedCompany = fullSettingsArr[0];
-            this.buildForm();
+        this.companiesService.companies$.pipe(takeUntil(this.destroyed$)).subscribe((companies: Company[]) => {
+            this.companies = companies;
+            if (companies.length > 0) {
+                this.selectedCompany = this.companies[0];
+                this.buildForm();
+            }
         });
     }
 
@@ -76,11 +75,14 @@ export class CompaniesComponent implements OnInit {
             EnableGame: [this.selectedCompany.EnableGame, Validators.required],
             minBet: [this.selectedCompany.minBet, Validators.required],
             gameOp: [this.selectedCompany.gameOp],
-            groups: [this.selectedCompany.groups.map(el => el.name), Validators.required]
+            groups: [[this.selectedCompany.groups ? this.selectedCompany.groups.map(el => el.name) : []], Validators.required]
 
         });
     }
 
+    /**
+     * update company
+     */
     public onSubmit(): void {
         this.message = '';
         this.form.value.groups = this.form.value.groups.map(el => new Object({name: el}));
@@ -93,10 +95,14 @@ export class CompaniesComponent implements OnInit {
     public deleteCompany(): void {
         this.companiesService.deleteCompany(this.selectedCompany.companyName).subscribe((response) => {
             this.message = response.message;
-            this.fullSettingsArr.splice(this.fullSettingsArr.indexOf(this.selectedCompany), 1);
-            this.selectedCompany = this.fullSettingsArr[0];
+            this.selectedCompany = this.companies[0];
             this.buildForm();
         }, (error) => this.message = error.message);
+    }
+
+    public ngOnDestroy(): void {
+        this.destroyed$.next();
+        this.destroyed$.complete();
     }
 
 }

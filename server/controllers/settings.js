@@ -113,13 +113,12 @@ router.post('/createNewFullSettings', function (req, res) {
         EnableGame: req.body.EnableGame,
         groups: req.body.groups
 
-    })
+    });
 
-    fullsettings.save()
-        .then(doc = > {
-        console.log(doc)
-    res.status(200).json({message: 'Company created'});
-})
+    fullsettings.save().then(function(doc) {
+        console.log(doc);
+        res.status(200).json({message: 'Company created'});
+    })
 });
 
 router.post('/getFullSttingsByCompany', function (req, res) {
@@ -147,7 +146,7 @@ router.post('/deleteFullSettings', function (req, res) {
     });
 });
 
-router.put('/updateCompany', (req, res) = > {
+router.put('/updateCompany', function(req, res) {
     console.log("INSIDE UPDATE FULL", req.body)
 let {defaultCoins, defaultCorrectFB, defaultInCorrectFB, timeLimitForQ, lowToMed, medToHigh, timetToSendToLogin, EnableGame, minBet, companyName, gameOp} = req.body
 // UserModel.update({_id:}, {$set: {name:newname}}, options, function(err,doc){res.status(200)});
@@ -173,7 +172,7 @@ FullSettingsModel.findOneAndUpdate({companyName: companyName},
     , function (err, doc) {
         res.status(200)
     })
-    .then(doc = > {
+    .then(function(doc) {
     if (doc) {
         console.log("SETTING FULL DOC", doc)
         res.status(200).json({message: 'FULL Setting were updated successfully'})
