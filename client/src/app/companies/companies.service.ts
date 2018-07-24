@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import {Company } from './company.model';
 import { ReplaySubject } from 'rxjs';
+import {BehaviorSubject} from 'rxjs/Rx';
 
 
 
 
 @Injectable()
 export class CompaniesService {
-    private companiesSubject: ReplaySubject<Company[]> = new ReplaySubject<Company[]>(1);
+    private companiesSubject: BehaviorSubject<Company[]> = new BehaviorSubject<Company[]>([]);
     companies$: Observable<Company[]> = this.companiesSubject.asObservable();
     constructor(private apiService: ApiService) {
         // from api once to load all companies.
@@ -38,7 +39,8 @@ export class CompaniesService {
         companies.push(newCompany);
         this.updateCompanies(companies);
 
-        const obs = this.apiService.addCompany(newCompany).subscribe(res => {
+        const obs = this.apiService.addCompany(newCompany);
+        obs.subscribe(res => {
             // this.fullSettingsArr.push(newSettings);
             console.log('New Company Added!');
         }, (error) => {
@@ -51,7 +53,7 @@ export class CompaniesService {
     public updateCompany(updateCompany: Company): Observable<any> {
         const companies: Company[] = this.getCompaniesValue();
         const index = companies.findIndex((company: Company) => company.companyName ===  updateCompany.companyName);
-        if (i > -1) {
+        if (index > -1) {
             companies[index] = updateCompany;
             this.updateCompanies(companies);
         }

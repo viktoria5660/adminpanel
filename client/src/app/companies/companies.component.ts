@@ -43,7 +43,6 @@ export class CompaniesComponent implements OnInit {
             width: '450px'
         });
         dialogRef.afterClosed().subscribe((newCompany: any) => {
-
                 if (newCompany) {
                     this.fixGroups(newCompany);
                     this.companiesService.addCompany(newCompany).subscribe(res => {
