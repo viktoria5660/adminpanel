@@ -3,8 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../users.model';
 import { Observable } from 'rxjs/Observable';
-import { FullCompany } from '../../company/full.company.model';
-import { CompanyService } from '../../company/company.service';
+import {FullSettings } from '../../settings/fullsettings.model';
+// import {settingsService} from '../../settings/settings.service';
 
 @Component({
     selector: 'app-add-edit-user',
@@ -15,10 +15,11 @@ export class AddEditUserDialogComponent implements OnInit {
     form: FormGroup;
     user: User;
     editMode: boolean;
-    companies$: Observable<FullCompany[]>;
-    selectedCompany: FullCompany;
+    // companies$: Observable<FullSettings[]>;
+    // selectedCompany: FullSettings;
+    settings : FullSettings
     constructor(private dialogRef: MatDialogRef<AddEditUserDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: any, private companyService: CompanyService,
+                @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {
     }
 
@@ -31,10 +32,10 @@ export class AddEditUserDialogComponent implements OnInit {
             this.editMode = false;
             this.user = new User();
         }
-        this.companies$ = this.companyService.companies$;
-        this.companyService.companies$.subscribe((companies) => {
-            this.selectedCompany = companies[0];
-        });
+        // this.companies$ = this.settingsService.companies$;
+        // this.settingsService.companies$.subscribe((companies) => {
+        //     this.selectedCompany = companies[0];
+        // });
         this.buildForm();
         
     }

@@ -1,4 +1,4 @@
-export interface Settings {
+export interface FullSettings {
     companyName: string;
     defaultCoins: number;
     defaultCorrectFB: string;
@@ -10,4 +10,6 @@ export interface Settings {
     EnableGame: boolean;
     minBet: number;
     gameOp : string;
+    groups: any[];
+
 }

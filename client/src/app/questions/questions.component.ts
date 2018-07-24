@@ -3,9 +3,10 @@ import {QuestionsService} from './questions.service';
 import {Question} from './questions.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
-import {FullCompany} from '../company/full.company.model';
-import {CompanyService} from '../company/company.service';
 import {Observable} from 'rxjs/Observable';
+import { FullSettings } from '../settings/fullsettings.model';
+import { Subject } from 'rxjs';
+import { SettingsService } from '../settings/settings.service';
 
 
 @Component({
@@ -16,24 +17,30 @@ import {Observable} from 'rxjs/Observable';
 export class QuestionsComponent implements OnInit {
     displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
-    companies$: Observable<FullCompany[]>;
-    selectedCompany: FullCompany;
+    companies$: Observable<FullSettings[]>;
+    selectedCompany:FullSettings;
+    fullSettingsArr:FullSettings[];
+    fullSettingsArrSubject:Subject<FullSettings[]>
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
-    constructor(private questionsService: QuestionsService,
-                private companyService: CompanyService,
+    constructor(private questionsService: QuestionsService,private settingsService: SettingsService,
                 private dialog: MatDialog) {
+                    this.selectedCompany = {} as FullSettings;
+                    this.fullSettingsArrSubject = new Subject<FullSettings[]>();
     }
 
     public ngOnInit(): void {
         this.dataSource = new MatTableDataSource([]);
-        this.companies$ = this.companyService.companies$;
-        this.companyService.companies$.subscribe((companies) => {
+        this.companies$ = this.settingsService.companies$;
+        this.settingsService.companies$.subscribe((companies) => {
+            console.log(companies)
             this.selectedCompany = companies[0];
             this.getQuestions();
         });
+        // this.getQuestions();
+    
     }
 
     public getQuestions(): void {

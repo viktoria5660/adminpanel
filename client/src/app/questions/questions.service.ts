@@ -6,7 +6,9 @@ import {Question} from './questions.model';
 @Injectable()
 export class QuestionsService {
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService) {
+        
+    }
 
     public getQuestionsByCompany(companyName: string): Observable<Question[]> {
         const obs = this.apiService.getQuestionsByCompany(companyName);

@@ -25,7 +25,7 @@ const router = require('express').Router(),
                   user.incorrectAns.splice(user.incorrectAns.findIndex(el => el.questionId == qid), 1);
                        
                 }
-                else 
+                else (!isCorrect)
                 {
                     user.coins = user.coins - ( bet / 2);
                   let incorrectAnsIndex = user.incorrectAns.findIndex(el => el.questionId == qid);
@@ -33,7 +33,11 @@ const router = require('express').Router(),
                   if(incorrectAnsIndex != -1){
                     //The question exist
                     user.incorrectAns[incorrectAnsIndex].attempts = 2;             
-                } else  user.incorrectAns.push({questionId:qid, attempts:1,numberOfTurns:0});
+                } else 
+                {
+                    user.incorrectAns.push({questionId:qid, attempts:1,numberOfTurns:0});
+                } 
+                
                 }
                 if (user.countOfcorrectAns > 8)
                 {

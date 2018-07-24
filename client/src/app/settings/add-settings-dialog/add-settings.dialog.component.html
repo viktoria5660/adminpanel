@@ -13,14 +13,15 @@
                     </mat-form-field>
                 </div>
             </div>
-            <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
            
-                    <div class="form-group">
-                        <mat-form-field>
-                            <input matInput formControlName="groups" placeholder="groups">
-                        </mat-form-field>
-                    </div>
-                </div>   -->
+                <div class="form-group">
+                    <mat-form-field>
+                        <input matInput formControlName="groups" placeholder="groups separated by comma">
+                    </mat-form-field>
+                </div>
+            </div>    
+          
 
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                
@@ -58,14 +59,14 @@
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput type="number" formControlName="lowToMed" placeholder="lowToMed">
+                        <input matInput type="number" formControlName="lowToMed" placeholder="Number Of Turns From Low To Med">
                     </mat-form-field>
                 </div>
             </div>
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput type="number" formControlName="medToHigh" placeholder="medToHigh">
+                        <input matInput type="number" formControlName="medToHigh" placeholder="Number Of Turns From Low To High">
                     </mat-form-field>
                 </div>
             </div>
@@ -79,7 +80,10 @@
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field>
-                        <input matInput formControlName="EnableGame" placeholder="EnableGame">
+                        <mat-select placeholder="EnableGame" formControlName="EnableGame">
+                            <mat-option [value]="true">True</mat-option>
+                            <mat-option [value]="false">False</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
@@ -91,15 +95,6 @@
                 </div>
             </div>
 
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <!--Coins-->
-                <div class="form-group">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="gameOp" placeholder="gameOp">
-                    </mat-form-field>
-                </div>
-            </div>
-            
 
         </div>
 

@@ -11,7 +11,11 @@
                             <!--Is Admin-->
                             <div class="form-group">
                                 <mat-form-field>
-                                    <input matInput formControlName="isAdmin" placeholder="isAdmin ? true/false">
+                                    <!-- <input matInput formControlName="isAdmin" placeholder="isAdmin ? true/false"> -->
+                                    <mat-select placeholder="isAdmin?" formControlName="isAdmin">
+                                        <mat-option [value]="false">False</mat-option>
+                                        <mat-option [value]="true">True</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -64,11 +68,12 @@
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
             <div class="form-group">
             <mat-form-field class="mr-2">
-                    <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
-                        <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                    <input matInput type="text" formControlName="company" placeholder="Company">
+                    <!-- <mat-select placeholder="Select company">
+                        <mat-option *ngFor="let company of companies$ | async" [value]="company"  formControlName="company">
                             {{company.companyName}}
                         </mat-option>
-                    </mat-select>
+                    </mat-select> -->
                 </mat-form-field>
             </div>
         </div>

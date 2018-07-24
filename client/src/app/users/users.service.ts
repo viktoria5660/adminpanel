@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ApiService } from "../_services/api.service";
 import { Observable } from "rxjs";
 import { User } from "./users.model";
+import {FullSettings } from '../settings/fullsettings.model';
 
 
 
@@ -32,6 +33,16 @@ export class UsersService {
         console.log(newUser);
         // console.log("INSIDE SET USER SERViCE");
         return this.apiService.deleteUser(newUser);
+        
+    }
+    
+    public getAllFullSettings(): Observable<FullSettings[]> {
+        const obs = this.apiService.getAllFullSettings();
+        obs.subscribe((settings: FullSettings[]) => {
+
+        }, (error) => console.log('User Service error: ' + error.message));
+
+        return obs;
     }
 
 }

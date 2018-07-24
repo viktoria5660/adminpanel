@@ -1,36 +1,48 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../_services/api.service';
 import { Observable } from 'rxjs';
-import { Settings } from './settings.model';
-import { FullCompany } from '../company/full.company.model';
+import * as _ from 'lodash';
+import {FullSettings } from './fullsettings.model';
+import { ReplaySubject } from 'rxjs';
+
+
+
 
 @Injectable()
 export class SettingsService {
-
-    constructor(private apiService: ApiService) {}
-
-    // public getSettings(): Observable<Settings> {
-    //     const obs = this.apiService.getSettings();
-    //     obs.subscribe((settings: Settings) => {
-
-    //     }, (error) => console.log('Settings Service error: ' + error.message));
-
-    //     return obs;
-    // }
-
-    public updateSettings(newSettings: Settings): Observable<any> {
-
-        return this.apiService.updateSettings(newSettings);
+    private companiesSubject: ReplaySubject<FullSettings[]> = new ReplaySubject<FullSettings[]>(1);
+    companies$: Observable<FullSettings[]> = this.companiesSubject.asObservable();
+    constructor(private apiService: ApiService) {
+        // from api once to load all companies. 
+        this.loadCompanies();
     }
-    public addSettings(newSettings: Settings): Observable<any> {
+
+    updateCompanies(newCompanies: FullSettings[]): void {
+        this.companiesSubject.next(_.cloneDeep(newCompanies));
+    }
+
+    private loadCompanies(): void {
+        this.apiService.getAllFullCompanys().subscribe((companies: FullSettings[]) => {
+            console.log("companies:",companies)
+            this.updateCompanies(companies);
+        }, (error) => {
+
+        });
+    }
+
+    public getAllFullSettings(): Observable<FullSettings[]> {
+        return this.apiService.getAllFullSettings();
+    }
+    public updateFullSettings(newSettings: FullSettings): Observable<any> {
+        return this.apiService.updateFullSettings(newSettings);
+    }
+    public addSettings(newSettings: FullSettings): Observable<any> {
     
         return this.apiService.addSettings(newSettings);
     }
-    public addGroups(newGroups: FullCompany): Observable<any> {
-        return this.apiService.addGroups(newGroups);
-    }
-    public deleteSettings(newSettings: Settings): Observable<any> {
-        return this.apiService.deleteSettings(newSettings);
+    public deleteSettings(settings: any): Observable<any> {
+            console.log("INSIDE SETTINGS SERVICES",settings)
+        return this.apiService.deleteSettings(settings);
     }
 
 }

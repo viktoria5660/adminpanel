@@ -21,6 +21,7 @@ export class AddSettingsDialogComponent implements OnInit {
     public buildForm(): void {
         this.form = this.formBuilder.group({
             companyName: [, Validators.required],
+            gameOp: [],
             defaultCoins: [, Validators.required],
             defaultCorrectFB: [, Validators.required],
             defaultInCorrectFB : [, Validators.required],
@@ -30,7 +31,9 @@ export class AddSettingsDialogComponent implements OnInit {
             timetToSendToLogin: [, Validators.required],
             EnableGame: [, Validators.required],
             minBet: [, Validators.required],
-            gameOp: [, Validators.required]
+            
+            groups: [, Validators.required]
+
         });
     }
 

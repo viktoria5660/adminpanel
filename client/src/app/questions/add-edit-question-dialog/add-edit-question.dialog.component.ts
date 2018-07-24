@@ -5,8 +5,6 @@ import {Question} from '../questions.model';
 import {Answer} from '../_models/answer.model';
 import {Observable} from 'rxjs/Observable';
 import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-import {CompanyService} from '../../company/company.service';
-import {FullCompany} from '../../company/full.company.model';
 
 const URL = 'http://localhost:3000/upload/testupload';
 
@@ -19,10 +17,9 @@ export class AddEditQuestionDialogComponent implements OnInit {
     form: FormGroup;
     question: Question;
     editMode: boolean;
-    companies$: Observable<FullCompany[]>;
-    selectedCompany: FullCompany;
+  
 
-    constructor(private companyService: CompanyService,
+    constructor(
                 private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {
@@ -36,10 +33,10 @@ export class AddEditQuestionDialogComponent implements OnInit {
          };
 
         // this.companies$ = this.companyService.companies$;
-         this.companies$ = this.companyService.companies$;
-        this.companyService.companies$.subscribe((companies) => {
-            this.selectedCompany = companies[0];
-        });
+        //  this.companies$ = this.companyService.companies$;
+        // this.companyService.companies$.subscribe((companies) => {
+        //     this.selectedCompany = companies[0];
+        // });
 
         if (this.data && this.data.question) {
             this.editMode = true;

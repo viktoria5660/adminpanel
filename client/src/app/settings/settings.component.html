@@ -1,22 +1,20 @@
 <div class="container">
-    <h1>Settings</h1>
+    <h1>{{selectedCompany.companyName}} Settings</h1>
 
     <mat-card-actions class="px-1">
-            <h2>Add New Company</h2>
-            <p>Please add Settings & Groups to the same company</p>
+            <h2>Add New Company Settings</h2>
         <button mat-raised-button color="accent" (click)="addSettings()">Add Settings</button>    
-        <button mat-raised-button color="accent" (click)="addGroups()">Add Groups</button>
             
             </mat-card-actions>
 
-    <div class="row">
+     <div class="row"> 
         <div class="col-12 pb-4">
             <p>{{error}}</p>
             <h2>Select Company To Edit</h2>
             <mat-form-field class="mr-2">
                 <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" (ngModelChange)="buildForm()">
-                    <mat-option *ngFor="let company of companies$ | async" [value]="company">
-                        {{company.companyName}}
+                    <mat-option *ngFor="let company of fullSettingsArrSubject|async" [value]="company">
+                     {{company.companyName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -26,10 +24,10 @@
         </div>
 
 
-    </div>
+    </div> 
 
-    <mat-card style="margin: 0" *ngIf="selectedCompany">
-        <mat-card-title> {{selectedCompany.companyName}} Settings</mat-card-title>
+    <mat-card style="margin: 0">
+        <mat-card-title> Settings</mat-card-title>
         <mat-card-subtitle>Change some settings if you know what you are doing</mat-card-subtitle>
 
         <!--<p *ngIf="settings">{{ settings | json}}</p>-->
@@ -40,12 +38,13 @@
         <form [formGroup]="form" *ngIf="form">
             <mat-card-content>
                 <div fxLayout="row wrap">
+
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Company Name" formControlName="companyName">
+                            <input matInput placeholder="groups separated by comma" formControlName="groups">
                             <mat-hint
-                                    *ngIf="form.controls['companyName'].hasError('required') && form.controls['companyName'].touched"
-                                    class="mat-text-warn">You must include a company name.
+                                    *ngIf="form.controls['groups'].hasError('required') && form.controls['groups'].touched"
+                                    class="mat-text-warn">You must include a groups name separated by comma.
                             </mat-hint>
                         </mat-form-field>
                     </div>
@@ -151,6 +150,8 @@
                         </mat-form-field>
 
                     </div>
+
+                   
                 </div>
            
             </mat-card-content>
@@ -159,9 +160,10 @@
                 <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">
                     Submit
                 </button>
-                <button (click)="deleteSettings(companyName)" mat-icon-button class="ml-xs overflow-visible">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                <button  (click)="deleteSettings()" mat-icon-button class="ml-xs overflow-visible">
+                    <mat-icon>delete</mat-icon>
+                </button>
+         
             </mat-card-actions>
             
         </form>

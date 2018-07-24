@@ -2,12 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, throwError} from 'rxjs';
-import {Settings} from '../settings/settings.model';
 import {catchError, publishLast, refCount} from 'rxjs/operators';
 import {User} from '../users/users.model';
 import {Question} from '../questions/questions.model';
-import {Company} from '../company/company.model';
-import {FullCompany} from '../company/full.company.model';
+import {FullSettings} from '../settings/fullsettings.model';
 
 const API_URL: string = environment.apiUrl;
 const company = 'HP';
@@ -24,27 +22,34 @@ export class ApiService {
     //     return this.http.post<Settings>(API_URL + '/settings/getSttingsByCompany', {'companyName': company})
     //     .pipe(publishLast(), refCount(), catchError(this.handleError))
     // }
-    public getCompanies(): Observable<FullCompany[]> {
-        return this.http.get<FullCompany[]>(API_URL + '/company')
+    public getAllFullSettings(): Observable<FullSettings[]> {
+        return this.http.get<FullSettings[]>(API_URL + '/settings/getAllFullSettings')
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+    
+    public getAllFullCompanys(): Observable<any> {
+        return this.http.get<FullSettings[]>(API_URL + '/settings/getAllFullCompanys')
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+    // public updateSettings(settings: FullSettings): Observable<any> {
+    //     return this.http.put<FullSettings>(API_URL + '/settings', settings)
+    //         .pipe(publishLast(), refCount(), catchError(this.handleError));
+    // }
+    public updateFullSettings(settings: FullSettings): Observable<any> {
+        console.log("APISERVICE");
+        return this.http.put(API_URL + '/settings/updateFullSettings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 
-    public updateSettings(settings: Settings): Observable<any> {
-        return this.http.put<Settings>(API_URL + '/settings', settings)
+    public addSettings(settings: FullSettings): Observable<any> {
+        console.log('INSIDE THE addSetting API SERVICE',settings);
+        return this.http.post<FullSettings>(API_URL + '/settings/createNewFullSettings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 
-    public addSettings(settings: Settings): Observable<any> {
-        return this.http.post<Settings>(API_URL + '/settings/createNewSettings', settings)
-            .pipe(publishLast(), refCount(), catchError(this.handleError));
-    }
-    public deleteSettings(settings: Settings): Observable<any> {
-        console.log('INSIDE THE deleteSettings');
-        return this.http.post<User>(API_URL + '/settings/deleteSettings', settings)
-            .pipe(publishLast(), refCount(), catchError(this.handleError));
-    }
-    public addGroups(newGroups: FullCompany): Observable<any> {
-        return this.http.post<FullCompany>(API_URL + '/company/create', newGroups)
+    public deleteSettings(settings: any): Observable<any> {
+        console.log('INSIDE THE deleteSetting API SERVICE',settings);
+        return this.http.post(API_URL + '/settings/deleteFullSettings', settings)
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 

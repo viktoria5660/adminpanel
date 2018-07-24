@@ -3,9 +3,9 @@ import {UsersService} from './users.service';
 import {User} from './users.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
-import { FullCompany } from '../company/full.company.model';
 import { Observable } from 'rxjs/Observable';
-import { CompanyService } from '../company/company.service';
+import { Subject } from 'rxjs';
+
 
 
 @Component({
@@ -16,28 +16,23 @@ import { CompanyService } from '../company/company.service';
 export class UsersComponent implements OnInit {
     displayedColumns: string[] = ['name', 'lastName', 'email', 'company' , 'group','coins','created_at','updatedAt','isAdmin', 'actions'];
     dataSource;
-
+    dataSourceSubject : Subject<any>
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
-    companies$: Observable<FullCompany[]>;
-    selectedCompany: FullCompany;
-
     constructor(private usersService: UsersService,
-                private dialog: MatDialog,  private companyService: CompanyService) {
+                private dialog: MatDialog) {
+                    this.dataSourceSubject = new Subject<any>();
     }
 
     public ngOnInit(): void {
         this.dataSource = new MatTableDataSource([]);
         this.usersService.getUsers().subscribe((users: User[]) => {
             this.dataSource.data = users;
+            this.dataSourceSubject.next(this.dataSource.data);
             this.dataSource.sort = this.sort;
             this.error = '';
         }, (error) => this.error = error.message);
-        this.companies$ = this.companyService.companies$;
-        this.companyService.companies$.subscribe((companies) => {
-            this.selectedCompany = companies[0];
-            });
     }
 
     public addUser(): void {
@@ -49,11 +44,13 @@ export class UsersComponent implements OnInit {
             // console.log(newUser);
             if (newUser) {
                 // todo: add user
+                // console.log(newUser)
                 this.usersService.setUser(newUser).subscribe((response) => {
                     // this.message = response.message;
                     // console.log("INSIDE SET USER COMPO")
                 },  (error) => console.log(error));
             }
+            
         });
     }
 
@@ -78,7 +75,7 @@ export class UsersComponent implements OnInit {
         // todo: delete user
         this.usersService.deleteUser(user).subscribe((response) => {
             // this.message = response.message;
-            console.log("INSIDE SET UPDATE USER COMPO")
+            console.log("INSIDE SET UPDATE USER COMPO", user)
         },  (error) => console.log(error));
     }
 
