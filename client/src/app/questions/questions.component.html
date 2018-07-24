@@ -20,7 +20,11 @@
         <!-- picture Column -->
         <ng-container matColumnDef="picture">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Picture</th>
-            <td mat-cell *matCellDef="let question"><img [src]="question.picture" class="thumbnail"></td>
+            <td mat-cell *matCellDef="let question">
+                <img [src]="question.picture || 'assets/images/image-placeholder.png'"
+                     onError="this.src='assets/images/image-placeholder.png'"
+                     class="thumbnail">
+            </td>
         </ng-container>
 
         <!-- difficulty Column -->

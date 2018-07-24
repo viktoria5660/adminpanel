@@ -4,9 +4,9 @@ import {Question} from './questions.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
 import {Observable} from 'rxjs/Observable';
-import { FullSettings } from '../settings/fullsettings.model';
+import { Company } from '../companies/company.model';
 import { Subject } from 'rxjs';
-import { SettingsService } from '../settings/settings.service';
+import { CompaniesService } from '../companies/companies.service';
 
 
 @Component({
@@ -17,18 +17,19 @@ import { SettingsService } from '../settings/settings.service';
 export class QuestionsComponent implements OnInit {
     displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
-    companies$: Observable<FullSettings[]>;
-    selectedCompany:FullSettings;
-    fullSettingsArr:FullSettings[];
-    fullSettingsArrSubject:Subject<FullSettings[]>
+    companies$: Observable<Company[]>;
+    selectedCompany: Company;
+    fullSettingsArr: Company[];
+    fullSettingsArrSubject: Subject<Company[]>;
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
-    constructor(private questionsService: QuestionsService,private settingsService: SettingsService,
+    constructor(private questionsService: QuestionsService,
+                private settingsService: CompaniesService,
                 private dialog: MatDialog) {
-                    this.selectedCompany = {} as FullSettings;
-                    this.fullSettingsArrSubject = new Subject<FullSettings[]>();
+                    this.selectedCompany = {} as Company;
+                    this.fullSettingsArrSubject = new Subject<Company[]>();
     }
 
     public ngOnInit(): void {

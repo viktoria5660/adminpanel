@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../users.model';
 import { Observable } from 'rxjs/Observable';
-import {FullSettings } from '../../settings/fullsettings.model';
+import {Company } from '../../companies/company.model';
 // import {settingsService} from '../../settings/settings.service';
 
 @Component({
@@ -15,9 +15,9 @@ export class AddEditUserDialogComponent implements OnInit {
     form: FormGroup;
     user: User;
     editMode: boolean;
-    // companies$: Observable<FullSettings[]>;
-    // selectedCompany: FullSettings;
-    settings : FullSettings
+    // companies$: Observable<Company[]>;
+    // selectedCompany: Company;
+    settings : Company
     constructor(private dialogRef: MatDialogRef<AddEditUserDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {

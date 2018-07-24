@@ -60,11 +60,11 @@ const router = require('express').Router(),
 // settings.save()
 //     .then(doc => {
 //         console.log(doc)
-//         res.status(200).json({ message: 'Settings created',id:doc.id});
+//         res.status(200).json({ message: 'Company created',id:doc.id});
 //     })
 // });
 // //delete by company
-// router.post('/deleteSettings',function(req,res){
+// router.post('/deleteCompany',function(req,res){
 //     console.log("deleteSttings")
 //     var companyName = req.body.companyName
 //     SettingsModel.findOneAndRemove({companyName: companyName }, function(err,info){
@@ -118,7 +118,7 @@ router.post('/createNewFullSettings',function(req,res){
     fullsettings.save()
         .then(doc => {
             console.log(doc)
-            res.status(200).json({ message: 'Settings created'});
+            res.status(200).json({ message: 'Company created'});
         })
     });
 
@@ -147,7 +147,7 @@ router.post('/deleteFullSettings',function(req,res){
     });
 });
 
-router.put('/updateFullSettings', (req, res) => {
+router.put('/updateCompany', (req, res) => {
     console.log("INSIDE UPDATE FULL",req.body)
     let { defaultCoins, defaultCorrectFB, defaultInCorrectFB, timeLimitForQ, lowToMed, medToHigh, timetToSendToLogin,EnableGame, minBet, companyName, gameOp } = req.body
     // UserModel.update({_id:}, {$set: {name:newname}}, options, function(err,doc){res.status(200)});
@@ -172,7 +172,6 @@ router.put('/updateFullSettings', (req, res) => {
 
 })
 router.get('/getAllFullCompanys',function(req,res){
-    console.log("getAllFullCompanys")
     FullSettingsModel.find({}, function(err,info){
         if(err) {
           res.status(500).send({message:"Error!"});
@@ -191,8 +190,8 @@ router.get('/getAllFullCompanys',function(req,res){
     });
 });
 
-router.get('/getAllFullSettings',function(req,res){
-    console.log("getAllFullSettings")
+router.get('/getAllCompanies',function(req,res){
+    console.log("getAllCompanies")
     FullSettingsModel.find({}, function(err,info){
         if(err) {
           res.status(500).send({message:"Error!"});

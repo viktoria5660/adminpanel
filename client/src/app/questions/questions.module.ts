@@ -26,6 +26,7 @@ import {QuestionsService} from './questions.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
 import {SharedModule} from '../shared/shared.module';
+import {CompaniesModule} from '../companies/companies.module';
 
 @NgModule({
     imports: [

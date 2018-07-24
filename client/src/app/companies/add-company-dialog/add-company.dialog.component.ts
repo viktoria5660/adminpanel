@@ -4,12 +4,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-add-settings',
-    templateUrl: './add-settings.dialog.component.html',
-    styleUrls: ['./add-settings.dialog.component.scss']
+    templateUrl: './add-company.dialog.component.html',
+    styleUrls: ['./add-company.dialog.component.scss']
 })
-export class AddSettingsDialogComponent implements OnInit {
+export class AddCompanyDialogComponent implements OnInit {
     form: FormGroup;
-    constructor(private dialogRef: MatDialogRef<AddSettingsDialogComponent>,
+    constructor(private dialogRef: MatDialogRef<AddCompanyDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private formBuilder: FormBuilder) {
     }

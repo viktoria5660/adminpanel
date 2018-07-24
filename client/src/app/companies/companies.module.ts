@@ -6,12 +6,12 @@ import {
     MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgressBarModule, MatMenuModule,
     MatTableModule, MatSortModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule
   } from '@angular/material';
-import { AddSettingsDialogComponent } from './add-settings-dialog/add-settings.dialog.component';
+import { AddCompanyDialogComponent } from './add-company-dialog/add-company.dialog.component';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import {SettingsComponent} from './settings.component';
-import {SettingsRoutes} from './settings.routing';
-import {SettingsService} from './settings.service';
+import {CompaniesComponent} from './companies.component';
+import {CompaniesRoutes} from './companies.routing';
+import {CompaniesService} from './companies.service';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 
@@ -19,24 +19,23 @@ import {SharedModule} from '../shared/shared.module';
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forChild(SettingsRoutes),
+        RouterModule.forChild(CompaniesRoutes),
         FormsModule,
         ChartsModule,
         NgxDatatableModule,
         FlexLayoutModule
     ],
-    declarations: [SettingsComponent, AddSettingsDialogComponent],
-    providers: [SettingsService],
-    entryComponents: [AddSettingsDialogComponent]
+    declarations: [CompaniesComponent, AddCompanyDialogComponent],
+    entryComponents: [AddCompanyDialogComponent]
 
 })
 
-export class SettingsModule {
+export class CompaniesModule {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: SettingsModule,
+            ngModule: CompaniesModule,
             providers: [
-                SettingsService
+                CompaniesService
             ]
         };
     }

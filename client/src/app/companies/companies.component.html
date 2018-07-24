@@ -3,7 +3,7 @@
 
     <mat-card-actions class="px-1">
             <h2>Add New Company Settings</h2>
-        <button mat-raised-button color="accent" (click)="addSettings()">Add Settings</button>    
+        <button mat-raised-button color="accent" (click)="addCompany()">Add Settings</button>
             
             </mat-card-actions>
 
@@ -160,7 +160,7 @@
                 <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">
                     Submit
                 </button>
-                <button  (click)="deleteSettings()" mat-icon-button class="ml-xs overflow-visible">
+                <button (click)="deleteCompany()" mat-icon-button class="ml-xs overflow-visible">
                     <mat-icon>delete</mat-icon>
                 </button>
          

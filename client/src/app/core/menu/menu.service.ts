@@ -41,7 +41,7 @@ const MENUITEMS = [
   },
   {
     state: 'settings',
-    name: 'Settings',
+    name: 'Company',
     type: 'link',
     icon: 'settings'
   },
