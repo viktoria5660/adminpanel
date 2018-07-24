@@ -31,12 +31,4 @@ import {SharedModule} from '../shared/shared.module';
 })
 
 export class CompaniesModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: CompaniesModule,
-            providers: [
-                CompaniesService
-            ]
-        };
-    }
 }
