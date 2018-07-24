@@ -1,6 +1,7 @@
 const express     = require('express'),
       bodyParser  = require('body-parser')
       controllers = require('./controllers'),
+     
     //    cors = require('cors'),
       db          = require('./helpers/database')
 
@@ -16,8 +17,9 @@ app.use(function(req, res, next) {
 })
 
 
-
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '500mb'}));
+app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));
+// app.use(bodyParser.json())
 app.use(controllers)
 // app.use(cors(corsOptions));
 app.get('/', (req, res) => {
