@@ -4,9 +4,6 @@ import {User} from './users.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
 import {Subject} from 'rxjs';
-import {CompaniesService} from '../companies/companies.service';
-import {Observable} from 'rxjs/Rx';
-import {Company} from '../companies/company.model';
 
 
 @Component({
@@ -21,6 +18,7 @@ export class UsersComponent implements OnInit {
     dataSourceSubject: Subject<any>;
     @ViewChild(MatSort) sort: MatSort;
     error: string;
+
     constructor(private usersService: UsersService,
                 private dialog: MatDialog) {
         this.dataSourceSubject = new Subject<any>();

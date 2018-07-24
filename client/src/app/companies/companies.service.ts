@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../_services/api.service';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../_services/api.service';
+import {Observable} from 'rxjs';
 import * as _ from 'lodash';
-import {Company } from './company.model';
-import { ReplaySubject } from 'rxjs';
-import {BehaviorSubject} from 'rxjs/Rx';
-
-
+import {Company} from './company.model';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -41,10 +38,9 @@ export class CompaniesService {
 
         const obs = this.apiService.addCompany(newCompany);
         obs.subscribe(res => {
-            // this.fullSettingsArr.push(newSettings);
             console.log('New Company Added!');
         }, (error) => {
-            // can log error here
+            // handle error!!
         });
 
         return obs;
