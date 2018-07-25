@@ -29,22 +29,42 @@ export class UsersService {
 
 
 
-    public setUser(newUser: User): Observable<any> {
-        // console.log(newUser);
-        // console.log('INSIDE SET USER SERViCE');
-        return this.apiService.setUser(newUser);
+    public addUser(newUser: User): Observable<any> {
+        const obs = this.apiService.addUser(newUser);
+        obs.subscribe((res: User) => {
+            const users: User[] = this.getUsersValue();
+            newUser.created_at = res.created_at;
+            newUser.updatedAt = res.updatedAt;
+            users.push(newUser);
+            this.updateUsers(users);
+            console.log('New User Added!');
+        }, (error) => {
+            // handle error!!
+        });
+
+        return obs;
     }
 
-    public updateUser(newUser: User): Observable<any> {
-        console.log(newUser);
-        // console.log('INSIDE SET USER SERViCE');
-        return this.apiService.updateUser(newUser);
+    public updateUser(updateUser: User): Observable<any> {
+        const users: User[] = this.getUsersValue();
+        const index = users.findIndex((user: User) => user.id ===  updateUser.id);
+        if (index > -1) {
+            users[index] = updateUser;
+            this.updateUsers(users);
+        }
+
+        return this.apiService.updateUser(updateUser);
     }
 
-    public deleteUser(newUser: User): Observable<any> {
-        console.log(newUser);
-        // console.log('INSIDE SET USER SERViCE');
-        return this.apiService.deleteUser(newUser);
+    public deleteUser(deleteUser: User): Observable<any> {
+        const users: User[] = this.getUsersValue();
+        const index = users.findIndex((user: User) => user.id ===  deleteUser.id);
+        if (index > -1) {
+            users.splice(index, 1);
+            this.updateUsers(users);
+        }
+
+        return this.apiService.deleteUser(deleteUser);
     }
 
 

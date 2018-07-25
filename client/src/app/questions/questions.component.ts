@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {QuestionsService} from './questions.service';
 import {Question} from './questions.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditQuestionDialogComponent} from './add-edit-question-dialog/add-edit-question.dialog.component';
 import {Observable} from 'rxjs/Observable';
-import { Company } from '../companies/company.model';
-import { Subject } from 'rxjs';
-import { CompaniesService } from '../companies/companies.service';
+import {Company} from '../companies/company.model';
+import {CompaniesService} from '../companies/companies.service';
+import {Subscription} from 'rxjs/Rx';
 
 
 @Component({
@@ -14,14 +14,14 @@ import { CompaniesService } from '../companies/companies.service';
     templateUrl: './questions.component.html',
     styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit, OnDestroy {
     displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
     companies$: Observable<Company[]>;
+    subscription: Subscription;
     selectedCompany: Company;
+    isDefaultSelectedCompanySet = false;
     questions: Question[];
-
-
     @ViewChild(MatSort) sort: MatSort;
     error: string;
 
@@ -33,21 +33,26 @@ export class QuestionsComponent implements OnInit {
     public ngOnInit(): void {
         this.dataSource = new MatTableDataSource([]);
         this.companies$ = this.companiesService.companies$;
-        this.companiesService.companies$.subscribe((companies) => {
+        this.subscription = this.companiesService.companies$.subscribe((companies) => {
             if (companies.length > 0) {
-                this.selectedCompany = companies[0];
-                this.getQuestions();
+                if (!this.isDefaultSelectedCompanySet) {
+                    this.selectedCompany = companies[0];
+                    this.getQuestions();
+                    this.isDefaultSelectedCompanySet = true;
+                }
             }
         });
-    }
 
-    public getQuestions(): void {
-        this.questionsService.getQuestionsByCompany(this.selectedCompany.companyName).subscribe((questions: Question[]) => {
+        this.questionsService.questions$.subscribe((questions: Question[]) => {
             this.dataSource.data = questions;
             this.dataSource.sort = this.sort;
             this.error = '';
 
         }, (error) => this.error = error.message);
+    }
+
+    public getQuestions(): void {
+        this.questionsService.getQuestionsByCompany(this.selectedCompany.companyName);
     }
 
     public addQuestion(): void {
@@ -57,12 +62,12 @@ export class QuestionsComponent implements OnInit {
         dialogRef.afterClosed().subscribe((newQuestion: Question) => {
             console.log('dialog component closed', newQuestion);
             if (newQuestion) {
-                // todo: add question
-
                 this.questionsService.addQuestion(newQuestion).subscribe((response) => {
-                    // this.message = response.message;
-                    // console.log('INSIDE SET USER COMPO')
-                }, (error) => console.log(error));
+                    // todo: open success alert
+                }, (error) => {
+                    // todo: open fail alert
+                    console.log(error);
+                });
             }
         });
     }
@@ -76,11 +81,12 @@ export class QuestionsComponent implements OnInit {
         dialogRef.afterClosed().subscribe((editQuestion: Question) => {
             console.log(editQuestion);
             if (editQuestion) {
-                // todo: edit question
                 this.questionsService.editQuestion(editQuestion).subscribe((response) => {
-                    // this.message = response.message;
-                    console.log('INSIDE edit Q', editQuestion);
-                }, (error) => console.log(error));
+                    // todo: open success alert
+                }, (error) => {
+                    // todo: open error alert
+                    console.log(error);
+                });
 
             }
         });
@@ -109,6 +115,10 @@ export class QuestionsComponent implements OnInit {
         }
 
         return res;
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }

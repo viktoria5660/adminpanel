@@ -4,8 +4,8 @@ import {AddCompanyDialogComponent} from './add-company-dialog/add-company.dialog
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Company} from './company.model';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/internal/operators';
+import {Subscription} from 'rxjs/Subscription';
+import {DialogsService} from '../dialogs/dialogs.service';
 
 
 @Component({
@@ -20,19 +20,23 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
     companies: Company[];
     selectedCompany: Company;
-
-    private destroyed$ = new Subject<void>();
+    subscription: Subscription;
+    isDefaultSelectedCompanySet = false;
     constructor(private companiesService: CompaniesService,
+                private dialogsService: DialogsService,
                 private fb: FormBuilder, private dialog: MatDialog) {
     }
 
 
     public ngOnInit(): void {
-        this.companiesService.companies$.pipe(takeUntil(this.destroyed$)).subscribe((companies: Company[]) => {
+        this.subscription = this.companiesService.companies$.subscribe((companies: Company[]) => {
             this.companies = companies;
             if (companies.length > 0) {
-                this.selectedCompany = this.companies[0];
-                this.buildForm();
+                if (!this.isDefaultSelectedCompanySet) {
+                    this.selectedCompany = this.companies[0];
+                    this.isDefaultSelectedCompanySet = true;
+                    this.buildForm();
+                }
             }
         });
     }
@@ -44,9 +48,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe((newCompany: any) => {
                 if (newCompany) {
                     this.fixGroups(newCompany);
-                    this.companiesService.addCompany(newCompany).subscribe(res => {
-                        // this.fullSettingsArr.push(newSettings);
-                        console.log('alert to use: New Company Added!');
+                    this.companiesService.addCompany(newCompany).subscribe((res: Company) => {
+                        this.dialogsService.alert('Success', 'Company ' + res.companyName +  ' added', 'success');
                     });
                 }
             }, (error) => console.log(error)
@@ -101,8 +104,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.destroyed$.next();
-        this.destroyed$.complete();
+        this.subscription.unsubscribe();
     }
 
 }

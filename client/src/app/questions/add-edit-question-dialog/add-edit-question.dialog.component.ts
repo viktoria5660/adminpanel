@@ -21,14 +21,10 @@ export class AddEditQuestionDialogComponent implements OnInit {
     editMode: boolean;
     companies$: Observable<Company[]>;
     selectedCompany: Company;
-    
-  
-
     constructor(
                 private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any, private companiesService: CompaniesService,
                 private formBuilder: FormBuilder) {
-                   
     }
     public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
     ngOnInit() {
@@ -42,7 +38,6 @@ export class AddEditQuestionDialogComponent implements OnInit {
         if (this.data && this.data.question) {
             this.editMode = true;
             this.question = this.data.question;
-            console.log(this.question)
         } else {
             this.editMode = false;
             this.question = new Question();
@@ -69,13 +64,12 @@ export class AddEditQuestionDialogComponent implements OnInit {
             company: [this.question.company, Validators.required],
             groups: [this.question.groups, Validators.required],
             content: [this.question.content, Validators.required],
-            difficulty: [this.question.difficulty,Validators.required],
+            difficulty: [this.question.difficulty, Validators.required],
             answers: this.formBuilder.array(answers)
         });
     }
 
     createAnswer(answer?: Answer): FormGroup {
-        
         return this.formBuilder.group({
             content: [answer ? answer.content : '', Validators.required],
             feedback: [answer ? answer.feedback : '', Validators.required],
@@ -84,7 +78,14 @@ export class AddEditQuestionDialogComponent implements OnInit {
     }
 
     public onSubmit(): void {
-        this.dialogRef.close(this.form.value);
+        this.question.picture = this.form.value.picture;
+        this.question.template = this.form.value.template;
+        this.question.company = this.form.value.company;
+        this.question.groups = this.form.value.groups;
+        this.question.content = this.form.value.content;
+        this.question.difficulty = this.form.value.difficulty;
+        this.question.answers = this.form.value.answers;
+        this.dialogRef.close(this.question);
     }
 
 }

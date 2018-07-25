@@ -32,12 +32,11 @@ export class CompaniesService {
     }
 
     public addCompany(newCompany: Company): Observable<any> {
-        const companies: Company[] = this.getCompaniesValue();
-        companies.push(newCompany);
-        this.updateCompanies(companies);
-
         const obs = this.apiService.addCompany(newCompany);
-        obs.subscribe(res => {
+        obs.subscribe((res: Company) => {
+            const companies: Company[] = this.getCompaniesValue();
+            companies.push(res);
+            this.updateCompanies(companies);
             console.log('New Company Added!');
         }, (error) => {
             // handle error!!
@@ -65,10 +64,6 @@ export class CompaniesService {
             this.updateCompanies(companies);
         }
         return this.apiService.deleteCompany(companyName);
-    }
-
-    private getAllCompanies(): Observable<Company[]> {
-        return this.apiService.getAllCompanies();
     }
 
 }

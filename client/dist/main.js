@@ -121,7 +121,7 @@ var ApiService = /** @class */ (function () {
         return this.http.get(API_URL + '/users')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["publishLast"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["refCount"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
     };
-    ApiService.prototype.setUser = function (user) {
+    ApiService.prototype.addUser = function (user) {
         return this.http.post(API_URL + '/users/createNewUser', user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["publishLast"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["refCount"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
     };

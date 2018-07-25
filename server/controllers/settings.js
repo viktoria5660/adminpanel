@@ -7,7 +7,6 @@ const router = require('express').Router(),
 //create new full settings
 router.post('/createNewFullSettings', function (req, res) {
     console.log("INSIDE createNewFullSettings")
-    console.log("REQ FULL SETTINGS", req)
     let fullsettings = new FullSettingsModel({
         companyName: req.body.companyName,
         gameOp: req.body.gameOp,
@@ -25,8 +24,7 @@ router.post('/createNewFullSettings', function (req, res) {
     });
 
     fullsettings.save().then(function(doc) {
-        console.log(doc);
-        res.status(200).json({message: 'Company created'});
+        res.status(200).json(doc);
     })
 });
 
@@ -117,7 +115,6 @@ router.get('/getAllNameCompanies', function (req, res) {
 });
 
 router.get('/getAllCompanies', function (req, res) {
-    console.log("getAllCompanies")
     FullSettingsModel.find({}, function (err, info) {
         if (err) {
             res.status(500).send({message: "Error!"});

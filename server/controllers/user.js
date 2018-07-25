@@ -2,7 +2,7 @@ const router = require('express').Router(),
       UserModel = require('../models/User'), FullSettingsModel = require('../models/FullSettings')
 
       //api {email:,bet:,isCorrect:,qid:}
-      router.put('/update', (req, res) => {
+      router.put('/update', function(req, res) {
         let email = req.body.email,
             bet = req.body.bet,
             isCorrect = req.body.isCorrect,
@@ -12,7 +12,7 @@ const router = require('express').Router(),
               // query
               {email:email},
               // callback function
-              (err, user) => {
+                  function(err, user) {
                 if (err) return res.status(304).send(err)
                 user.incorrectAns.forEach(el => el.numberOfTurns++);
                 if (isCorrect)
@@ -109,8 +109,6 @@ const router = require('express').Router(),
     });
     
     router.post('/createNewUser',function(req,res){
-        // console.log("INSIDE CREATING USER", req)
-        
         let user = new UserModel({
             coins : req.body.coins,
             difficulty : req.body.difficulty,
@@ -119,34 +117,33 @@ const router = require('express').Router(),
             company : req.body.company,
             lastName : req.body.lastName,
             name : req.body.name,
-            password : req.body.password
-        })
+            password : req.body.password,
+            isAdmin: req.body.isAdmin
+        });
         
         user.save()
-            .then(doc => {
-                console.log(doc)
-                res.status(200).json({ message: 'User created'})
+            .then(function(doc) {
+                res.status(200).json(doc)
             })
         });
 
 
-        router.put('/updateuserfromadmin', (req, res) => {
-            let { coins , company, difficulty,group, lastName, name, email } = req.body
+        router.put('/updateuserfromadmin', function(req, res) {
+            let { coins , company, difficulty,group, lastName, name, email, isAdmin} = req.body
             // UserModel.update({_id:}, {$set: {name:newname}}, options, function(err,doc){res.status(200)});
             // console.log("MINBET",minBet)
             UserModel.findOneAndUpdate({email : email}, 
-            {$set: {coins : coins , company : company, difficulty : difficulty ,group : group, lastName : lastName, name : name }}
+            {$set: {coins : coins , company : company, difficulty : difficulty ,group : group, lastName : lastName, name : name , isAdmin: isAdmin}}
             ,function(err,doc){res.status(200)})
-                    .then(doc => {
+                    .then(function(doc) {
                         if (doc) {
                             // console.log("SETTING DOC", doc)
                             res.status(200).json({ message: 'user were updated successfully' })
                         } else {
                             res.status(500).json({ message: 'Bad Request'})
                         }
-                    })
-                    .catch(err => {
-                        console.log(err)
+                    }).catch(function(err) {
+                        console.log(err);
                         res.status(500).json({ message: 'Bad Request'})
                     })
             
@@ -251,4 +248,3 @@ const router = require('express').Router(),
         });
   
     module.exports = router
-      

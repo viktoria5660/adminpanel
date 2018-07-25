@@ -1,0 +1,15 @@
+<div class="text-center">
+  <h1 matDialogTitle>{{ title }}</h1>
+  <div mat-dialog-content><br>
+    <p>{{ message }}</p>
+  </div>
+</div>
+
+<div class="form-actions">
+  <button type="button" mat-raised-button class="btn-w-md mr-3" color="primary"
+          (click)="dialogRef.close(true)">Ok
+  </button>
+  <button type="button" mat-raised-button class="btn-w-md" color="warn"
+          (click)="dialogRef.close(false)">Cancel
+  </button>
+</div>

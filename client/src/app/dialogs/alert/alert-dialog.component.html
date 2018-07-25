@@ -1,0 +1,11 @@
+<div class="alert-container text-center">
+  <i [@scale]="initScale" class="material-icons {{color}}">{{icon}}</i>
+  <h3 matDialogTitle [className]="color">{{ title }}</h3>
+  <div mat-dialog-content>
+    <p>{{ message }}</p>
+    <button type="button" mat-button class="btn-w-md"
+            (click)="dialogRef.close(false)" i18n>
+      Dismiss
+    </button>
+  </div>
+</div>

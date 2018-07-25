@@ -168,25 +168,26 @@ router.get('/:id', (req, res) => {
 
 
 
-router.post('/enterQ', (req, res) => {
-let { content, template, picture, difficulty, groups,answers, company } = req.body
+router.post('/enterQ', function(req, res) {
+let { content, template, picture, difficulty, groups,answers, company } = req.body;
 
-if (content && template && picture && difficulty && groups && answers&& company) {
+if (content && template && difficulty && groups && answers&& company) {
 
-  QuestionHelper.enterQ(content , template, picture ,difficulty, groups,answers, company)
-      .then(doc => {
+  QuestionHelper.enterQ(content , template ,difficulty, groups,answers, company)
+      .then(function(doc) {
           if (doc) {
-             return res.json(doc)
+             return res.json(doc);
           } else {
               return res.status(500).json({ message: 'Bad Request'})
           }
       })
-      .catch(err => {
-          console.log(err)
+      .catch(function(err) {
+          console.log(err);
           return res.status(500).json({ message: 'Bad Request'})
       })
+} else {
+    return res.status(500).json({ message: 'Bad Request: Missing fields'})
 }
-
 })
 
 router.get('/getQuestionsByCompany/:conpamyName',function(req,res){
@@ -213,7 +214,7 @@ router.get('/get/getAllQuestions',function(req,res){
     });
 
 router.post('/deleteQ', (req, res) => {
-let Qid = req.body._id
+let Qid = req.body.id
 
   QuestionModel.findByIdAndRemove({_id : Qid})
       .then(doc => {
@@ -250,9 +251,8 @@ router.post('/fileUpload', upload.single('image'), function (req, res, next) {
   })
 
 
-router.put('/updateQ', (req, res) => {
-console.log("INSIDE UPDATEQ", req.body)
-let id = req.body._id
+router.put('/updateQ', function(req, res) {
+let id = req.body.id;
 let {content , template, picture, difficulty , company, groups} = req.body
 let answers = req.body.answers
 
@@ -260,16 +260,15 @@ QuestionModel.findOneAndUpdate({_id: id},
 {$set: { content : content , template : template , picture : picture, difficulty : difficulty,
   company : company, groups: groups, answers : answers }}
 ,function(err,doc){res.status(200)})
-      .then(doc => {
+      .then(function(doc) {
           if (doc) {
-              console.log("SETTING DOC", doc)
-              res.status(200).json({ message: 'Question was updated successfully' })
+              res.status(200).json(doc)
           } else {
               res.status(500).json({ message: 'Question did not updated'})
           }
       })
-      .catch(err => {
-          console.log(err)
+      .catch(function(err) {
+          console.log(err);
           res.status(500).json({ message: 'Bad Request'})
       })
 

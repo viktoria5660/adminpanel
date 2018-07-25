@@ -1,0 +1,8 @@
+<div style="position: relative">
+  <i class="material-icons close-icon" (click)="dialogRef.close()">close</i>
+  <div mat-dialog-content>
+    <video *ngIf="type === 'Video'" [src]="src" type="video/mp4"  class="image-responsive" (click)="toggleVideo()" #videoPlayer controls></video>
+    <img   *ngIf="type === 'Image'" [src]="src" class="image-responsive">
+  </div>
+</div>
+

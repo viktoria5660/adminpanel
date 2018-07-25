@@ -191,7 +191,7 @@ var UsersComponent = /** @class */ (function () {
             if (newUser) {
                 // todo: add user
                 // console.log(newUser)
-                _this.usersService.setUser(newUser).subscribe(function (response) {
+                _this.usersService.addUser(newUser).subscribe(function (response) {
                     // this.message = response.message;
                     // console.log("INSIDE SET USER COMPO")
                 }, function (error) { return console.log(error); });
@@ -394,10 +394,10 @@ var UsersService = /** @class */ (function () {
             _this.updateUsers(users);
         });
     };
-    UsersService.prototype.setUser = function (newUser) {
+    UsersService.prototype.addUser = function (newUser) {
         // console.log(newUser);
         // console.log('INSIDE SET USER SERViCE');
-        return this.apiService.setUser(newUser);
+        return this.apiService.addUser(newUser);
     };
     UsersService.prototype.updateUser = function (newUser) {
         console.log(newUser);

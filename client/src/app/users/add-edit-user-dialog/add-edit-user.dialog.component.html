@@ -72,7 +72,7 @@
             <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                 <div class="form-group">
                     <mat-form-field class="mr-2">
-                        <mat-select #selectedCompany placeholder="Company" formControlName="company">
+                        <mat-select [(ngModel)]="selectedCompany" placeholder="Company" formControlName="company">
                             <mat-option *ngFor="let company of companies$ | async" [value]="company">
                                 {{company.companyName}}
                             </mat-option>
@@ -85,10 +85,10 @@
                 <!--Group-->
                 <div class="form-group">
                     <mat-form-field>
-                        <mat-select placeholder="Group" formControlName="groups">
-                            <mat-option *ngIf="!selectedCompany.value">No company selected</mat-option>
-                            <ng-container *ngIf="selectedCompany.value">
-                                <mat-option *ngFor="let group of selectedCompany.value.groups" [value]="group">
+                        <mat-select placeholder="Group" formControlName="group">
+                            <mat-option *ngIf="!selectedCompany">No company selected</mat-option>
+                            <ng-container *ngIf="selectedCompany">
+                                <mat-option *ngFor="let group of selectedCompany.groups" [value]="group.name">
                                     {{group.name}}
                                 </mat-option>
                             </ng-container>

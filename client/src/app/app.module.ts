@@ -37,6 +37,7 @@ import {AppComponent} from './app.component';
 import {ApiService} from './_services/api.service';
 import {SharedModule} from './shared/shared.module';
 import {CompaniesService} from './companies/companies.service';
+import {DialogsModule} from './dialogs/dialogs.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -70,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         BrowserAnimationsModule,
         RouterModule.forRoot(AppRoutes),
         FormsModule,
+        DialogsModule,
         HttpClientModule,
         TranslateModule.forRoot({
             loader: {

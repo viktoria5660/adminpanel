@@ -9,46 +9,58 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class QuestionsService {
     private questionsSubject: BehaviorSubject<Question[]> = new BehaviorSubject<Question[]>([]);
     questions$: Observable<Question[]> = this.questionsSubject.asObservable();
+
     constructor(private apiService: ApiService) {
-        this.loadQuestions();
     }
+
     public updateQuestions(newQuestions: Question[]): void {
         this.questionsSubject.next(_.cloneDeep(newQuestions));
     }
 
-    public getQuestions(): Question[] {
+    public getQuestionsValue(): Question[] {
         return _.cloneDeep(this.questionsSubject.getValue());
-    }
-
-    private loadQuestions(): void {
-        // this.apiService.getQuestionsByCompany(companyName: string).subscribe((question:Question[]) => {
-        //     this.updateQuestions(question);
-        // }, (error) => {
-
-        // });
     }
 
     public getQuestionsByCompany(companyName: string): Observable<Question[]> {
         const obs = this.apiService.getQuestionsByCompany(companyName);
         obs.subscribe((questions: Question[]) => {
-
+            this.updateQuestions(questions);
         }, (error) => console.log('Questions Service error: ' + error.message));
 
         return obs;
     }
-    public deleteQuestion(newQuestion: Question): Observable<any> {
-        console.log(newQuestion);
-        // console.log("INSIDE SET USER SERViCE");
-        return this.apiService.deleteQuestion(newQuestion);
+
+    public deleteQuestion(deleteQuestion: Question): Observable<any> {
+        const questions: Question[] = this.getQuestionsValue();
+        const index = questions.findIndex((question: Question) => question.id === deleteQuestion.id);
+        if (index > -1) {
+            questions.splice(index, 1);
+            this.updateQuestions(questions);
+        }
+        return this.apiService.deleteQuestion(deleteQuestion);
     }
+
     public addQuestion(newQuestion: Question): Observable<any> {
-        console.log("INSIDE Q SERVICE ADD Q",newQuestion);
-        // console.log("INSIDE SET USER SERViCE");
-        return this.apiService.addQuestion(newQuestion);
+        const obs = this.apiService.addQuestion(newQuestion);
+        obs.subscribe((res: Question) => {
+            const questions: Question[] = this.getQuestionsValue();
+            questions.push(res);
+            this.updateQuestions(questions);
+        });
+
+        return obs;
     }
+
     public editQuestion(newQuestion: Question): Observable<any> {
-        console.log("INSIDE Q SERVICE edit Q",newQuestion);
-        // console.log("INSIDE SET USER SERViCE");
+        const questions: Question[] = this.getQuestionsValue();
+        const index = questions.findIndex((question: Question) => question.id === newQuestion.id);
+        console.log(newQuestion.id);
+        console.log(questions);
+        console.log(index);
+        if (index > -1) {
+            questions[index] = newQuestion;
+            this.updateQuestions(questions);
+        }
         return this.apiService.editQuestion(newQuestion);
     }
 

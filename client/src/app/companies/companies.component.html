@@ -54,7 +54,7 @@
 
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default Coins" formControlName="defaultCoins">
+                            <input matInput type="number" placeholder="Default Coins" formControlName="defaultCoins">
                             <mat-hint
                                     *ngIf="form.controls['defaultCoins'].hasError('required') && form.controls['defaultCoins'].touched"
                                     class="mat-text-warn">You must include default coins.
@@ -84,7 +84,7 @@
                     </div>
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default timeLimitForQ" formControlName="timeLimitForQ">
+                            <input matInput type="number" placeholder="Default timeLimitForQ" formControlName="timeLimitForQ">
                             <mat-hint
                                     *ngIf="form.controls['timeLimitForQ'].hasError('required') && form.controls['timeLimitForQ'].touched"
                                     class="mat-text-warn">You must include default timeLimitForQ.
@@ -94,7 +94,7 @@
                     </div>
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default lowToMed" formControlName="lowToMed">
+                            <input matInput type="number" placeholder="Default lowToMed" formControlName="lowToMed">
                             <mat-hint
                                     *ngIf="form.controls['lowToMed'].hasError('required') && form.controls['lowToMed'].touched"
                                     class="mat-text-warn">You must include default lowToMed.
@@ -104,7 +104,7 @@
                     </div>
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default medToHigh" formControlName="medToHigh">
+                            <input matInput type="number" placeholder="Default medToHigh" formControlName="medToHigh">
                             <mat-hint
                                     *ngIf="form.controls['medToHigh'].hasError('required') && form.controls['medToHigh'].touched"
                                     class="mat-text-warn">You must include default medToHigh.
@@ -114,7 +114,7 @@
                     </div>
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default timetToSendToLogin"
+                            <input matInput type="number" placeholder="Default timetToSendToLogin"
                                    formControlName="timetToSendToLogin">
                             <mat-hint
                                     *ngIf="form.controls['timetToSendToLogin'].hasError('required') && form.controls['timetToSendToLogin'].touched"
@@ -135,7 +135,7 @@
                     </div>
                     <div class="mr-1 mb-1">
                         <mat-form-field>
-                            <input matInput placeholder="Default minBet" formControlName="minBet">
+                            <input matInput type="number" placeholder="Default minBet" formControlName="minBet">
                             <mat-hint
                                     *ngIf="form.controls['minBet'].hasError('required') && form.controls['minBet'].touched"
                                     class="mat-text-warn">You must include default minBet.
