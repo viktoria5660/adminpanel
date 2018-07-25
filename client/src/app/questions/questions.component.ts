@@ -19,6 +19,8 @@ export class QuestionsComponent implements OnInit {
     dataSource;
     companies$: Observable<Company[]>;
     selectedCompany: Company;
+    questions: Question[];
+
 
     @ViewChild(MatSort) sort: MatSort;
     error: string;

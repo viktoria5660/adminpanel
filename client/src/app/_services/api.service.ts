@@ -16,11 +16,6 @@ export class ApiService {
     private handleError(error: HttpErrorResponse) {
         return throwError(error);
     }
-
-    // public getAllCompanies(): Observable<Company[]> {
-    //     return this.http.get<Company[]>(API_URL + '/settings/getAllCompanies')
-    //         .pipe(publishLast(), refCount(), catchError(this.handleError));
-    // }
     public getAllCompanies(): Observable<Company[]> {
         return this.http.get<Company[]>(API_URL + '/settings/getAllCompanies')
             .pipe(publishLast(), refCount(), catchError(this.handleError));
@@ -63,6 +58,10 @@ export class ApiService {
 
     public getQuestionsByCompany(companyName: string): Observable<Question[]> {
         return this.http.get<Question[]>(API_URL + '/question/getQuestionsByCompany/' + companyName)
+            .pipe(publishLast(), refCount(), catchError(this.handleError));
+    }
+    public getAllQuestions(): Observable<Question[]> {
+        return this.http.get<Question[]>(API_URL + '/question/get/getAllQuestions/')
             .pipe(publishLast(), refCount(), catchError(this.handleError));
     }
 

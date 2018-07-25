@@ -201,6 +201,17 @@ QuestionModel.find({company :conpamyName }, function(err,questions){
 });
 });
 
+router.get('/get/getAllQuestions',function(req,res){
+    console.log("INSIDE GET ALL")
+    QuestionModel.find({}, function(err,questions){
+      if(err) {
+        res.status(500).send({message:"Error!"});
+      } else {
+        res.send(questions);
+      }
+    });
+    });
+
 router.post('/deleteQ', (req, res) => {
 let Qid = req.body._id
 
@@ -231,13 +242,12 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.post('/fileUpload', upload.single('image'), (req, res, next) => {
-    MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+   
         insertDocuments( './uploads/' + req.file.filename, () => {
             db.close();
             res.json({'message': 'File uploaded successfully'});
         });
-    });
+   
 });
 
 router.put('/updateQ', (req, res) => {
