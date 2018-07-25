@@ -34,10 +34,6 @@ export class AddEditUserDialogComponent implements OnInit {
             this.editMode = false;
             this.user = new User();
         }
-        // this.companies$ = this.settingsService.companies$;
-        // this.settingsService.companies$.subscribe((companies) => {
-        //     this.selectedCompany = companies[0];
-        // });
         this.buildForm();
     }
 

@@ -7,8 +7,8 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div fxLayout="row wrap">
 
-                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                        <!--Group-->
+                <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                        
                         <div class="form-group">
                             <mat-form-field>
                                 <input matInput type="text" formControlName="groups" placeholder="Group">
@@ -16,10 +16,9 @@
                         </div>
                     </div>
                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                        <!--Group-->
+                        
                         <div class="form-group">
                             <mat-form-field>
-                                <!-- <input matInput type="text" formControlName="company" placeholder="Company"> -->
                                 <mat-select placeholder="Select company" [(ngModel)]="selectedCompany" [ngModelOptions]="{standalone: true}">
                                         <mat-option *ngFor="let company of companies$ | async" [value]="company">
                                             {{company.companyName}}
@@ -27,7 +26,35 @@
                                     </mat-select>
                             </mat-form-field>
                         </div>
+                    </div> -->
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                        <div class="form-group">
+                            <mat-form-field class="mr-2">
+                                <mat-select #selectedCompany placeholder="Company" formControlName="company">
+                                    <mat-option *ngFor="let company of companies$ | async" [value]="company">
+                                        {{company.companyName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
+        
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                        <!--Group-->
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-select placeholder="Group" formControlName="groups">
+                                    <mat-option *ngIf="!selectedCompany.value">No company selected</mat-option>
+                                    <ng-container *ngIf="selectedCompany.value">
+                                        <mat-option *ngFor="let group of selectedCompany.value.groups" [value]="group">
+                                            {{group.name}}
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+        
                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
                             <!--Group-->
                             <div class="form-group">
@@ -49,14 +76,14 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                            <!--Group-->
+                        <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                           
                             <div class="form-group">
                                 <mat-form-field>
                                     <input matInput type="text" formControlName="picture" placeholder="picture">
                                 </mat-form-field>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
 

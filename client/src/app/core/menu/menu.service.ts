@@ -44,12 +44,6 @@ const MENUITEMS = [
     name: 'Companies',
     type: 'link',
     icon: 'location_city'
-  },
-  {
-    state: 'http://primer.nyasha.me/docs',
-    name: 'DOCS',
-    type: 'extTabLink',
-    icon: 'local_library'
   }
 ];
 

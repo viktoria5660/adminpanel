@@ -233,22 +233,22 @@ let Qid = req.body._id
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, './uploads')
+      cb(null, upload)
     },
     filename: (req, file, cb) => {
       cb(null, file.fieldname + '-' + Date.now())
     }
 });
-var upload = multer({storage: storage});
+// var upload = multer({storage: storage});
+var upload = multer({ dest: 'uploads/' })
+router.post('/fileUpload', upload.single('image'), function (req, res, next) {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    insertDocuments( './uploads/' + req.file.filename, () => {
+                    res.json({'message': 'File uploaded successfully'});
+                });
+  })
 
-router.post('/fileUpload', upload.single('image'), (req, res, next) => {
-   
-        insertDocuments( './uploads/' + req.file.filename, () => {
-            db.close();
-            res.json({'message': 'File uploaded successfully'});
-        });
-   
-});
 
 router.put('/updateQ', (req, res) => {
 console.log("INSIDE UPDATEQ", req.body)

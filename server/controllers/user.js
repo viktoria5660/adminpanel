@@ -1,5 +1,5 @@
 const router = require('express').Router(),
-      UserModel = require('../models/User')
+      UserModel = require('../models/User'), FullSettingsModel = require('../models/FullSettings')
 
       //api {email:,bet:,isCorrect:,qid:}
       router.put('/update', (req, res) => {
@@ -165,7 +165,90 @@ const router = require('express').Router(),
             });
         });
 
+    
+        router.post('/login', (req, res) => {
 
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+            res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+            console.log("LOGIN", req.body)
+            let { email, password } = req.body;
+            
+            let exists
+           
+           UserModel.find({email : email }, function(err,info){
+            if(err) {
+              res.status(500).send({message:"Error!"});
+            } else {
+                console.log("email", info)
+                if (info.length > 0)
+                {
+                    exists = 1
+                }
+                else if (!info.length)
+                {
+                    exists = 2
+                }
+            }
+            console.log("EXISTS",exists)
+            switch(exists) {
+                case 1:{
+                UserModel.findOne({ email : email })
+                               .then(user => {
+                                   console.log(email)
+                                   user.comparePassword(password, (err, match) => {
+                                       console.log("MATCH",match)
+                                    //    resolve(match)
+                                    res.status(200).send({message:match});
+                                   })
+                               })
+                    break;
+                }
+                case 2:
+                {
+                res.status(404).send({message:"User Not Found!"});
+                    break;
+                }
+            }
+        });
+        });
+
+
+        router.post('/getUserSettings',function(req,res,next){
+            var email = req.body.email
+            var company
+            UserModel.findOne({email: email }, function(err,info){
+                if(err) {
+                  res.status(500).send({message:"Error!"});
+                } else {
+                    // console.log("INFO",info)
+                    
+                    if (info)
+                    {   
+                        console.log("INSIDE IF")
+                        company = info.company;
+                        FullSettingsModel.find({companyName : company }, function(err,set){
+                                if(err) {
+                                  res.status(500).send({message:"Error!"});
+                                } else {
+                                    console.log(set)
+                                  res.send(set);
+                                }
+                            });
+                    }
+                }
+                
+            });
+            
+            // FullSettingsModel.find({companyName : company }, function(err,info){
+            //     if(err) {
+            //       res.status(500).send({message:"Error!"});
+            //     } else {
+            //       res.send(info);
+            //     }
+            // });
+        });
   
     module.exports = router
       

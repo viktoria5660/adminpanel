@@ -5,6 +5,8 @@ import {Question} from '../questions.model';
 import {Answer} from '../_models/answer.model';
 import {Observable} from 'rxjs/Observable';
 import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { Company } from '../../companies/company.model';
+import { CompaniesService } from '../../companies/companies.service';
 
 const URL = 'http://localhost:3000/upload/testupload';
 
@@ -17,26 +19,25 @@ export class AddEditQuestionDialogComponent implements OnInit {
     form: FormGroup;
     question: Question;
     editMode: boolean;
+    companies$: Observable<Company[]>;
+    selectedCompany: Company;
+    
   
 
     constructor(
                 private dialogRef: MatDialogRef<AddEditQuestionDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: any,
+                @Inject(MAT_DIALOG_DATA) public data: any, private companiesService: CompaniesService,
                 private formBuilder: FormBuilder) {
+                   
     }
     public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
     ngOnInit() {
+        this.companies$ = this.companiesService.companies$;
         this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
              console.log('ImageUpload:uploaded:', item, status, response);
              alert('File uploaded successfully');
          };
-
-        // this.companies$ = this.companyService.companies$;
-        //  this.companies$ = this.companyService.companies$;
-        // this.companyService.companies$.subscribe((companies) => {
-        //     this.selectedCompany = companies[0];
-        // });
 
         if (this.data && this.data.question) {
             this.editMode = true;
