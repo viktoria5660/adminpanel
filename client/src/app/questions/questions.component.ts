@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import {Company} from '../companies/company.model';
 import {CompaniesService} from '../companies/companies.service';
 import {Subscription} from 'rxjs/Rx';
+import {DialogsService} from '../dialogs/dialogs.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import {Subscription} from 'rxjs/Rx';
     styleUrls: ['./questions.component.scss']
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
-    displayedColumns: string[] = ['picture', 'difficulty', 'content', 'answers', 'actions'];
+    displayedColumns: string[] = [ 'difficulty', 'content', 'answers', 'actions'];
     dataSource;
     companies$: Observable<Company[]>;
     subscription: Subscription;
@@ -27,6 +28,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
 
     constructor(private questionsService: QuestionsService,
                 private companiesService: CompaniesService,
+                private dialogsService: DialogsService,
                 private dialog: MatDialog) {
     }
 
@@ -63,6 +65,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
             console.log('dialog component closed', newQuestion);
             if (newQuestion) {
                 this.questionsService.addQuestion(newQuestion).subscribe((response) => {
+                    this.dialogsService.alert('Success', 'Question added ' , 'success');
+         
                     // todo: open success alert
                 }, (error) => {
                     // todo: open fail alert
@@ -82,6 +86,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
             console.log(editQuestion);
             if (editQuestion) {
                 this.questionsService.editQuestion(editQuestion).subscribe((response) => {
+                        this.dialogsService.alert('Success', 'Question edited ', 'success');
+         
                     // todo: open success alert
                 }, (error) => {
                     // todo: open error alert
@@ -95,6 +101,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     public deleteQuestion(question: Question): void {
         // todo: delete question
         this.questionsService.deleteQuestion(question).subscribe((response) => {
+            this.dialogsService.alert('Success', 'Question deleted ', 'success');
+         
             // this.message = response.message;
             console.log('INSIDE delet Q');
         }, (error) => console.log(error));

@@ -4,6 +4,7 @@ import {User} from './users.model';
 import {MatDialog, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {AddEditUserDialogComponent} from './add-edit-user-dialog/add-edit-user.dialog.component';
 import {Subscription} from 'rxjs/Rx';
+import {DialogsService} from '../dialogs/dialogs.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private usersService: UsersService,
+    constructor(private usersService: UsersService, private dialogsService: DialogsService,
                 private dialog: MatDialog) {
     }
 
@@ -39,6 +40,7 @@ export class UsersComponent implements OnInit, OnDestroy {
             // this.message = '';
             if (newUser) {
                 this.usersService.addUser(newUser).subscribe((response) => {
+                    this.dialogsService.alert('Success', 'User ' + response.name +  ' added', 'success');
                     // this.message = response.message;
                 }, (error) => console.log(error));
             }
@@ -56,6 +58,7 @@ export class UsersComponent implements OnInit, OnDestroy {
             if (editUser) {
                 // todo: edit user
                 this.usersService.updateUser(editUser).subscribe((response) => {
+                    this.dialogsService.alert('Success', 'User updated ', 'success');
                     // this.message = response.message;
                     // console.log('INSIDE SET UPDATE USER COMPO');
                 }, (error) => console.log(error));
@@ -66,6 +69,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     public deleteUser(user: User): void {
         // todo: delete user
         this.usersService.deleteUser(user).subscribe((response) => {
+            this.dialogsService.alert('Success', 'User deleted', 'success');
             // this.message = response.message;
             // console.log('INSIDE SET UPDATE USER COMPO', user);
         }, (error) => console.log(error));

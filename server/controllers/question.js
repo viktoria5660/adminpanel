@@ -169,11 +169,12 @@ router.get('/:id', (req, res) => {
 
 
 router.post('/enterQ', function(req, res) {
-let { content, template, picture, difficulty, groups,answers, company } = req.body;
+    console.log("INSIDE ENTER Q")
+let { content, difficulty, groups,answers, company } = req.body;
 
-if (content && template && difficulty && groups && answers&& company) {
+if (content && difficulty && groups && answers&& company) {
 
-  QuestionHelper.enterQ(content , template ,difficulty, groups,answers, company)
+  QuestionHelper.enterQ(content ,difficulty, groups,answers, company)
       .then(function(doc) {
           if (doc) {
              return res.json(doc);
@@ -185,8 +186,7 @@ if (content && template && difficulty && groups && answers&& company) {
           console.log(err);
           return res.status(500).json({ message: 'Bad Request'})
       })
-} else {
-    return res.status(500).json({ message: 'Bad Request: Missing fields'})
+
 }
 })
 

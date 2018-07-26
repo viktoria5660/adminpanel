@@ -91,6 +91,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         this.form.value.groups = this.form.value.groups.map(el => new Object({name: el}));
         // console.log('AFTER');
         this.companiesService.updateCompany(this.form.value).subscribe((response) => {
+            this.dialogsService.alert('Success', 'Company ' + response.companyName +  ' updated', 'success');
             // console.log(response);
         }, (error) => console.log(error));
     }
@@ -100,6 +101,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
             this.message = response.message;
             this.selectedCompany = this.companies[0];
             this.buildForm();
+            this.dialogsService.alert('Success', 'Company ' + response.companyName +  ' deleted', 'success');
+          
+            
         }, (error) => this.message = error.message);
     }
 

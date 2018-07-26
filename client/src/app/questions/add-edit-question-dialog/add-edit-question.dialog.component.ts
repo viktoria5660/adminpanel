@@ -8,7 +8,7 @@ import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upl
 import { Company } from '../../companies/company.model';
 import { CompaniesService } from '../../companies/companies.service';
 
-const URL = 'http://localhost:3000/upload/testupload';
+// const URL = 'http://localhost:3000/upload/testupload';
 
 @Component({
     selector: 'app-add-edit-question',
@@ -26,14 +26,14 @@ export class AddEditQuestionDialogComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) public data: any, private companiesService: CompaniesService,
                 private formBuilder: FormBuilder) {
     }
-    public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+    // public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
     ngOnInit() {
         this.companies$ = this.companiesService.companies$;
-        this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-        this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-             console.log('ImageUpload:uploaded:', item, status, response);
-             alert('File uploaded successfully');
-         };
+        // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+        // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+        //      console.log('ImageUpload:uploaded:', item, status, response);
+        //      alert('File uploaded successfully');
+        //  };
 
         if (this.data && this.data.question) {
             this.editMode = true;
@@ -59,8 +59,6 @@ export class AddEditQuestionDialogComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-            picture: [this.question.picture, Validators.required],
-            template: [this.question.template, Validators.required],
             company: [this.question.company, Validators.required],
             groups: [this.question.groups, Validators.required],
             content: [this.question.content, Validators.required],
