@@ -88,11 +88,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
      */
     public onSubmit(): void {
         this.message = '';
-        this.form.value.groups = this.form.value.groups.map(el => new Object({name: el}));
+     
+        this.fixGroups(this.form.value);
+        console.log("INSIDE ON SUBMIT",this.form.value)
+        // this.form.value.groups = this.form.value.groups.map(el => new Object({name: el}));
         // console.log('AFTER');
+        
         this.companiesService.updateCompany(this.form.value).subscribe((response) => {
+            console.log("response of updated",response);
             this.dialogsService.alert('Success', 'Company ' + response.companyName +  ' updated', 'success');
-            // console.log(response);
+            
         }, (error) => console.log(error));
     }
 

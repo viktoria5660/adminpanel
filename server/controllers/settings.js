@@ -82,7 +82,7 @@ FullSettingsModel.findOneAndUpdate({companyName: companyName},
     .then(function(doc) {
     if (doc) {
         console.log("SETTING FULL DOC", doc)
-        res.status(200).json({message: 'FULL Setting were updated successfully'})
+        res.status(200).send({message: 'FULL Setting were updated successfully'},doc)
     } else {
         res.status(500).json({message: 'Bad Request'})
 }

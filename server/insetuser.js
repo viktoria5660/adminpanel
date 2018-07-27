@@ -5,12 +5,12 @@ const UserModel = require('./models/User')
 let user = new UserModel({
     name: "viki", 
     lastName: "last test",
-    email: "viki@gmail.com",
-    group: "viki", // TODO: fix to objectid
+    email: "new@gmail.com",
+    group: "new", // TODO: fix to objectid
     password: "v",
     correctAns : [],
     countOfcorrectAns : 0 ,
-    company : "viki",
+    company : "new",
     incorrectAns: [],
     difficulty: 1,
     isAdmin : false,

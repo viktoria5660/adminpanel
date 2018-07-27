@@ -3,12 +3,10 @@ const QuestionModel = require('./models/Question')
 
 
 let question = new QuestionModel({
-    content: 'test15?',
-    template: 1,
-    picture: 'pic.jpeg',
-    difficulty: 1,
-    company : "test",
-    groups:  [ "test" ],
+    content: 'test16?',
+    difficulty: 2,
+    company : "new",
+    groups:  [ "new" ],
     answers:[{
         content  : 'Podales ut accumsan ac',
         feedback  : 'Phasellus ipsum elit',
