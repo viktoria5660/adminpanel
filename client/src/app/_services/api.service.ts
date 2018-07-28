@@ -79,4 +79,8 @@ export class ApiService {
             .pipe(publishLast(), refCount(), catchError(this.handleError));
 
     }
+    // public getAllReports(): Observable<Reports[]> {
+    //     return this.http.get<Reports[]>(API_URL + '/users/Reports')
+    //         .pipe(publishLast(), refCount(), catchError(this.handleError));
+    // }
 }

@@ -1,5 +1,7 @@
 const router = require('express').Router(),
-      UserModel = require('../models/User'), FullSettingsModel = require('../models/FullSettings')
+      UserModel = require('../models/User'), FullSettingsModel = require('../models/FullSettings'),
+      ReportModel = require('../models/Report'),QuestionModel = require('../models/Question')
+
 
       //api {email:,bet:,isCorrect:,qid:}
       router.put('/update', function(req, res) {
@@ -7,6 +9,7 @@ const router = require('express').Router(),
             bet = req.body.bet,
             isCorrect = req.body.isCorrect,
             qid = req.body.qid
+            reports (email, bet, isCorrect,qid);
                 console.log("INSIDE UPDATE", req.body)
               UserModel.findOne(  
               // query
@@ -126,6 +129,75 @@ const router = require('express').Router(),
                 res.status(200).json(doc)
             })
         });
+
+
+        ////////////////create report/////////////
+        // router.post('/CreateReportUser',function(req,res){
+          function reports (email, bet, isCorrect,qid)
+            {   
+                UserModel.findOne({email : email }, function(err,info){
+                    if(err) {
+                      res.status(500).send({message:"Error!"});
+                    } else {
+                         let company = info.company
+                         let name = info.name   
+                        console.log("INSIDE FIND", company,name)
+                        QuestionModel.find({id : qid }, function(err,question){
+                            if(err) {
+                              res.status(500).send({message:"Error!"});
+                            } else {
+                                var content = question.content
+                                let report = new ReportModel({
+                                    name: name, 
+                                    email:email,
+                                    company: company,
+                                    bet:bet,
+                                    isCorrect: isCorrect,
+                                    qid: qid,
+                                    qContent: content
+                                });
+                                
+                                report.save()
+                                    .then(function(doc) {
+                                        console.log("SAVED",doc)
+                                        // res.status(200).json(doc)
+                                    })   
+                            }
+                        });
+
+                    //   res.send(info);
+                  
+                    }
+                });
+
+                // 
+                
+            }
+            // });
+
+            //get all reports
+            router.get('/Reports',function(req,res,next){
+                ReportModel.find({}, function(err,report){
+                    if(err) {
+                      res.status(500).send({message:"Error!"});
+                    } else {
+                      res.send(report);
+                    }
+                });
+            });
+            //get report by email
+            router.get('/Reports/report/:email',function(req,res,next){
+                email = req.params.email
+                console.log("INSIDE PARAM", email)
+                ReportModel.find({email : email}, function(err,report){
+                    if(err) {
+                      res.status(500).send({message:"Error!"});
+                    } else {
+                      res.send(report);
+                    }
+                });
+            });
+            
 
 
         router.put('/updateuserfromadmin', function(req, res) {

@@ -44,6 +44,11 @@ const MENUITEMS = [
     name: 'Companies',
     type: 'link',
     icon: 'location_city'
+  },{
+    state: 'reports',
+    name: 'Reports',
+    type: 'link',
+    icon: 'location_city'
   }
 ];
 
